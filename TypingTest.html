@@ -1098,6 +1098,24 @@ console.log('6');
             document.getElementById("stop-test").disabled = true;
 
         };
+        function updateTimer() {
+            var timerElement = document.getElementById("timer");
+            var currentTime = timerElement.innerText;
+            var timeParts = currentTime.split(":");
+            var minutes = parseInt(timeParts[0]);
+            var seconds = parseInt(timeParts[1]);
+            if (minutes == 0 && seconds == 0) {
+                //End test if timer reaches 0
+                displayResult();
+            } else {
+                var totalSeconds = minutes * 60 + seconds;
+                if (totalSeconds > 0) {
+                    totalSeconds--;
+                    time--;
+                    timerElement.innerText = convertSecondsToTime(totalSeconds) + "s";
+                }
+            }
+        }
     </script>
     <!-- 
     <Script>

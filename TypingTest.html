@@ -1126,6 +1126,199 @@ console.log('6');
 
             return minutesStr + ":" + secondsStr;
         }
+        const displayResult = () => {
+            document.getElementById("resultMainDiv").style.display = 'block';
+            document.getElementById("quote-input").style.display = 'none';
+            document.getElementById("quote").style.display = 'none';
+            document.getElementById("timeDivId").style.display = 'none';
+
+            var resultSection = document.getElementById("wrapperResultId");
+            var quotee = document.getElementById("quote").innerText;
+            const words = quotee.split(/\s+/);
+            let typedwords = document.getElementById("quote-input").value.replace(/\s+/g, ' ').trim().split(' ');
+
+            let i = 0, j = 0;
+            let correctWordCnt = 0;
+            let inCorrectWordCnt = 0;
+            let skipWordCnt = 0;
+
+            while (i < words.length || j < typedwords.length) {
+                if (j >= typedwords.length || (i < words.length && words[i] !== typedwords[j])) {
+                    if (j < typedwords.length && !words.includes(typedwords[j])) {
+                        inCorrectWordCnt++;
+                        const span = document.createElement('span');
+                        span.classList.add('incorrect-word');
+                        span.textContent = typedwords[j];
+
+                        const correctSpan = document.createElement('span');
+                        correctSpan.classList.add('correct-word');
+                        correctSpan.textContent = words[i];
+
+                        resultSection.appendChild(span);
+                        resultSection.appendChild(correctSpan);
+                        j++;
+                        i++;
+                    } else {
+                        skipWordCnt++;
+                        const span = document.createElement('span');
+                        span.classList.add('skipped');
+                        span.textContent = words[i] + ' ';
+                        resultSection.appendChild(span);
+                        i++;
+                    }
+                } else {
+                    correctWordCnt++;
+                    const span = document.createElement('span');
+                    span.classList.add('correct-input');
+                    span.textContent = words[i] + ' ';
+                    resultSection.appendChild(span);
+                    i++;
+                    j++;
+                }
+            }
+
+            document.querySelector(".result").style.display = "block";
+            clearInterval(timer);
+            document.getElementById("stop-test").style.display = "none";
+            userInput.disabled = true;
+
+            let timeTaken = 1;
+            if (time != 0) {
+                timeTaken = (totalTimeInSecond - time) / 60; // in minutes
+            }
+
+            // Calculate all metrics
+            const grossWPM = (keyStrokes / 5) / timeTaken;
+            const netWPM = grossWPM - (fullMistakes / timeTaken);
+            const accuracyData = calculateTypingAccuracy().split('@');
+            const accuracy = parseFloat(accuracyData[0]);
+            fullMistakes = parseInt(accuracyData[1]);
+            halfMistakes = parseInt(accuracyData[2]);
+
+            // Net DPH (Depressions Per Hour)
+            const netDPH = (keyStrokes - backspaceCount) * (60 / timeTaken);
+
+            // Marks calculation (example: 50 - (fullMistakes * 2) - (halfMistakes * 1))
+            const marksOutOf50 = Math.max(0, 50 - (fullMistakes * 2) - (halfMistakes * 1));
+            const marksOutOf25 = Math.max(0, 25 - (fullMistakes * 1) - (halfMistakes * 0.5));
+
+            // Error Stocks (Gross Error + 5)
+            const errorStocks = fullMistakes + 5;
+
+            // Update the results display
+            const wrapper = document.querySelector(".wrapper");
+            wrapper.innerHTML = `
+        <p>Gross Speed: <span id="gross-wpm">${grossWPM.toFixed(2)} WPM</span></p>
+        <p>Net Speed: <span id="net-wpm">${netWPM.toFixed(2)} WPM</span></p>
+        <p>Accuracy: <span id="accuracy">${accuracy.toFixed(2)}%</span></p>
+        <p>Full Mistakes: <span id="full-mistakes">${fullMistakes}</span></p>
+        <p>Half Mistakes: <span id="half-mistakes">${halfMistakes}</span></p>
+        <p>Net DPH: <span id="net-dph">${netDPH.toFixed(0)}</span></p>
+        <p>Marks (50): <span id="marks-50">${marksOutOf50.toFixed(1)}</span></p>
+        <p>Marks (25): <span id="marks-25">${marksOutOf25.toFixed(1)}</span></p>
+        <p>Error Stocks: <span id="error-stocks">${errorStocks}</span></p>
+        <p>Backspaces: <span id="backspaces">${backspaceCount}</span></p>
+        <p>Total Keystrokes: <span id="keystrokes">${keyStrokes}</span></p>
+    `;
+
+            // Send data to server
+            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "Phone": SPR_StudentPhone,
+                "courseDataId": courseDataId,
+                "accuracy": accuracy.toFixed(2),
+                "fullMistakes": fullMistakes,
+                "halfMistakes": halfMistakes,
+                "grossSpeed": grossWPM.toFixed(2),
+                "netSpeed": netWPM.toFixed(2),
+                "netDPH": netDPH.toFixed(0),
+                "marksOutOf50": marksOutOf50.toFixed(1),
+                "marksOutOf25": marksOutOf25.toFixed(1),
+                "errorStocks": errorStocks,
+                "backspaceCount": backspaceCount,
+                "totalKeystrokes": keyStrokes,
+                "totalWords": quoteSection.innerText.length + '',
+                "totalType": totaltypewords,
+                "timeTaken": timeTaken * 60, // in seconds
+                "contentData": quoteSection.innerText,
+                "studentTypedData": typedwords,
+                "submitTypedData": 'submitTypedData'
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+                .then(response => response.json())
+                .then(result => console.log(result))
+                .catch(error => console.log('error=', error));
+        };
+ // Modify the calculateTypingAccuracy function
+ function calculateTypingAccuracy() {
+            let referenceText = quoteSection.innerText;
+            let userInputText = document.getElementById('quote-input').value;
+
+            if (userInputText.length > 0) {
+                document.getElementById("stop-test").disabled = false;
+                document.getElementById("stop-test").style.cursor = "pointer";
+            } else {
+                document.getElementById("stop-test").style.cursor = "not-allowed";
+                document.getElementById("stop-test").disabled = true;
+            }
+
+            referenceText = referenceText.split(' ');
+            userInputText = userInputText.trim().split(' ');
+
+            let correctWords = 0;
+            fullMistakes = 0;
+            halfMistakes = 0;
+            totaltypewords = userInputText.length;
+
+            // Compare word by word
+            for (let i = 0; i < userInputText.length; i++) {
+                if (i >= referenceText.length) {
+                    fullMistakes++;
+                    continue;
+                }
+
+                if (referenceText[i] === userInputText[i]) {
+                    correctWords++;
+                    correctKeystrokes += userInputText[i].length;
+                } else {
+                    // Check for partial matches (half mistakes)
+                    let minLength = Math.min(referenceText[i].length, userInputText[i].length);
+                    let matchingChars = 0;
+
+                    for (let j = 0; j < minLength; j++) {
+                        if (referenceText[i][j] === userInputText[i][j]) {
+                            matchingChars++;
+                        }
+                    }
+
+                    if (matchingChars >= minLength * 0.5) {
+                        halfMistakes++;
+                        correctKeystrokes += matchingChars;
+                        incorrectKeystrokes += (userInputText[i].length - matchingChars);
+                    } else {
+                        fullMistakes++;
+                        incorrectKeystrokes += userInputText[i].length;
+                    }
+                }
+            }
+
+            document.getElementById("TotalTyped").innerText = totaltypewords;
+            document.getElementById("mistakes").innerText = fullMistakes;
+
+            const accuracy = (correctWords / userInputText.length) * 100;
+            return accuracy + '@' + fullMistakes + '@' + halfMistakes;
+        }
     </script>
     <!-- 
     <Script>
@@ -1315,201 +1508,9 @@ console.log('6');
             }
         });
 
-        // Modify the calculateTypingAccuracy function
-        function calculateTypingAccuracy() {
-            let referenceText = quoteSection.innerText;
-            let userInputText = document.getElementById('quote-input').value;
-
-            if (userInputText.length > 0) {
-                document.getElementById("stop-test").disabled = false;
-                document.getElementById("stop-test").style.cursor = "pointer";
-            } else {
-                document.getElementById("stop-test").style.cursor = "not-allowed";
-                document.getElementById("stop-test").disabled = true;
-            }
-
-            referenceText = referenceText.split(' ');
-            userInputText = userInputText.trim().split(' ');
-
-            let correctWords = 0;
-            fullMistakes = 0;
-            halfMistakes = 0;
-            totaltypewords = userInputText.length;
-
-            // Compare word by word
-            for (let i = 0; i < userInputText.length; i++) {
-                if (i >= referenceText.length) {
-                    fullMistakes++;
-                    continue;
-                }
-
-                if (referenceText[i] === userInputText[i]) {
-                    correctWords++;
-                    correctKeystrokes += userInputText[i].length;
-                } else {
-                    // Check for partial matches (half mistakes)
-                    let minLength = Math.min(referenceText[i].length, userInputText[i].length);
-                    let matchingChars = 0;
-
-                    for (let j = 0; j < minLength; j++) {
-                        if (referenceText[i][j] === userInputText[i][j]) {
-                            matchingChars++;
-                        }
-                    }
-
-                    if (matchingChars >= minLength * 0.5) {
-                        halfMistakes++;
-                        correctKeystrokes += matchingChars;
-                        incorrectKeystrokes += (userInputText[i].length - matchingChars);
-                    } else {
-                        fullMistakes++;
-                        incorrectKeystrokes += userInputText[i].length;
-                    }
-                }
-            }
-
-            document.getElementById("TotalTyped").innerText = totaltypewords;
-            document.getElementById("mistakes").innerText = fullMistakes;
-
-            const accuracy = (correctWords / userInputText.length) * 100;
-            return accuracy + '@' + fullMistakes + '@' + halfMistakes;
-        }
+       
 
         // Modify the displayResult function to show all metrics
-        const displayResult = () => {
-            document.getElementById("resultMainDiv").style.display = 'block';
-            document.getElementById("quote-input").style.display = 'none';
-            document.getElementById("quote").style.display = 'none';
-            document.getElementById("timeDivId").style.display = 'none';
-
-            var resultSection = document.getElementById("wrapperResultId");
-            var quotee = document.getElementById("quote").innerText;
-            const words = quotee.split(/\s+/);
-            let typedwords = document.getElementById("quote-input").value.replace(/\s+/g, ' ').trim().split(' ');
-
-            let i = 0, j = 0;
-            let correctWordCnt = 0;
-            let inCorrectWordCnt = 0;
-            let skipWordCnt = 0;
-
-            while (i < words.length || j < typedwords.length) {
-                if (j >= typedwords.length || (i < words.length && words[i] !== typedwords[j])) {
-                    if (j < typedwords.length && !words.includes(typedwords[j])) {
-                        inCorrectWordCnt++;
-                        const span = document.createElement('span');
-                        span.classList.add('incorrect-word');
-                        span.textContent = typedwords[j];
-
-                        const correctSpan = document.createElement('span');
-                        correctSpan.classList.add('correct-word');
-                        correctSpan.textContent = words[i];
-
-                        resultSection.appendChild(span);
-                        resultSection.appendChild(correctSpan);
-                        j++;
-                        i++;
-                    } else {
-                        skipWordCnt++;
-                        const span = document.createElement('span');
-                        span.classList.add('skipped');
-                        span.textContent = words[i] + ' ';
-                        resultSection.appendChild(span);
-                        i++;
-                    }
-                } else {
-                    correctWordCnt++;
-                    const span = document.createElement('span');
-                    span.classList.add('correct-input');
-                    span.textContent = words[i] + ' ';
-                    resultSection.appendChild(span);
-                    i++;
-                    j++;
-                }
-            }
-
-            document.querySelector(".result").style.display = "block";
-            clearInterval(timer);
-            document.getElementById("stop-test").style.display = "none";
-            userInput.disabled = true;
-
-            let timeTaken = 1;
-            if (time != 0) {
-                timeTaken = (totalTimeInSecond - time) / 60; // in minutes
-            }
-
-            // Calculate all metrics
-            const grossWPM = (keyStrokes / 5) / timeTaken;
-            const netWPM = grossWPM - (fullMistakes / timeTaken);
-            const accuracyData = calculateTypingAccuracy().split('@');
-            const accuracy = parseFloat(accuracyData[0]);
-            fullMistakes = parseInt(accuracyData[1]);
-            halfMistakes = parseInt(accuracyData[2]);
-
-            // Net DPH (Depressions Per Hour)
-            const netDPH = (keyStrokes - backspaceCount) * (60 / timeTaken);
-
-            // Marks calculation (example: 50 - (fullMistakes * 2) - (halfMistakes * 1))
-            const marksOutOf50 = Math.max(0, 50 - (fullMistakes * 2) - (halfMistakes * 1));
-            const marksOutOf25 = Math.max(0, 25 - (fullMistakes * 1) - (halfMistakes * 0.5));
-
-            // Error Stocks (Gross Error + 5)
-            const errorStocks = fullMistakes + 5;
-
-            // Update the results display
-            const wrapper = document.querySelector(".wrapper");
-            wrapper.innerHTML = `
-        <p>Gross Speed: <span id="gross-wpm">${grossWPM.toFixed(2)} WPM</span></p>
-        <p>Net Speed: <span id="net-wpm">${netWPM.toFixed(2)} WPM</span></p>
-        <p>Accuracy: <span id="accuracy">${accuracy.toFixed(2)}%</span></p>
-        <p>Full Mistakes: <span id="full-mistakes">${fullMistakes}</span></p>
-        <p>Half Mistakes: <span id="half-mistakes">${halfMistakes}</span></p>
-        <p>Net DPH: <span id="net-dph">${netDPH.toFixed(0)}</span></p>
-        <p>Marks (50): <span id="marks-50">${marksOutOf50.toFixed(1)}</span></p>
-        <p>Marks (25): <span id="marks-25">${marksOutOf25.toFixed(1)}</span></p>
-        <p>Error Stocks: <span id="error-stocks">${errorStocks}</span></p>
-        <p>Backspaces: <span id="backspaces">${backspaceCount}</span></p>
-        <p>Total Keystrokes: <span id="keystrokes">${keyStrokes}</span></p>
-    `;
-
-            // Send data to server
-            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            var raw = JSON.stringify({
-                "Phone": SPR_StudentPhone,
-                "courseDataId": courseDataId,
-                "accuracy": accuracy.toFixed(2),
-                "fullMistakes": fullMistakes,
-                "halfMistakes": halfMistakes,
-                "grossSpeed": grossWPM.toFixed(2),
-                "netSpeed": netWPM.toFixed(2),
-                "netDPH": netDPH.toFixed(0),
-                "marksOutOf50": marksOutOf50.toFixed(1),
-                "marksOutOf25": marksOutOf25.toFixed(1),
-                "errorStocks": errorStocks,
-                "backspaceCount": backspaceCount,
-                "totalKeystrokes": keyStrokes,
-                "totalWords": quoteSection.innerText.length + '',
-                "totalType": totaltypewords,
-                "timeTaken": timeTaken * 60, // in seconds
-                "contentData": quoteSection.innerText,
-                "studentTypedData": typedwords,
-                "submitTypedData": 'submitTypedData'
-            });
-
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-
-            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
-                .then(response => response.json())
-                .then(result => console.log(result))
-                .catch(error => console.log('error=', error));
-        };
 
         // Update the startTest function to reset all metrics
         function startTest() {

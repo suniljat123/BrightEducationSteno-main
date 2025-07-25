@@ -215,8 +215,8 @@ console.log('result=', result)
 
       const userTypedText = typedwords;
 
-      const result = compareTexts(originalText, userTypedText);
-      document.getElementById("comparisonOutput").innerHTML = result;
+      const typingResult = compareTexts(originalText, userTypedText);
+      document.getElementById("comparisonOutput").innerHTML = typingResult;
                 })
                 .catch(error => console.log('error=', error));
         

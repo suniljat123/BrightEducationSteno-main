@@ -1179,42 +1179,7 @@ justify-content: space-around;">
             let correctWordCnt = 0;
             let inCorrectWordCnt = 0;
             let skipWordCnt = 0;
-
-            while (i < words.length || j < typedwords.length) {
-                if (j >= typedwords.length || (i < words.length && words[i] !== typedwords[j])) {
-                    if (j < typedwords.length && !words.includes(typedwords[j])) {
-                        inCorrectWordCnt++;
-                        const span = document.createElement('span');
-                        span.classList.add('incorrect-word');
-                        span.textContent = typedwords[j];
-
-                        const correctSpan = document.createElement('span');
-                        correctSpan.classList.add('correct-word');
-                        correctSpan.textContent = words[i];
-
-                        resultSection.appendChild(span);
-                        resultSection.appendChild(correctSpan);
-                        j++;
-                        i++;
-                    } else {
-                        skipWordCnt++;
-                        const span = document.createElement('span');
-                        span.classList.add('skipped');
-                        span.textContent = words[i] + ' ';
-                        resultSection.appendChild(span);
-                        i++;
-                    }
-                } else {
-                    correctWordCnt++;
-                    const span = document.createElement('span');
-                    span.classList.add('correct-input');
-                    span.textContent = words[i] + ' ';
-                    resultSection.appendChild(span);
-                    i++;
-                    j++;
-                }
-            }
-
+ 
             document.querySelector(".result").style.display = "block";
             clearInterval(timer);
             document.getElementById("stop-test").style.display = "none";
@@ -1263,7 +1228,7 @@ justify-content: space-around;">
             let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
-
+let totaltypewords = typedwords.length;
             var raw = JSON.stringify({
                 "Phone": SPR_StudentPhone,
                 "courseDataId": courseDataId,

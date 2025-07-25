@@ -1116,6 +1116,16 @@ console.log('6');
                 }
             }
         }
+        function convertSecondsToTime(seconds) {
+            var minutes = Math.floor(seconds / 60);
+            var remainingSeconds = seconds % 60;
+
+            // Add leading zero if necessary
+            var minutesStr = minutes < 10 ? "0" + minutes : minutes.toString();
+            var secondsStr = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds.toString();
+
+            return minutesStr + ":" + secondsStr;
+        }
     </script>
     <!-- 
     <Script>
@@ -1256,58 +1266,7 @@ console.log('6');
                     quoteSection.innerHTML += arr.join("");
                 })
                 .catch(error => console.log('error=', error));
-        };
-
-        function convertSecondsToTime(seconds) {
-            var minutes = Math.floor(seconds / 60);
-            var remainingSeconds = seconds % 60;
-
-            // Add leading zero if necessary
-            var minutesStr = minutes < 10 ? "0" + minutes : minutes.toString();
-            var secondsStr = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds.toString();
-
-            return minutesStr + ":" + secondsStr;
-        }
-        function updateTimer() {
-            var timerElement = document.getElementById("timer");
-            var currentTime = timerElement.innerText;
-            var timeParts = currentTime.split(":");
-            var minutes = parseInt(timeParts[0]);
-            var seconds = parseInt(timeParts[1]);
-            if (minutes == 0 && seconds == 0) {
-                //End test if timer reaches 0
-                displayResult();
-            } else {
-                var totalSeconds = minutes * 60 + seconds;
-                if (totalSeconds > 0) {
-                    totalSeconds--;
-                    time--;
-                    timerElement.innerText = convertSecondsToTime(totalSeconds) + "s";
-                }
-            }
-        }
-
-
-        //Sets timer
-        const timeReduce = () => {
-            //time = 60;
-            timer = setInterval(updateTimer, 1000);
-        };
-         
-        //Start Test
-        const startTest = () => {
-            mistakes = 0;
-            timer = "";
-            var dropdown = document.getElementById("duration");
-            dropdown.setAttribute("disabled", true);
-            userInput.disabled = false;
-            timeReduce();
-            document.getElementById("stop-test").style.cursor = "not-allowed";
-            document.getElementById("start-test").style.display = "none";
-            document.getElementById("stop-test").style.display = "block";
-            document.getElementById("stop-test").disabled = true;
-
-        };
+        }; 
 
         window.onload = () => {
             userInput.value = "";

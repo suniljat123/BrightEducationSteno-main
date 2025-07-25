@@ -1100,6 +1100,7 @@ justify-content: space-around;">
         const quoteSection = document.getElementById("quote");
         // Update the input event listener to track more metrics
         userInput.addEventListener("input", (e) => {
+            console.log('input event triggered');
             calculateTypingAccuracy();
 
             // Track backspaces
@@ -1266,9 +1267,7 @@ justify-content: space-around;">
             var raw = JSON.stringify({
                 "Phone": SPR_StudentPhone,
                 "courseDataId": courseDataId,
-                "accuracy": accuracy.toFixed(2),
-                "fullMistakes": fullMistakes,
-                "halfMistakes": halfMistakes,
+                "accuracy": accuracy.toFixed(2), 
                 "grossSpeed": grossWPM.toFixed(2),
                 "netSpeed": netWPM.toFixed(2),
                 "netDPH": netDPH.toFixed(0),
@@ -1298,63 +1297,15 @@ justify-content: space-around;">
                 .catch(error => console.log('error=', error));
         };
         // Modify the calculateTypingAccuracy function
-        function calculateTypingAccuracy() {
-
-            let userInput = document.getElementById("quote-input");
-            let referenceText = quoteSection.innerText;
-            let userInputText = document.getElementById('quote-input').value;
-
+        function calculateTypingAccuracy() { 
+            let userInputText = document.getElementById('quote-input').value; 
             if (userInputText.length > 0) {
                 document.getElementById("stop-test").disabled = false;
                 document.getElementById("stop-test").style.cursor = "pointer";
             } else {
                 document.getElementById("stop-test").style.cursor = "not-allowed";
                 document.getElementById("stop-test").disabled = true;
-            }
-
-            referenceText = referenceText.split(' ');
-            userInputText = userInputText.trim().split(' ');
-
-            let correctWords = 0;
-            fullMistakes = 0;
-            halfMistakes = 0;
-            let totaltypewords = userInputText.length;
-
-            // Compare word by word
-            for (let i = 0; i < userInputText.length; i++) {
-                if (i >= referenceText.length) {
-                    fullMistakes++;
-                    continue;
-                }
-
-                if (referenceText[i] === userInputText[i]) {
-                    correctWords++;
-                    correctKeystrokes += userInputText[i].length;
-                } else {
-                    // Check for partial matches (half mistakes)
-                    let minLength = Math.min(referenceText[i].length, userInputText[i].length);
-                    let matchingChars = 0;
-
-                    for (let j = 0; j < minLength; j++) {
-                        if (referenceText[i][j] === userInputText[i][j]) {
-                            matchingChars++;
-                        }
-                    }
-
-                    if (matchingChars >= minLength * 0.5) {
-                        halfMistakes++;
-                        correctKeystrokes += matchingChars;
-                        incorrectKeystrokes += (userInputText[i].length - matchingChars);
-                    } else {
-                        fullMistakes++;
-                        incorrectKeystrokes += userInputText[i].length;
-                    }
-                }
-            }
-
-            document.getElementById("TotalTyped").innerText = totaltypewords;
-            document.getElementById("mistakes").innerText = fullMistakes;
-
+            }   
             const accuracy = (correctWords / userInputText.length) * 100;
             return accuracy + '@' + fullMistakes + '@' + halfMistakes;
         }

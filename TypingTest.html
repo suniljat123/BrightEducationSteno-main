@@ -983,7 +983,7 @@ justify-content: space-around;">
     <script defer src="assets/js/main.js"></script>
     <script src="assets/js/MyComponents.js"></script>
     <script>
-         
+
         $(document).ready(function () {
             checkIsSprStudent();
             document.getElementById('header').style.backgroundColor = '#38434b'
@@ -1003,25 +1003,33 @@ justify-content: space-around;">
         let time = 60;
         let totalTimeInSecond;
         $(document).ready(function () {
-            console.log('document ready') 
-            console.log('1'); 
+            console.log('document ready')
+            console.log('1');
             console.log('2');
             const queryString = window.location.search;
             console.log('3');
             const urlParams = new URLSearchParams(queryString);
-           console.log('4');
+            console.log('4');
             let id = urlParams.get('Id')
             console.log('5');
             if (id == null) {
-console.log('6');
+                console.log('6');
                 id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
             }
             console.log('id===>', id)
             renderNewQuote(id)
-
+            let userInput = document.getElementById('quote-input')
+            mistakes = 0;
+            timer = "";
+            var dropdown = document.getElementById("duration");
+            dropdown.setAttribute("disabled", true);
+            userInput.disabled = true;
+            timeReduce();
+            document.getElementById("stop-test").style.cursor = "not-allowed";
+            document.getElementById("stop-test").disabled = true;
         })
-              //Display random quotes
-              const renderNewQuote = async (id) => {
+        //Display random quotes
+        const renderNewQuote = async (id) => {
             const quoteSection = document.getElementById("quote");
             console.log('rendernew')
             courseDataId = id;
@@ -1067,7 +1075,7 @@ console.log('6');
                     content = content.replace('<p>', '');
                     content = content.replace('</p>', '');
                     quote = content;
-                   
+
                     //   value='I am very happy to be present here today for opening the new building of your University. All that you have said about this new University, which is only six years old, is commendable in many respects. Although you have not had adequate equipment and the necessary wherewithal in the beginning, these serious shortcomings did not bother you. In right earnest you started the work.';
                     //Array of characters in the quote
                     let arr = quote.split("").map((value) => {
@@ -1079,7 +1087,7 @@ console.log('6');
                 })
                 .catch(error => console.log('error=', error));
         };
-  
+
         // Add these variables at the top with other variable declarations
         let fullMistakes = 0;
         let halfMistakes = 0;
@@ -1103,14 +1111,14 @@ console.log('6');
             if (e.data && e.inputType !== "deleteContentBackward") {
                 keyStrokes++;
             }
-        }); 
+        });
 
-  //Sets timer
-  const timeReduce = () => {
+        //Sets timer
+        const timeReduce = () => {
             //time = 60;
             timer = setInterval(updateTimer, 1000);
         };
-         
+
         //Start Test
         const startTest = () => {
             let userInput = document.getElementById('quote-input')
@@ -1289,10 +1297,10 @@ console.log('6');
                 .then(result => console.log(result))
                 .catch(error => console.log('error=', error));
         };
- // Modify the calculateTypingAccuracy function
- function calculateTypingAccuracy() {
-   
-        let userInput = document.getElementById("quote-input");
+        // Modify the calculateTypingAccuracy function
+        function calculateTypingAccuracy() {
+
+            let userInput = document.getElementById("quote-input");
             let referenceText = quoteSection.innerText;
             let userInputText = document.getElementById('quote-input').value;
 
@@ -1514,7 +1522,7 @@ console.log('6');
         });
     </script>
 
-     
+
 </body>
 
 </html>

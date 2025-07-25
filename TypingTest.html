@@ -1290,6 +1290,8 @@ console.log('6');
         };
  // Modify the calculateTypingAccuracy function
  function calculateTypingAccuracy() {
+    const quoteSection = document.getElementById("quote");
+        const userInput = document.getElementById("quote-input");
             let referenceText = quoteSection.innerText;
             let userInputText = document.getElementById('quote-input').value;
 
@@ -1375,8 +1377,7 @@ console.log('6');
 
         })
         //Random Quotes Api URL 
-        const quoteSection = document.getElementById("quote");
-        const userInput = document.getElementById("quote-input");
+        
         let quote = "";
         let courseDataId = ''
         let timer = "";

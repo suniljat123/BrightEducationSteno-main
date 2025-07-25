@@ -1344,6 +1344,14 @@ console.log('6');
             const accuracy = (correctWords / userInputText.length) * 100;
             return accuracy + '@' + fullMistakes + '@' + halfMistakes;
         }
+        function handleGoBack() {
+            history.back();
+            var part1 = document.getElementById('datatable');
+            var part2 = document.getElementById('typingModalId');
+            part1.style.display = 'table';
+            part2.style.display = 'none';
+            quote = '';
+        }
     </script>
     <!-- 
     <Script>
@@ -1417,14 +1425,7 @@ console.log('6');
             part2.style.display = 'inline-block';
 
         }
-        function handleGoBack() {
-            history.back();
-            var part1 = document.getElementById('datatable');
-            var part2 = document.getElementById('typingModalId');
-            part1.style.display = 'table';
-            part2.style.display = 'none';
-            quote = '';
-        }
+       
 
 
 

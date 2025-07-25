@@ -10,7 +10,7 @@ function resetLogoutTimer() {
 function startLogoutTimer() {
   console.log('startLogoutTimer called');
   logoutTimer = setTimeout(() => {
-    alert('You have been logged out due to 15 minutes of inactivity.');
+    alert('You have been logged out due to 16 minutes of inactivity.');
     localStorage.removeItem("SPR_StudentPhone"); // clear localStorage if needed
     location.href = "index.html"; // Redirect to login page
   }, 15 * 60 * 1000); // 15 minutes

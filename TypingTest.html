@@ -1255,130 +1255,7 @@ console.log('6');
             //time = 60;
             timer = setInterval(updateTimer, 1000);
         };
-        const displayResult = () => {
-            document.getElementById("resultMainDiv").style.display = 'block';
-            document.getElementById("quote-input").style.display = 'none';
-            document.getElementById("quote").style.display = 'none';
-            document.getElementById("timeDivId").style.display = 'none';
-            var resultSection = document.getElementById("wrapperResultId")
-            // Words in above box
-            var quotee = document.getElementById("quote").innerText;
-            const words = quotee.split(/\s+/);
-            // ended
-
-            // words in below box
-            // var quoteebox = document.getElementById("quote-input").value;
-            //  text.replace(/\s+/g, ' ').trim();
-            let typedwords = document.getElementById("quote-input").value.replace(/\s+/g, ' ').trim().split(' ');
-            // ended
-            // console.log('1=', document.getElementById("quote-input").value.trim().split(' '));
-            console.log('2=', typedwords);
-            console.log('words: ', words);
-            let i = 0, j = 0;
-            let correctWordCnt = 0;
-            let inCorrectWordCnt = 0;
-            let skipWordCnt = 0;
-            while (i < words.length || j < typedwords.length) {
-                if (j >= typedwords.length || (i < words.length && words[i] !== typedwords[j])) {
-                    if (j < typedwords.length && !words.includes(typedwords[j])) {
-                        // Incorrect word
-                        inCorrectWordCnt++;
-                        const span = document.createElement('span');
-                        span.classList.add('incorrect-word');
-                        span.textContent = typedwords[j];
-
-                        const correctSpan = document.createElement('span');
-                        correctSpan.classList.add('correct-word');
-                        correctSpan.textContent = words[i];
-
-                        resultSection.appendChild(span);
-                        resultSection.appendChild(correctSpan);
-                        j++;
-                        i++; // Skip the correct word already displayed
-                    } else {
-                        // Skipped word
-                        skipWordCnt++;
-                        const span = document.createElement('span');
-                        span.classList.add('skipped');
-                        span.textContent = words[i] + ' ';
-                        resultSection.appendChild(span);
-                        i++;
-                    }
-                } else {
-                    // Correct word
-                    correctWordCnt++;
-                    const span = document.createElement('span');
-                    span.classList.add('correct-input');
-                    span.textContent = words[i] + ' ';
-                    resultSection.appendChild(span);
-                    i++;
-                    j++;
-                }
-            }
-            console.log('correct=', correctWordCnt)
-            console.log('incorrect=', inCorrectWordCnt)
-            console.log('skip=', skipWordCnt)
-
-            document.querySelector(".result").style.display = "block";
-            clearInterval(timer);
-            document.getElementById("stop-test").style.display = "none";
-            userInput.disabled = true;
-            //  userInput = userInput.trim();
-            let timeTaken = 1;
-            if (time != 0) {
-                timeTaken = (totalTimeInSecond - time) / 100;
-            }
-            var speedTemp = (userInput.value.length / 5 / timeTaken).toFixed(2);
-            if (speedTemp == 'Infinity' || speedTemp == 'NaN')
-                speedTemp = 0;
-            document.getElementById("wpm").innerText = speedTemp + " wpm";
-            let accuracy = calculateTypingAccuracy();
-            console.log('Student Typed data=>', document.getElementById("wrapperResultId").innerText)
-            let wrongWords = accuracy.substr(accuracy.indexOf('@') + 1, accuracy.length)
-            accuracy = parseInt(accuracy.substr(0, accuracy.indexOf('@')));
-            if (accuracy == 'Infinity' || accuracy == 'NaN') {
-                accuracy = 0;
-                document.getElementById("accuracy").innerText = '0%';
-            } else {
-                document.getElementById("accuracy").innerText = accuracy.toFixed(2) + '%';
-            }
-
-
-            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
-
-            var raw = JSON.stringify({
-                "Phone": SPR_StudentPhone,
-                "courseDataId": courseDataId,
-                "accuracy": accuracy?.toFixed(2),
-                "wrongWords": wrongWords,
-                "speed": (userInput.value.length / 5 / timeTaken).toFixed(2) + " wpm",
-                "totalWords": quoteSection.innerText.length + '',
-                "totalType": totaltypewords,
-                "timeTaken": timeTaken,
-                "contentData": quoteSection.innerText,
-                "studentTypedData": typedwords,
-                "submitTypedData": 'submitTypedData'
-            });
-
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
-                .then(response => response.json())
-                .then(result => {
-                    console.log('result=', result)
-
-                })
-                .catch(error => console.log('error=', error));
-
-        };
-
+         
         //Start Test
         const startTest = () => {
             mistakes = 0;
@@ -1638,7 +1515,7 @@ console.log('6');
         };
 
         // Update the startTest function to reset all metrics
-        const startTest = () => {
+        function startTest() {
             fullMistakes = 0;
             halfMistakes = 0;
             backspaceCount = 0;

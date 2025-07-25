@@ -13,7 +13,7 @@ function startLogoutTimer() {
     alert('You have been logged out due to 15 minutes of inactivity.');
     localStorage.removeItem("SPR_StudentPhone"); // clear localStorage if needed
     location.href = "index.html"; // Redirect to login page
-  }, 1 * 60 * 1000); // 15 minutes
+  }, 15 * 60 * 1000); // 15 minutes
 }
 
 // Detect tab visibility change

@@ -171,6 +171,7 @@
             if (id == null) { 
                 id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
             } 
+            console.log('id=', id)
             let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -192,7 +193,7 @@
             fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
                 .then(response => response.json())
                 .then(result => {
-
+console.log('result=', result)
                     result = JSON.parse(result);
                     console.log('typing result=>', result)
                     if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {

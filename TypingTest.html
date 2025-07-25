@@ -983,6 +983,7 @@ justify-content: space-around;">
     <script defer src="assets/js/main.js"></script>
     <script src="assets/js/MyComponents.js"></script>
     <script>
+         
         $(document).ready(function () {
             checkIsSprStudent();
             document.getElementById('header').style.backgroundColor = '#38434b'
@@ -1019,32 +1020,8 @@ console.log('6');
             renderNewQuote(id)
 
         })
-        // Add these variables at the top with other variable declarations
-        let fullMistakes = 0;
-        let halfMistakes = 0;
-        let backspaceCount = 0;
-        let keyStrokes = 0;
-        let startTime, endTime;
-        let correctKeystrokes = 0;
-        let incorrectKeystrokes = 0;
-
-        // Update the input event listener to track more metrics
-        userInput.addEventListener("input", (e) => {
-            calculateTypingAccuracy();
-
-            // Track backspaces
-            if (e.inputType === "deleteContentBackward") {
-                backspaceCount++;
-            }
-
-            // Track total keystrokes (excluding backspace)
-            if (e.data && e.inputType !== "deleteContentBackward") {
-                keyStrokes++;
-            }
-        }); 
-
-        //Display random quotes
-        const renderNewQuote = async (id) => {
+              //Display random quotes
+              const renderNewQuote = async (id) => {
             const quoteSection = document.getElementById("quote");
             console.log('rendernew')
             courseDataId = id;
@@ -1090,6 +1067,7 @@ console.log('6');
                     content = content.replace('<p>', '');
                     content = content.replace('</p>', '');
                     quote = content;
+                   
                     //   value='I am very happy to be present here today for opening the new building of your University. All that you have said about this new University, which is only six years old, is commendable in many respects. Although you have not had adequate equipment and the necessary wherewithal in the beginning, these serious shortcomings did not bother you. In right earnest you started the work.';
                     //Array of characters in the quote
                     let arr = quote.split("").map((value) => {
@@ -1101,6 +1079,31 @@ console.log('6');
                 })
                 .catch(error => console.log('error=', error));
         };
+  
+        // Add these variables at the top with other variable declarations
+        let fullMistakes = 0;
+        let halfMistakes = 0;
+        let backspaceCount = 0;
+        let keyStrokes = 0;
+        let startTime, endTime;
+        let correctKeystrokes = 0;
+        let incorrectKeystrokes = 0;
+        let userInput = document.getElementById('quote-input')
+        // Update the input event listener to track more metrics
+        userInput.addEventListener("input", (e) => {
+            calculateTypingAccuracy();
+
+            // Track backspaces
+            if (e.inputType === "deleteContentBackward") {
+                backspaceCount++;
+            }
+
+            // Track total keystrokes (excluding backspace)
+            if (e.data && e.inputType !== "deleteContentBackward") {
+                keyStrokes++;
+            }
+        }); 
+
   //Sets timer
   const timeReduce = () => {
             //time = 60;

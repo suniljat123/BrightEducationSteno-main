@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Typing Comparison - Case Sensitive</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .correct {
+      color: black;
+    }
+
+    .incorrect {
+      color: red;
+      text-decoration: line-through;
+    }
+
+    .wrong-capitalization {
+      color: orange;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .expected {
+      color: green !important;
+      background-color: #e8f5e9;
+      font-weight: bold;
+    }
+
+    .extra {
+      color: purple;
+      text-decoration: underline;
+    }
+
+    .missed {
+      color: blue;
+      font-weight: bold;
+    }
+
+    #comparisonOutput {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: monospace;
+      font-size: 1rem;
+    }
+
+    .result-box {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      min-height: 150px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="container-fluid py-2">
+    <div class="row">
+      <div class="col-12 col-md-3 mb-2 mb-md-0">
+        <button class="btn btn-primary w-100" onclick="window.print()">Print/Save Result</button>
+      </div>
+      <div class="col-12 col-md-9">
+        <h4 class="text-center text-md-start">Candidate Result Sheet - Typing Test</h4>
+      </div>
+    </div>
+  </section>
+
+  <section class="container py-2">
+    <p class="mb-1">Error Legend:</p>
+    <ul class="mb-2">
+      <li><span class="incorrect">wrong</span> = Incorrect word</li>
+      <li><span class="wrong-capitalization">wrong Capitalization</span> = Capitalization mismatch</li>
+      <li><span class="incorrect">typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown</li>
+      <li><span class="missed">[expected]</span> = Missed word</li>
+      <li><span class="extra">extra</span> = Extra word</li>
+    </ul>
+  </section>
+
+  <section class="container mb-5">
+    <h5 class="mb-3">Typed Text Comparison:</h5>
+    <div id="comparisonOutput" class="result-box"></div>
+  </section>
+
+  <script>
+    function tokenize(text) {
+      text = text.normalize("NFC");
+      // Tokenize words and punctuation separately, ignoring whitespace tokens
+      const regex = /\w+(?:-\w+)*|[.,!?;:]+/g;
+      return text.match(regex) || [];
+    }
+
+    function escapeHtml(text) {
+      return (text || "").replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function compareWords(origWords, typedWords) {
+      const result = [];
+      let i = 0, j = 0;
+
+      while (i < origWords.length || j < typedWords.length) {
+        const origWord = origWords[i] || null;
+        const typedWord = typedWords[j] || null;
+
+        if (origWord === null) {
+          // Extra word typed
+          result.push(`<span class="extra">${escapeHtml(typedWord)}</span> `);
+          j++;
+          continue;
+        }
+
+        if (typedWord === null) {
+          // Missed word
+          result.push(`<span class="missed">[${escapeHtml(origWord)}]</span> `);
+          i++;
+          continue;
+        }
+
+        if (origWord === typedWord) {
+          // Exact match, including case
+          result.push(`<span class="correct">${escapeHtml(typedWord)}</span> `);
+          i++;
+          j++;
+        } else if (origWord.toLowerCase() === typedWord.toLowerCase()) {
+          // Same word ignoring case - capitalization error
+          result.push(`<span class="wrong-capitalization">${escapeHtml(typedWord)}</span>`);
+          result.push(`<span class="expected">[${escapeHtml(origWord)}]</span> `);
+          i++;
+          j++;
+        } else {
+          // Spelling error or totally different word
+          // Try lookahead to detect missing/extra words
+
+          // If next orig matches current typed → missed word in typed
+          if (origWords[i + 1] && origWords[i + 1].toLowerCase() === typedWord.toLowerCase()) {
+            result.push(`<span class="missed">[${escapeHtml(origWord)}]</span> `);
+            i++;
+          }
+          // If next typed matches current orig → extra word typed
+          else if (typedWords[j + 1] && typedWords[j + 1].toLowerCase() === origWord.toLowerCase()) {
+            result.push(`<span class="extra">${escapeHtml(typedWord)}</span> `);
+            j++;
+          } else {
+            // Substitution error
+            result.push(`<span class="incorrect">${escapeHtml(typedWord)}</span>`);
+            result.push(`<span class="expected">[${escapeHtml(origWord)}]</span> `);
+            i++;
+            j++;
+          }
+        }
+      }
+
+      return result.join('').trim();
+    }
+
+    function compareTexts(original, typed) {
+      const origTokens = tokenize(original);
+      const typedTokens = tokenize(typed);
+      return compareWords(origTokens, typedTokens);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+       
+            const queryString = window.location.search; 
+            const urlParams = new URLSearchParams(queryString); 
+            let id = urlParams.get('Id') 
+            if (id == null) { 
+                id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
+            } 
+            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
+
+            var raw = JSON.stringify({
+                "Phone": SPR_StudentPhone,
+                "contentResultId": id,
+                "getTypingTestContent": 'getTypingTestResult',
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            let content = '';
+            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+
+                    result = JSON.parse(result);
+                    console.log('typing result=>', result)
+                    if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
+
+                        document.getElementById("quote").style.fontFamily = 'Hindi';
+                        document.getElementById("quote-input").style.fontFamily = 'Hindi';
+                        document.getElementById("wrapperResultId").style.fontFamily = 'Hindi';
+                    } else {
+                        document.getElementById("quote").style.fontFamily = 'monospace';
+                        document.getElementById("quote-input").style.fontFamily = 'monospace';
+                        document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
+                    }
+
+                     
+                      content = result[0].Audio_Text__c;
+                    content = content.replace('<p>', '');
+                    content = content.replace('</p>', '');
+                     
+ const originalText = `We must acknowledge that this Court has very often entertained applications for divorce by mutual consent under Section 13-B of the Hindu Marriage Act and passed a decree of divorce without relegating or asking the parties to move a joint motion before the Trial Court. In such cases, other pending proceedings between the parties, civil and criminal, are appropriately dealt with in terms of the settlement and are decreed, quashed or closed accordingly. This situation arises when proceedings are pending in this Court against an interim or a final order passed in a judicial proceeding or on a transfer petition being filed before this Court. The parties may mutually agree to dissolve the marriage, often through mediation or on being prompted by the Court. In matrimonial matters, settlement and not litigation, is the preferable mode of dispute resolution. Exercise of jurisdiction under Article 142 of the Constitution of India by this Court in such cases is clearly permissible to do complete justice to a cause or matter. We should accept that this Court can pass an order or decree which a Family Court, Trial Court or High Court can pass. As per the said Article, a decree passed or an order made by this Court is executable throughout the territory of India. A question or issue of lack of subject- matter jurisdiction does not arise. Settlements in matrimonial matters invariably end multiple legal proceedings, including criminal proceedings in different Courts and at diverse locations. Necessarily, in such cases, the parties have to move separate applications in multiple Courts, including the jurisdictional High Court for appropriate relief and closure and disposal or dismissal of cases. This puts a burden on the Courts in the form of listing, paper work, compliance with formalities, verification etc. Parallelly, parties have to bear the cost, appear before several forums and the final orders get delayed causing anxiety and apprehension. In this sense, when this Court exercises the power under Article 142 of the Constitution of India, it assists and aids the cause of justice. However, there is a difference between existence of a power and exercise of that power in a given case. Existence of power is generally a matter of law, whereas exercise of power is a mixed question of law and facts. Even when the power to pass a decree of divorce by mutual consent exists and can be exercised by this Court, when and in which of the cases the power should be exercised to do complete justice in a cause or matter is an issue that has to be determined independent of existence of the power. This discretion has to be exercised on the basis of the factual matrix in the particular case, evaluated on objective criteria and factors, without ignoring the objective of the statutory provisions. The Hindu Marriage Act envisages a total waiting period of one and a half years from the date of separation for the grant of decree of divorce by mutual consent.`;
+
+      const userTypedText = `We Must that Court has  very often entertained applications for   divorce by mutual consent under Section 3-B of the brigh-eduction Hindu Marriage Act and passed a decree of divorce without relegating or asking the parties to move a joint motion before the Trial Court. In such cases, other pending proceedings between the parties,,, civil and criminal, are appropriately dealt with in terms of the settlement and are decreed, quashed or closed accordingly. This situation arises when proceedings are pending in this Court against an interim or a final order passed in a judicial proceeding or on a transfer petition being filed before this Court. The parties may mutually agree to dissolve the marriage, often through mediation or on being prompted by the Court. In matrimonial matters, settlement and not litigation, is the preferable mode of dispute resolution. Exercise of jurisdiction under Article 1442 of the Constitution of India by this Court in such cases is clearly permissible to do complete justice to a cause or matter rakesh We should accept that this Court can pass an order or decree which a Family Court, Trial Court or High Court can pass. As per the said Article, a decree passed or an order made by this Court is executable throughout the territory of India. A question or issue of lack of subject-matter jurisdiction does not arise. Settlements in matrimonial matters invariably end multiple legal proceedings, including criminal proceedings Bright in different Courts and at diverse locations. Necessarily, in such cases, the parties have to move separate applications in multiple Courts, including the jurisdictional High Court for appropriate relief and closure and disposal or dismissal of cases. This puts a burden on the Courts in the form of listing, paper work, compliance with formalities, verification etc. Parallelly, parties have to bear the cost, appear before several forums and the final orders get delayed causing anxiety and apprehension. In this sense, when this Court exercises the power under Article 142 of the Constitution of India, it assists and aids the cause of justice. However, there is a difference between existence of a power and exercise of that power in a given case. Existence of power is generally a matter of law, whereas exercise of power is a mixed question of law and facts. Even when the power to pass a decree of divorce by mutual consent exists and can be exercised by this Court, when and in which of the cases the power should be exercised to do complete justice in a cause or matter is an issue that has to be determined independent of existence of the power. This discretion has to be exercised on the basis of the factual matrix in the particular case, evaluated on objective criteria and factors, without ignoring the objective of the statutory provisionss. waitings period of one and a half years from the date of separation of divorce Mutual consen.`;
+
+      const result = compareTexts(originalText, userTypedText);
+      document.getElementById("comparisonOutput").innerHTML = result;
+                })
+                .catch(error => console.log('error=', error));
+        
+
+      
+    });
+  </script>
+
+</body>
+
+</html>

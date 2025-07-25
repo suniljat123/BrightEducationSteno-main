@@ -1002,21 +1002,13 @@ justify-content: space-around;">
         });
         let time = 60;
         let totalTimeInSecond;
-        $(document).ready(function () {
-            console.log('document ready')
-            console.log('1');
-            console.log('2');
-            const queryString = window.location.search;
-            console.log('3');
-            const urlParams = new URLSearchParams(queryString);
-            console.log('4');
-            let id = urlParams.get('Id')
-            console.log('5');
-            if (id == null) {
-                console.log('6');
+        $(document).ready(function () { 
+            const queryString = window.location.search; 
+            const urlParams = new URLSearchParams(queryString); 
+            let id = urlParams.get('Id') 
+            if (id == null) { 
                 id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
-            }
-            console.log('id===>', id)
+            } 
             renderNewQuote(id)
             let userInput = document.getElementById('quote-input')
             mistakes = 0;

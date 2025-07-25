@@ -164,7 +164,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-       
+       console.log('DOM fully loaded and parsed');  
             const queryString = window.location.search; 
             const urlParams = new URLSearchParams(queryString); 
             let id = urlParams.get('Id') 

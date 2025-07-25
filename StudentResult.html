@@ -73,7 +73,8 @@
     <ul class="mb-2">
       <li><span class="incorrect">wrong</span> = Incorrect word</li>
       <li><span class="wrong-capitalization">wrong Capitalization</span> = Capitalization mismatch</li>
-      <li><span class="incorrect">typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown</li>
+      <li><span class="incorrect">typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown
+      </li>
       <li><span class="missed">[expected]</span> = Missed word</li>
       <li><span class="extra">extra</span> = Extra word</li>
     </ul>
@@ -164,64 +165,64 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-       console.log('DOM fully loaded and parsed');  
-            const queryString = window.location.search; 
-            const urlParams = new URLSearchParams(queryString); 
-            let id = urlParams.get('Id') 
-            if (id == null) { 
-                id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
-            } 
-            console.log('id=', id)
-            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
+      console.log('DOM fully loaded and parsed');
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      let id = urlParams.get('Id')
+      if (id == null) {
+        id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
+      }
+      console.log('id=', id)
+      let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
 
-            var raw = JSON.stringify({
-                "Phone": SPR_StudentPhone,
-                "contentResultId": id,
-                "getTypingTestResult": 'getTypingTestResult',
-            });
-console.log('raw=', raw)
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            let content = '';
-            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
-                .then(response => response.json())
-                .then(result => {
-console.log('result=', result)
-                    result = JSON.parse(result);
-                    console.log('typing result=>', result)
-                    if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
+      var raw = JSON.stringify({
+        "Phone": SPR_StudentPhone,
+        "contentResultId": id,
+        "getTypingTestResult": 'getTypingTestResult',
+      });
+      console.log('raw=', raw)
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      let content = '';
+      fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          console.log('result=', result)
+          result = JSON.parse(result);
+          console.log('typing result=>', result)
+          if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 
-                        document.getElementById("quote").style.fontFamily = 'Hindi';
-                        document.getElementById("quote-input").style.fontFamily = 'Hindi';
-                        document.getElementById("wrapperResultId").style.fontFamily = 'Hindi';
-                    } else {
-                        document.getElementById("quote").style.fontFamily = 'monospace';
-                        document.getElementById("quote-input").style.fontFamily = 'monospace';
-                        document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
-                    }
+            // document.getElementById("quote").style.fontFamily = 'Hindi';
+            // document.getElementById("quote-input").style.fontFamily = 'Hindi';
+            // document.getElementById("wrapperResultId").style.fontFamily = 'Hindi';
+          } else {
+            // document.getElementById("quote").style.fontFamily = 'monospace';
+            // document.getElementById("quote-input").style.fontFamily = 'monospace';
+            // document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
+          }
 
-                     
-                      content = result[0].Content_Words__c; 
-                      let typedwords = result[0].Typed_Words__c;
-                     
- const originalText = content;
 
-      const userTypedText = typedwords;
+          content = result[0].Content_Words__c;
+          let typedwords = result[0].Typed_Words__c;
 
-      const typingResult = compareTexts(originalText, userTypedText);
-      document.getElementById("comparisonOutput").innerHTML = typingResult;
-                })
-                .catch(error => console.log('error=', error));
-        
+          const originalText = content;
 
-      
+          const userTypedText = typedwords;
+
+          const typingResult = compareTexts(originalText, userTypedText);
+          document.getElementById("comparisonOutput").innerHTML = typingResult;
+        })
+        .catch(error => console.log('error=', error));
+
+
+
     });
   </script>
 

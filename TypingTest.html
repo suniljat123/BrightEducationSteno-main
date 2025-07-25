@@ -1089,6 +1089,7 @@ console.log('6');
         let correctKeystrokes = 0;
         let incorrectKeystrokes = 0;
         let userInput = document.getElementById('quote-input')
+        const quoteSection = document.getElementById("quote");
         // Update the input event listener to track more metrics
         userInput.addEventListener("input", (e) => {
             calculateTypingAccuracy();
@@ -1290,8 +1291,8 @@ console.log('6');
         };
  // Modify the calculateTypingAccuracy function
  function calculateTypingAccuracy() {
-    const quoteSection = document.getElementById("quote");
-        const userInput = document.getElementById("quote-input");
+   
+        let userInput = document.getElementById("quote-input");
             let referenceText = quoteSection.innerText;
             let userInputText = document.getElementById('quote-input').value;
 

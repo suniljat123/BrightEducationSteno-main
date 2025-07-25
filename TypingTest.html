@@ -1250,7 +1250,11 @@ let totaltypewords = typedwords.length;
 
             fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
                 .then(response => response.json())
-                .then(result => console.log(result))
+                .then(result => {
+                    console.log(result)
+                    let URL='StudentResult.html?Id='+result;
+                    window.open(URL, "_blank");
+        })
                 .catch(error => console.log('error=', error));
         };
         // Modify the calculateTypingAccuracy function

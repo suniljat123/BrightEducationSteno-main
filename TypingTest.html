@@ -1077,7 +1077,26 @@ console.log('6');
                 })
                 .catch(error => console.log('error=', error));
         };
+  //Sets timer
+  const timeReduce = () => {
+            //time = 60;
+            timer = setInterval(updateTimer, 1000);
+        };
+         
+        //Start Test
+        const startTest = () => {
+            mistakes = 0;
+            timer = "";
+            var dropdown = document.getElementById("duration");
+            dropdown.setAttribute("disabled", true);
+            userInput.disabled = false;
+            timeReduce();
+            document.getElementById("stop-test").style.cursor = "not-allowed";
+            document.getElementById("start-test").style.display = "none";
+            document.getElementById("stop-test").style.display = "block";
+            document.getElementById("stop-test").disabled = true;
 
+        };
     </script>
     <!-- 
     <Script>

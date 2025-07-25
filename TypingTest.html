@@ -1019,6 +1019,30 @@ console.log('6');
             renderNewQuote(id)
 
         })
+        // Add these variables at the top with other variable declarations
+        let fullMistakes = 0;
+        let halfMistakes = 0;
+        let backspaceCount = 0;
+        let keyStrokes = 0;
+        let startTime, endTime;
+        let correctKeystrokes = 0;
+        let incorrectKeystrokes = 0;
+
+        // Update the input event listener to track more metrics
+        userInput.addEventListener("input", (e) => {
+            calculateTypingAccuracy();
+
+            // Track backspaces
+            if (e.inputType === "deleteContentBackward") {
+                backspaceCount++;
+            }
+
+            // Track total keystrokes (excluding backspace)
+            if (e.data && e.inputType !== "deleteContentBackward") {
+                keyStrokes++;
+            }
+        }); 
+
         //Display random quotes
         const renderNewQuote = async (id) => {
             const quoteSection = document.getElementById("quote");
@@ -1127,6 +1151,7 @@ console.log('6');
             return minutesStr + ":" + secondsStr;
         }
         const displayResult = () => {
+            let userInput = document.getElementById('quote-input')
             document.getElementById("resultMainDiv").style.display = 'block';
             document.getElementById("quote-input").style.display = 'none';
             document.getElementById("quote").style.display = 'none';
@@ -1483,60 +1508,7 @@ console.log('6');
         });
     </script>
 
-    <script>
-        // Add these variables at the top with other variable declarations
-        let fullMistakes = 0;
-        let halfMistakes = 0;
-        let backspaceCount = 0;
-        let keyStrokes = 0;
-        let startTime, endTime;
-        let correctKeystrokes = 0;
-        let incorrectKeystrokes = 0;
-
-        // Update the input event listener to track more metrics
-        userInput.addEventListener("input", (e) => {
-            calculateTypingAccuracy();
-
-            // Track backspaces
-            if (e.inputType === "deleteContentBackward") {
-                backspaceCount++;
-            }
-
-            // Track total keystrokes (excluding backspace)
-            if (e.data && e.inputType !== "deleteContentBackward") {
-                keyStrokes++;
-            }
-        });
-
-       
-
-        // Modify the displayResult function to show all metrics
-
-        // Update the startTest function to reset all metrics
-        function startTest() {
-            fullMistakes = 0;
-            halfMistakes = 0;
-            backspaceCount = 0;
-            keyStrokes = 0;
-            correctKeystrokes = 0;
-            incorrectKeystrokes = 0;
-            startTime = new Date();
-
-            var dropdown = document.getElementById("duration");
-            dropdown.setAttribute("disabled", true);
-            userInput.disabled = false;
-            timeReduce();
-            document.getElementById("stop-test").style.cursor = "allowed";
-            document.getElementById("start-test").style.display = "none";
-            document.getElementById("stop-test").style.display = "block";
-            document.getElementById("stop-test").disabled = false;
-        };
-    </script>
-
-
-    <!-- include ace.js --> 
-    <!-- <script defer src="assets/js/main.js"></script>
-    <script defer src="assets/js/MyComponents.js"></script> -->
+     
 </body>
 
 </html>

@@ -388,7 +388,7 @@ function callToast() {
         alert('You have been logged out due to 15 minutes of inactivity.');
         localStorage.removeItem("SPR_StudentPhone"); // Clear stored session/token
         location.href = "LoginForm.html"; // Redirect to login page
-      }, 2 * 60 * 1000); // 15 minutes
+      }, 15 * 60 * 1000); // 15 minutes
     }
 
     // Reset timer on activity

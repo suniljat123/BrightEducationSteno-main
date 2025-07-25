@@ -1,0 +1,482 @@
+<html style="background-color:#87b4e2;">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>BrightEducationSteno</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Favicons -->
+  <link href="assets/img/BrightEducationSteno.png" rel="icon" />
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet" />
+
+
+  <!--   Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet" />
+  <link href="assets/css/slider.css" rel="stylesheet" />
+
+</head>
+
+<div class="mainDivForm">
+  <div
+    style="background-image: url(https://png.pngtree.com/png-vector/20220526/ourmid/pngtree-labour-day-icon-design-vector-png-image_4730509.png);"
+    class="sideOfFormDiv px-3 bgc-blue-l4 d-flex flex-column align-items-center justify-content-center">
+    <a style="    width: 88%;
+    display: flex;
+    justify-content: center;
+    height: 26%;
+    align-items: center;" class="mt-5 mb-2" href="#">
+      <img src="assets/img/BrightEducationSteno.png" height="60" width="60" />
+    </a>
+
+    <h2 style="    margin-top: 11rem;
+    margin-left: 63px;
+    color: white;" class="text-primary-d1">
+      Bright Education Steno <span class="text-80 text-dark-l1"> Classes</span>
+    </h2>
+
+    <div class="mt-5 mx-4 text-dark-tp3">
+      <span style="    margin-left: 71px;
+      display: block;
+      color: white;" class="text-120">
+        Join our Plateform to make Your,<br> Score Better &amp; Practice well!
+      </span>
+
+
+    </div>
+
+    <div class="mt-auto mb-4 text-dark-tp2">
+
+    </div>
+  </div>
+  <form style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;min-height: 27rem;" class="form">
+    <p style="display:none" id="RegisterId" class="title">Register </p>
+    <p id="loginId" class="title">LogIn </p>
+    <p class="message" id="modalMessage">Log In now and get full access to our app.</p>
+    <div class="flex">
+      <label id="firstNameId" style="display:none;">
+        <input required="true" autocomplete="off" id="firstName" placeholder="" type="text" class="input">
+        <span>Firstname</span>
+      </label>
+
+      <label id="LastNameId" style="display:none;">
+        <input required="" autocomplete="off" id="lastName" placeholder="" type="text" class="input">
+        <span>Lastname</span>
+      </label>
+    </div>
+
+    <label id="PhoneId">
+      <input id="phoneInputId" required="true" placeholder="" maxlength="10" type="Number" class="input"
+        autocomplete="off">
+      <span>Phone</span>
+    </label>
+
+    <label id="EmailId" style="display:none;">
+      <input required="" id="email" placeholder="" type="email" class="input" autocomplete="off">
+      <span>Email</span>
+    </label>
+
+    <label id="PasswordId">
+      <input id="passwordInputId" required placeholder="" type="password" class="input" autocomplete="off">
+      <span>Password</span>
+    </label>
+    <label id="confirmPasswordId" style="display:none;">
+      <input required placeholder="" id="confirmPassword" type="password" class="input" autocomplete="off">
+      <span>Confirm password</span>
+    </label>
+    <button class="submit signup" style="cursor: pointer;" id="SignUpBtn" onclick="handleSubmitClick()">Submit</button>
+    <button class="submit" id="loginBtn" style="display:block;cursor: pointer;" onclick="handleLogIn()">Log In</button>
+    <p id="signInId" style="display:none;" class="signin">Already have an acount ? <a
+        onclick="handleAlreadyHaveAccount()" style="cursor: pointer;">Signin</a> </p>
+    <p id="signUpId" class="signin">Create an Account <a onclick=handleCreateAnAccount()
+        style="cursor: pointer;">Signup</a> </p>
+  </form>
+  <app-showtoast></app-showtoast>
+</div>
+<script>
+ 
+  function handleCreateAnAccount() {
+    console.log('new account method called')
+    var part1 = document.getElementById('firstNameId');
+    var part2 = document.getElementById('LastNameId');
+    var part3 = document.getElementById('EmailId');
+    var part4 = document.getElementById('confirmPasswordId');
+    var part5 = document.getElementById('signUpId');
+    var part6 = document.getElementById('signInId');
+    var part7 = document.getElementById('RegisterId');
+    var part8 = document.getElementById('loginId');
+
+    part1.style.display = 'block';
+    part2.style.display = 'block';
+    part3.style.display = 'block';
+    part4.style.display = 'block';
+    part5.style.display = 'none';
+    part6.style.display = 'block';
+    part7.style.display = 'block';
+    part8.style.display = 'none';
+    document.getElementById('loginBtn').style.display = 'none';
+    document.getElementById('SignUpBtn').style.display = 'block';
+    document.getElementById('modalMessage').innerText = 'Signup now and get full access to our app.'
+  }
+  function handleAlreadyHaveAccount() {
+    console.log('already account called')
+    document.getElementById("phoneInputId").value = '';
+    document.getElementById("passwordInputId").value = '';
+    var part1 = document.getElementById('firstNameId');
+    var part2 = document.getElementById('LastNameId');
+    var part3 = document.getElementById('EmailId');
+    var part4 = document.getElementById('confirmPasswordId');
+    var part5 = document.getElementById('signUpId');
+    var part6 = document.getElementById('signInId');
+    var part7 = document.getElementById('loginId');
+    var part8 = document.getElementById('RegisterId');
+
+    part1.style.display = 'none';
+    part2.style.display = 'none';
+    part3.style.display = 'none';
+    part4.style.display = 'none';
+    part5.style.display = 'block';
+    part6.style.display = 'none';
+    part7.style.display = 'block';
+    part8.style.display = 'none';
+    document.getElementById('loginBtn').style.display = 'block';
+    document.getElementById('SignUpBtn').style.display = 'none';
+    document.getElementById('modalMessage').innerText = 'Log In now and get full access to our app.'
+  }
+  function handleSuybmitClick() {
+    // console.log('submit is clicked');
+    // location.href="Home.html";
+
+  }
+  function handleLogIn() {
+
+    var phone = document.getElementById("phoneInputId").value.trim();
+    var password = document.getElementById("passwordInputId").value;
+    console.log('phone=', phone);
+    console.log(password);
+
+    if (phone == '' || password == '') {
+      alert('please fill both the fields');
+      return false;
+    }
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
+
+    var raw = JSON.stringify({
+      "Password": password,
+      "Phone": phone,
+      "loginStudent": "loginStudent"
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log('result=', result)
+        if (result == 'No Account Found.') {
+          alert(result)
+        } else {
+
+          localStorage.setItem("SPR_StudentPhone", result);
+          localStorage.setItem("SPR_LoginTime", Date.now())
+          location.href = "Home.html";
+        }
+
+
+
+      })
+      .catch(error => console.log('error=', error));
+
+
+
+    // You can add more complex validation here
+
+    // If all validation passes, show success message
+    //location.href = "Home.html";
+  }
+  function callToast() {
+    const toastDiv = document.getElementById("toastDiv");
+    toastDiv.style.display = "flex";
+    setTimeout(() => {
+      document.getElementById("successDiv").style.display = "none";
+    }, 4000);
+    const toastEement = document.getElementById("formendSuccess");
+    const toastEl = new bootstrap.Toast(toastEement, {
+      animation: true,
+      delay: 4000,
+    });
+    toastEl.show();
+  }
+  function callError() {
+    const toastDiv = document.getElementById("toastDiv");
+    toastDiv.style.display = "flex";
+    setTimeout(() => {
+      console;
+      document.getElementById("toastDiv").style.display = "none";
+    }, 4000);
+    const toastEement = document.getElementById("formendError");
+    const toastEl = new bootstrap.Toast(toastEement, {
+      animation: true,
+      delay: 4000,
+    });
+    toastEl.show();
+  }
+  function handleSubmitClick() {
+    console.log('validate form called');
+    let isFormFilledCompletely = true;
+    var firstName = document.getElementById("firstName").value.trim();
+    var lastName = document.getElementById("lastName").value.trim();
+    var confirmPassword = document.getElementById("confirmPassword").value;
+    // var email = document.getElementById("email").value.trim();
+    var phone = document.getElementById("phoneInputId").value.trim();
+    var password = document.getElementById("passwordInputId").value;
+
+    document.getElementById("firstName").value = document.getElementById("firstName").value.trim();
+    document.getElementById("lastName").value = document.getElementById("lastName").value.trim();
+    // document.getElementById("email").value = document.getElementById("email").value.trim();
+    document.getElementById("phoneInputId").value = document.getElementById("phoneInputId").value.trim();
+
+    if (firstName.length > 0) {
+      isFormFilledCompletely = true;
+    } else {
+      isFormFilledCompletely = false;
+      alert('Please enter your first name.');
+      return false;
+    }
+    if (phone.length > 0) {
+      isFormFilledCompletely = true;
+    } else {
+      isFormFilledCompletely = false;
+      alert('Please enter phone.');
+      return false;
+    }
+    if (password.length > 0) {
+      isFormFilledCompletely = true;
+    } else {
+      isFormFilledCompletely = false;
+      alert('Please enter password.');
+      return false;
+    }
+    if (password == confirmPassword) {
+      isFormFilledCompletely = true;
+    } else {
+      isFormFilledCompletely = false;
+      alert('Password doesn\'t match.');
+      return false;
+    }
+
+
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
+
+    var raw = JSON.stringify({
+      "LastName": lastName,
+      "FirstName": firstName,
+      "Email": email,
+      "Password": password,
+      "Phone": phone,
+      "fillStudentDetails": "fillStudentDetails"
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+      .then(response => response.json())
+      .then(result => {
+
+        //alert('re=', result)
+        // setTimeout(() => {
+        console.log('result=>', result)
+        if (result == 'Account already exist with this number.') {
+          alert(result);
+        } else {
+          console.log('Id=', result)
+          alert('Account Created Successfully.')
+          //localStorage.setItem("SPR_StudentPhone", result);
+          //  result = JSON.parse(result);
+        }
+        // }, 1500)
+
+      })
+      .catch(error => console.log('error=', error));
+
+    //  return true;
+  }
+</script>
+
+<style>
+  .sideOfFormDiv {
+
+    background-color: royalblue;
+    max-width: 350px;
+    width: 350px;
+    height: 417px;
+    border-bottom-left-radius: 35px;
+    border-top-left-radius: 35px;
+  }
+
+  .mainDivForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #87b4e2;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+    min-width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .title {
+    font-size: 28px;
+    color: royalblue;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+  }
+
+  .title::before,
+  .title::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: royalblue;
+  }
+
+  .title::before {
+    width: 18px;
+    height: 18px;
+    background-color: royalblue;
+  }
+
+  .title::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+  }
+
+  .message,
+  .signin {
+    color: rgba(88, 87, 87, 0.822);
+    font-size: 14px;
+  }
+
+  .signin {
+    text-align: center;
+  }
+
+  .signin a {
+    color: royalblue;
+  }
+
+  .signin a:hover {
+    text-decoration: underline royalblue;
+  }
+
+  .flex {
+    display: flex;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .form label {
+    position: relative;
+  }
+
+  .form label .input {
+    width: 100%;
+    padding: 10px 10px 20px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 10px;
+  }
+
+  .form label .input+span {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: grey;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+  }
+
+  .form label .input:placeholder-shown+span {
+    top: 15px;
+    font-size: 0.9em;
+  }
+
+  .form label .input:focus+span,
+  .form label .input:valid+span {
+    top: 30px;
+    font-size: 0.7em;
+    font-weight: 600;
+  }
+
+  .form label .input:valid+span {
+    color: green;
+  }
+
+  .submit {
+    border: none;
+    outline: none;
+    background-color: royalblue;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+  }
+
+  .submit:hover {
+    background-color: rgb(56, 90, 194);
+  }
+
+  @keyframes pulse {
+    from {
+      transform: scale(0.9);
+      opacity: 1;
+    }
+
+    to {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+</style>
+
+</html>

@@ -1,0 +1,243 @@
+@font-face {
+    font-family: 'kruti_dev_010regular';
+    src: url('../fonts/kruti_dev_010_regular-webfont.woff2') format('woff2'),
+         url('../fonts/kruti_dev_010_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {  
+  font-family: kruti dev ;  
+  src: url( '../fonts/Kruti_Dev_010.ttf' ) format("truetype");  
+}
+
+.hindi-text{
+    resize: none;
+    font-size: 21px;
+    font-family: kruti dev;
+}
+.scrollable{
+    max-height: 250px;
+    overflow: auto;
+}
+.red-text{
+    color: red !important;
+}
+.green-text{
+    color: green !important;
+}
+
+del {
+    /* color: red !important; */
+    /*ok 100%*/
+    /*background: #eaf2c2;*/
+    color: #406619;
+    /*color: #2c7b13;*/
+    text-decoration: none;
+    /*padding: 0px 3px;*/
+}
+ins {
+    /* color: green !important; 
+    color: black; */
+    text-decoration: line-through;
+    /*ok 100%*/
+    /*text-decoration: none;*/
+    /*background: #efc2c7;*/
+    
+    color: #b30000;
+    padding: 0px 3px;
+}
+ins2 {
+    /*text-decoration: line-through;*/
+    color: red;
+    /*padding: 0px 3px;*/
+}
+ins2::before {
+    content: "¿";
+}
+ins2::after {
+    content: "À";
+}
+
+skip-tag{
+    color: red !important;
+}
+skip-tag::before {
+    content: "¿";
+}
+skip-tag::after {
+    content: "À";
+}
+.result-text{
+    color: #000;
+    
+}
+/* skip_tag::before, skip_tag::before {
+    content: "¿";
+}
+skip_tag::after, skip_tag::after {
+    content: "À";
+} */
+/*added later*/
+del::before {
+    content: "¿";
+}
+del::after {
+    content: "À";
+} 
+.color-box{
+    width: 15px;
+    height: 15px;
+    float: right;
+    margin-top: 5px;
+    border: solid 1px grey;
+    margin-right: 10px !important;
+}
+
+.color-box-text{
+    float: right;
+}
+.green_bg{
+    background: green !important
+}
+.red_bg{
+    background: red !important
+}
+.blue_bg{
+    background: #3023f7 !important
+}
+.black_bg{
+    background: black !important
+}
+.hide{
+    display: none;
+}
+
+.note-editor.note-frame .note-editing-area .note-editable, .note-editor.note-airframe .note-editing-area .note-editable{
+    font-family: 'kruti_dev_010regular' !important;
+    height: 300px !important;
+}
+.w100{
+    width: 100% !important;
+}
+.hindi-content{
+    font-family: 'kruti_dev_010regular';
+}
+
+.result-box{
+    border: 25px solid #6cb6eaf0;
+}
+.subdiv1 {
+    width: 28%;
+    /*float: left;*/
+    display: inline-block;
+    height: 100%;
+    background-color: #65a7d6f0;
+    border-collapse: collapse;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.subdiv2 {
+    width: 32%;
+    /*float: left;*/
+    display: inline-block;
+    height: 100%;
+    background-color: #65a7d6f0;
+    border-collapse: collapse;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.subdiv3 {
+    width: 36%;
+    /*float: left;*/
+    display: inline-block;
+    height: 100%;
+    background-color: #65a7d6f0;
+    border-collapse: collapse;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.subdiv4 {
+    width: 24%;
+    /*float: left;*/
+    display: inline-block;
+    height: 100%;
+    background-color: #65a7d6f0;
+    border-collapse: collapse;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.subdiv1-1 {
+    width: 28%;
+    float: left;
+    height: 100%;
+    background-color: #65a7d6f0;
+    border-collapse: collapse;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.subdiv5 {
+    width: 28%;
+    /*float: left;*/
+    display: inline-block;
+    height: 100%;
+    background-color: #65a7d6f0;
+    border-collapse: collapse;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.calculation {
+    width: 60%;
+    height: 100%;
+    float: left;
+    font-size: 1.4vw;
+    margin-top: 1%;
+    
+    color: #2E2920;
+}
+
+.calculation2 {
+    width: 40%;
+    height: 100%;
+    float: left;
+    font-size: 1.4vw;
+    margin-top: 1%;
+    color: #FFF;
+}
+.first-div {
+    width: 100%;
+    height: 10%;
+    background-color: #6cb6eaf0;
+    clear: both;
+    /*display: flex;*/
+    display: inline-block;
+    margin: 0px;
+}
+.second-div {
+    width: 100%;
+    padding: 10px;
+    text-align: justify;
+}
+
+.scrollable-result-box{
+    /*max-height: 500px;
+    overflow-x: auto;*/
+}
+
+.margin-auto-box{
+    margin: auto;
+}
+
+#student_text { border: none !important;  outline: none !important; }

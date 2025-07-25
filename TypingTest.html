@@ -1228,10 +1228,10 @@ justify-content: space-around;">
             // Calculate all metrics
             const grossWPM = (keyStrokes / 5) / timeTaken;
             const netWPM = grossWPM - (fullMistakes / timeTaken);
-            const accuracyData = calculateTypingAccuracy().split('@');
-            const accuracy = parseFloat(accuracyData[0]);
-            fullMistakes = parseInt(accuracyData[1]);
-            halfMistakes = parseInt(accuracyData[2]);
+            const accuracyData = 100//calculateTypingAccuracy().split('@');
+            const accuracy = 100//parseFloat(accuracyData[0]);
+            fullMistakes =0// parseInt(accuracyData[1]);
+            halfMistakes =0// parseInt(accuracyData[2]);
 
             // Net DPH (Depressions Per Hour)
             const netDPH = (keyStrokes - backspaceCount) * (60 / timeTaken);
@@ -1305,9 +1305,7 @@ justify-content: space-around;">
             } else {
                 document.getElementById("stop-test").style.cursor = "not-allowed";
                 document.getElementById("stop-test").disabled = true;
-            }   
-            const accuracy =100;
-            return accuracy + '@' + fullMistakes + '@' + halfMistakes;
+            }    
         }
         function handleGoBack() {
             history.back();
@@ -1343,44 +1341,7 @@ justify-content: space-around;">
         let timer = "";
         let mistakes = 0;
         let totaltypewords = 0;
-        userInput.addEventListener("input", () => {
-            calculateTypingAccuracy()
-        })
-
-
-
-        function calculateTypingAccuracy() {
-            // console.log('referenceText=', document.getElementById('quote-input').value.length) 
-            let referenceText = quoteSection.innerText;
-            let userInput = document.getElementById('quote-input').value;
-            if (userInput.length > 0) {
-                document.getElementById("stop-test").disabled = false;
-                document.getElementById("stop-test").style.cursor = "pointer";
-            } else {
-                document.getElementById("stop-test").style.cursor = "not-allowed";
-                document.getElementById("stop-test").disabled = true;
-            }
-            referenceText = referenceText.split(' ');
-            if (userInput.length > 0) {
-                userInput = userInput.trim();
-                userInput = userInput.split(' ');
-            }
-
-            let correctWords = 0;
-            let incorrectWords = 0;
-            totaltypewords = userInput.length;
-            document.getElementById("TotalTyped").innerText = userInput.length;
-            for (let i = 0; i < userInput.length; i++) {
-                if (referenceText[i] === userInput[i]) {
-                    correctWords++;
-                } else {
-                    incorrectWords++;
-                }
-            }
-            document.getElementById("mistakes").innerText = incorrectWords;
-            const accuracy = (correctWords / userInput.length) * 100;
-            return accuracy + '@' + incorrectWords;
-        }
+         
         function handleStartTest(id) {
             renderNewQuote(id);
             var part1 = document.getElementById('datatable');
@@ -1389,76 +1350,7 @@ justify-content: space-around;">
             part2.style.display = 'inline-block';
 
         }
-       
-
-
-
-        //Display random quotes
-        const renderNewQuote = async (id) => {
-            console.log('rendernew')
-            courseDataId = id;
-            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
-
-            var raw = JSON.stringify({
-                "Phone": SPR_StudentPhone,
-                "courseContentId": id,
-                "getTypingTestContent": 'getTypingTestContent'
-            });
-
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
-                .then(response => response.json())
-                .then(result => {
-
-                    result = JSON.parse(result);
-                    console.log('typing result=>', result)
-                    if (result[0].Test_Language__c == 'Hindi') {
-
-                        document.getElementById("quote").style.fontFamily = 'Hindi';
-                        document.getElementById("quote-input").style.fontFamily = 'Hindi';
-                        document.getElementById("wrapperResultId").style.fontFamily = 'Hindi';
-                    } else {
-                        document.getElementById("quote").style.fontFamily = 'monospace';
-                        document.getElementById("quote-input").style.fontFamily = 'monospace';
-                        document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
-                    }
-
-                    time = parseInt(result[0].Duration__c) * 60;
-                    totalTimeInSecond = parseInt(result[0].Duration__c) * 60;
-                    //    document.getElementById("timer").innerText = convertSecondsToTime(time) + 's';
-                    //    document.getElementById("timer").innerText = time + "s";
-                    let content = result[0].Audio_Text__c;
-                    content = content.replace('<p>', '');
-                    content = content.replace('</p>', '');
-                    quote = content;
-                    //   value='I am very happy to be present here today for opening the new building of your University. All that you have said about this new University, which is only six years old, is commendable in many respects. Although you have not had adequate equipment and the necessary wherewithal in the beginning, these serious shortcomings did not bother you. In right earnest you started the work.';
-                    //Array of characters in the quote
-                    let arr = quote.split("").map((value) => {
-                        //wrap the characters in a span tag
-                        return "<span class='quote-chars'>" + value + "</span>";
-                    });
-                    //join array for displaying
-                    quoteSection.innerHTML += arr.join("");
-                })
-                .catch(error => console.log('error=', error));
-        }; 
-
-        window.onload = () => {
-            userInput.value = "";
-            document.getElementById("start-test").style.display = "block";
-            document.getElementById("stop-test").style.display = "none";
-
-            userInput.disabled = true;
-            // renderNewQuote();
-        };   
+         
     </Script>
  
     </script> -->

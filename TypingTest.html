@@ -1256,7 +1256,8 @@ let totaltypewords = typedwords.length;
                 .then(result => {
                     console.log(result)
                     let URL='StudentResult.html?Id='+result;
-                    window.open(URL, "_self");
+                    getResult(result);
+                   // window.open(URL, "_self");
         })
                 .catch(error => console.log('error=', error));
         };
@@ -1279,6 +1280,146 @@ let totaltypewords = typedwords.length;
             part2.style.display = 'none';
             quote = '';
         }
+        
+    function tokenize(text) {
+      text = text.normalize("NFC");
+      // Tokenize words and punctuation separately, ignoring whitespace tokens
+      const regex = /\w+(?:-\w+)*|[.,!?;:]+/g;
+      return text.match(regex) || [];
+    }
+
+    function escapeHtml(text) {
+      return (text || "").replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function compareWords(origWords, typedWords) {
+      const result = [];
+      let i = 0, j = 0;
+
+      while (i < origWords.length || j < typedWords.length) {
+        const origWord = origWords[i] || null;
+        const typedWord = typedWords[j] || null;
+
+        if (origWord === null) {
+          // Extra word typed
+          result.push(`<span class="extra">${escapeHtml(typedWord)}</span> `);
+          j++;
+          continue;
+        }
+
+        if (typedWord === null) {
+          // Missed word
+          result.push(`<span class="missed">[${escapeHtml(origWord)}]</span> `);
+          i++;
+          continue;
+        }
+
+        if (origWord === typedWord) {
+          // Exact match, including case
+          result.push(`<span class="correct">${escapeHtml(typedWord)}</span> `);
+          i++;
+          j++;
+        } else if (origWord.toLowerCase() === typedWord.toLowerCase()) {
+          // Same word ignoring case - capitalization error
+          result.push(`<span class="wrong-capitalization">${escapeHtml(typedWord)}</span>`);
+          result.push(`<span class="expected">[${escapeHtml(origWord)}]</span> `);
+          i++;
+          j++;
+        } else {
+          // Spelling error or totally different word
+          // Try lookahead to detect missing/extra words
+
+          // If next orig matches current typed → missed word in typed
+          if (origWords[i + 1] && origWords[i + 1].toLowerCase() === typedWord.toLowerCase()) {
+            result.push(`<span class="missed">[${escapeHtml(origWord)}]</span> `);
+            i++;
+          }
+          // If next typed matches current orig → extra word typed
+          else if (typedWords[j + 1] && typedWords[j + 1].toLowerCase() === origWord.toLowerCase()) {
+            result.push(`<span class="extra">${escapeHtml(typedWord)}</span> `);
+            j++;
+          } else {
+            // Substitution error
+            result.push(`<span class="incorrect">${escapeHtml(typedWord)}</span>`);
+            result.push(`<span class="expected">[${escapeHtml(origWord)}]</span> `);
+            i++;
+            j++;
+          }
+        }
+      }
+
+      return result.join('').trim();
+    }
+
+    function compareTexts(original, typed) {
+      const origTokens = tokenize(original);
+      const typedTokens = tokenize(typed);
+      return compareWords(origTokens, typedTokens);
+    }
+
+    function getResult(id) {
+      console.log('DOM fully loaded and parsed');
+    //   const queryString = window.location.search;
+    //   const urlParams = new URLSearchParams(queryString);
+    //   let id = urlParams.get('Id')
+    //   if (id == null) {
+    //     id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
+    //   }
+      console.log('id=', id)
+      let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
+
+      var raw = JSON.stringify({
+        "Phone": SPR_StudentPhone,
+        "contentResultId": id,
+        "getTypingTestResult": 'getTypingTestResult',
+      });
+      console.log('raw=', raw)
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      let content = '';
+      fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          console.log('result=', result)
+          result = JSON.parse(result);
+          console.log('typing result=>', result)
+
+
+
+          content = result[0].Content_Words__c;
+          let typedwords = result[0].Typed_Words__c;
+
+          const originalText = content;
+
+          const userTypedText = typedwords;
+
+          const typingResult = compareTexts(originalText, userTypedText);
+          if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
+
+           // document.getElementById("comparisonOutput").style.fontFamily = 'Hindi';
+            document.getElementById("resultMainDiv").style.fontFamily = 'Hindi';
+            console.log('Hindi typing test21');
+          } else {
+            document.getElementById("resultMainDiv").style.fontFamily = 'monospace';
+            console.log('English typing test');
+          }
+          document.getElementById("resultMainDiv").innerHTML = typingResult;
+          //document.getElementById("quote").innerHTML = typingResult;
+        })
+        .catch(error => console.log('error=', error));
+
+
+
+    }
     </script>
     <!-- 
     <Script>

@@ -199,13 +199,12 @@
           console.log('typing result=>', result)
           if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 
-            // document.getElementById("quote").style.fontFamily = 'Hindi';
-            // document.getElementById("quote-input").style.fontFamily = 'Hindi';
-            // document.getElementById("wrapperResultId").style.fontFamily = 'Hindi';
+            // document.getElementById("comparisonOutput").style.fontFamily = 'Hindi';
+            // document.getElementById("comparisonOutput").style.fontFamily = 'Hindi'; 
+            console.log('Hindi typing test');
           } else {
-            // document.getElementById("quote").style.fontFamily = 'monospace';
-            // document.getElementById("quote-input").style.fontFamily = 'monospace';
-            // document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
+             document.getElementById("comparisonOutput").style.fontFamily = 'monospace'; 
+             console.log('English typing test');
           }
 
 

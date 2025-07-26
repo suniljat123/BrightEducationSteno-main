@@ -1363,27 +1363,27 @@ if(!isTimeCompleted){
 
                 if (origWord === null) {
                     // Extra word typed
-                    result.push(`<span class="extra">${escapeHtml(typedWord)}</span> `);
+                    result.push(`<span style="compareWords"  class="extra">${escapeHtml(typedWord)}</span> `);
                     j++;
                     continue;
                 }
 
                 if (typedWord === null) {
                     // Missed word
-                    result.push(`<span class="missed">[${escapeHtml(origWord)}]</span> `);
+                    result.push(`<span style="compareWords" class="missed">[${escapeHtml(origWord)}]</span> `);
                     i++;
                     continue;
                 }
 
                 if (origWord === typedWord) {
                     // Exact match, including case
-                    result.push(`<span class="correct">${escapeHtml(typedWord)}</span> `);
+                    result.push(`<span style="compareWords" class="correct">${escapeHtml(typedWord)}</span> `);
                     i++;
                     j++;
                 } else if (origWord.toLowerCase() === typedWord.toLowerCase()) {
                     // Same word ignoring case - capitalization error
-                    result.push(`<span class="wrong-capitalization">${escapeHtml(typedWord)}</span>`);
-                    result.push(`<span class="expected">[${escapeHtml(origWord)}]</span> `);
+                    result.push(`<span style="compareWords" class="wrong-capitalization">${escapeHtml(typedWord)}</span>`);
+                    result.push(`<span style="compareWords" class="expected">[${escapeHtml(origWord)}]</span> `);
                     i++;
                     j++;
                 } else {
@@ -1392,17 +1392,17 @@ if(!isTimeCompleted){
 
                     // If next orig matches current typed → missed word in typed
                     if (origWords[i + 1] && origWords[i + 1].toLowerCase() === typedWord.toLowerCase()) {
-                        result.push(`<span class="missed">[${escapeHtml(origWord)}]</span> `);
+                        result.push(`<span style="compareWords" class="missed">[${escapeHtml(origWord)}]</span> `);
                         i++;
                     }
                     // If next typed matches current orig → extra word typed
                     else if (typedWords[j + 1] && typedWords[j + 1].toLowerCase() === origWord.toLowerCase()) {
-                        result.push(`<span class="extra">${escapeHtml(typedWord)}</span> `);
+                        result.push(`<span style="compareWords" class="extra">${escapeHtml(typedWord)}</span> `);
                         j++;
                     } else {
                         // Substitution error
-                        result.push(`<span class="incorrect">${escapeHtml(typedWord)}</span>`);
-                        result.push(`<span class="expected">[${escapeHtml(origWord)}]</span> `);
+                        result.push(`<span style="compareWords" class="incorrect">${escapeHtml(typedWord)}</span>`);
+                        result.push(`<span style="compareWords" class="expected">[${escapeHtml(origWord)}]</span> `);
                         i++;
                         j++;
                     }

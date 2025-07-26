@@ -6,7 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Typing Comparison - Case Sensitive</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
+  <style> 
+        @font-face {
+            font-family: Hindi;
+            src: url(font/Hindi.ttf);
+        }
+
+        @font-face {
+            font-family: 'Hindi';
+            src: url('font/Hindi.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .hindiFont {
+            font-family: 'Hindi';
+        } 
     .correct {
       color: black;
     }

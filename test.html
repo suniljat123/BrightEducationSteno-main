@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <title>Hindi Text Input</title>
+  <title>Hindi Input Checker</title>
   <style>
     body {
       font-family: "Noto Sans Devanagari", "Mangal", "Arial", sans-serif;
@@ -19,11 +19,38 @@
       border: 1px solid #ccc;
       box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
     }
+    #status {
+      margin-top: 10px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h1>हिंदी में लिखें</h1>
-  <p>कृपया नीचे दिए गए बॉक्स में हिंदी में लिखें:</p>
-  <textarea placeholder="यहाँ हिंदी में लिखें..."></textarea>
+  <h1>हिंदी इनपुट चेक करें</h1>
+  <p>नीचे कुछ हिंदी में टाइप करें और कंसोल में जांचें:</p>
+  <textarea id="hindiInput" placeholder="यहाँ हिंदी में लिखें..."></textarea>
+  <div id="status"></div>
+
+  <script>
+    const textarea = document.getElementById('hindiInput');
+    const statusDiv = document.getElementById('status');
+
+    textarea.addEventListener('input', () => {
+      const text = textarea.value;
+
+      // Regex to detect Devanagari script (used in Hindi)
+      const devanagariRegex = /[\u0900-\u097F]/;
+
+      if (devanagariRegex.test(text)) {
+        console.log("✅ Hindi characters detected:", text);
+        statusDiv.textContent = "✅ Hindi detected";
+        statusDiv.style.color = "green";
+      } else {
+        console.log("❌ No Hindi characters detected:", text);
+        statusDiv.textContent = "❌ Hindi not detected";
+        statusDiv.style.color = "red";
+      }
+    });
+  </script>
 </body>
 </html>

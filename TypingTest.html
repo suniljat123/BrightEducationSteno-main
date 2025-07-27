@@ -47,52 +47,6 @@
         .hindiFont {
             font-family: 'Hindi';
         }
-
-        .correct {
-            color: black;
-        }
-
-        .incorrect {
-            color: red;
-            text-decoration: line-through;
-        }
-
-        .wrong-capitalization {
-            color: orange;
-            text-decoration: underline;
-            font-weight: bold;
-        }
-
-        .expected {
-            color: green !important;
-            background-color: #e8f5e9;
-            font-weight: bold;
-        }
-
-        .extra {
-            color: purple;
-            text-decoration: underline;
-        }
-
-        .missed {
-            color: blue;
-            font-weight: bold;
-        }
-
-        #comparisonOutput {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: monospace;
-            font-size: 1rem;
-        }
-
-        .result-box {
-            border: 1px solid #ddd;
-            padding: 1rem;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            min-height: 150px;
-        }
     </style>
 
 </head>
@@ -975,7 +929,7 @@ font-size: 16px;
   border: none;
   padding: 10px 30px;
   border-radius: 5px;
-  font-size: 18px;" id="stop-test" onclick="callDisplayResult()">Stop Test</button>
+  font-size: 18px;" id="stop-test" onclick="displayResult()">Stop Test</button>
                             <div class="result" style="margin-top: 40px; border: 3px solid black;
 display: none;">
                                 <h3 style="padding: 13px 0 0 23px;">Result</h3>
@@ -1029,7 +983,7 @@ justify-content: space-around;">
     <script defer src="assets/js/main.js"></script>
     <script src="assets/js/MyComponents.js"></script>
     <script>
-        let isTimeCompleted = false;
+
         $(document).ready(function () {
             checkIsSprStudent();
             document.getElementById('header').style.backgroundColor = '#38434b'
@@ -1048,14 +1002,13 @@ justify-content: space-around;">
         });
         let time = 60;
         let totalTimeInSecond;
-        let timer;
-        $(document).ready(function () {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            let id = urlParams.get('Id')
-            if (id == null) {
+        $(document).ready(function () { 
+            const queryString = window.location.search; 
+            const urlParams = new URLSearchParams(queryString); 
+            let id = urlParams.get('Id') 
+            if (id == null) { 
                 id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
-            }
+            } 
             renderNewQuote(id)
             let userInput = document.getElementById('quote-input')
             mistakes = 0;
@@ -1180,14 +1133,9 @@ justify-content: space-around;">
             var timeParts = currentTime.split(":");
             var minutes = parseInt(timeParts[0]);
             var seconds = parseInt(timeParts[1]);
-            console.log('time=', timerElement.innerText)
             if (minutes == 0 && seconds == 0) {
                 //End test if timer reaches 0
-                isTimeCompleted = true;
-                 displayResult(); 
-                clearInterval(timer);
-                document.getElementById("stop-test").style.display = "none";
-                userInput.disabled = true;
+                displayResult();
             } else {
                 var totalSeconds = minutes * 60 + seconds;
                 if (totalSeconds > 0) {
@@ -1196,10 +1144,6 @@ justify-content: space-around;">
                     timerElement.innerText = convertSecondsToTime(totalSeconds) + "s";
                 }
             }
-        }
-        function callDisplayResult() {
-            isTimeCompleted = true;
-            displayResult();
         }
         function convertSecondsToTime(seconds) {
             var minutes = Math.floor(seconds / 60);
@@ -1212,7 +1156,6 @@ justify-content: space-around;">
             return minutesStr + ":" + secondsStr;
         }
         const displayResult = () => {
-          
             let userInput = document.getElementById('quote-input')
             document.getElementById("resultMainDiv").style.display = 'block';
             document.getElementById("quote-input").style.display = 'none';
@@ -1231,7 +1174,7 @@ justify-content: space-around;">
             let correctWordCnt = 0;
             let inCorrectWordCnt = 0;
             let skipWordCnt = 0;
-
+ 
             document.querySelector(".result").style.display = "block";
             clearInterval(timer);
             document.getElementById("stop-test").style.display = "none";
@@ -1241,16 +1184,14 @@ justify-content: space-around;">
             if (time != 0) {
                 timeTaken = (totalTimeInSecond - time) / 60; // in minutes
             }
-if(!isTimeCompleted){
-    return;
-}
+
             // Calculate all metrics
             const grossWPM = (keyStrokes / 5) / timeTaken;
             const netWPM = grossWPM - (fullMistakes / timeTaken);
             const accuracyData = 100//calculateTypingAccuracy().split('@');
             const accuracy = 100//parseFloat(accuracyData[0]);
-            fullMistakes = 0// parseInt(accuracyData[1]);
-            halfMistakes = 0// parseInt(accuracyData[2]);
+            fullMistakes =0// parseInt(accuracyData[1]);
+            halfMistakes =0// parseInt(accuracyData[2]);
 
             // Net DPH (Depressions Per Hour)
             const netDPH = (keyStrokes - backspaceCount) * (60 / timeTaken);
@@ -1282,11 +1223,11 @@ if(!isTimeCompleted){
             let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
-            let totaltypewords = typedwords.length;
+let totaltypewords = typedwords.length;
             var raw = JSON.stringify({
                 "Phone": SPR_StudentPhone,
                 "courseDataId": courseDataId,
-                "accuracy": accuracy.toFixed(2),
+                "accuracy": accuracy.toFixed(2), 
                 "grossSpeed": grossWPM.toFixed(2),
                 "netSpeed": netWPM.toFixed(2),
                 "netDPH": netDPH.toFixed(0),
@@ -1314,22 +1255,21 @@ if(!isTimeCompleted){
                 .then(response => response.json())
                 .then(result => {
                     console.log(result)
-                    let URL = 'StudentResult.html?Id=' + result;
-                    getResult(result);
-                    // window.open(URL, "_self");
-                })
+                    let URL='StudentResult.html?Id='+result;
+                    window.open(URL, "_self");
+        })
                 .catch(error => console.log('error=', error));
         };
         // Modify the calculateTypingAccuracy function
-        function calculateTypingAccuracy() {
-            let userInputText = document.getElementById('quote-input').value;
+        function calculateTypingAccuracy() { 
+            let userInputText = document.getElementById('quote-input').value; 
             if (userInputText.length > 0) {
                 document.getElementById("stop-test").disabled = false;
                 document.getElementById("stop-test").style.cursor = "pointer";
             } else {
                 document.getElementById("stop-test").style.cursor = "not-allowed";
                 document.getElementById("stop-test").disabled = true;
-            }
+            }    
         }
         function handleGoBack() {
             history.back();
@@ -1339,148 +1279,7 @@ if(!isTimeCompleted){
             part2.style.display = 'none';
             quote = '';
         }
-
-        function tokenize(text) {
-            text = text.normalize("NFC");
-            // Tokenize words and punctuation separately, ignoring whitespace tokens
-            const regex = /\w+(?:-\w+)*|[.,!?;:]+/g;
-            return text.match(regex) || [];
-        }
-
-        function escapeHtml(text) {
-            return (text || "").replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
-        }
-
-        function compareWords(origWords, typedWords) {
-            const result = [];
-            let i = 0, j = 0;
-
-            while (i < origWords.length || j < typedWords.length) {
-                const origWord = origWords[i] || null;
-                const typedWord = typedWords[j] || null;
-
-                if (origWord === null) {
-                    // Extra word typed
-                    result.push(`<span  style="font-family: Hindi;"  class="extra">${escapeHtml(typedWord)}</span> `);
-                    j++;
-                    continue;
-                }
-
-                if (typedWord === null) {
-                    // Missed word
-                    result.push(`<span  style="font-family: Hindi;" class="missed">[${escapeHtml(origWord)}]</span> `);
-                    i++;
-                    continue;
-                }
-
-                if (origWord === typedWord) {
-                    // Exact match, including case
-                    result.push(`<span  style="font-family: Hindi;" class="correct">${escapeHtml(typedWord)}</span> `);
-                    i++;
-                    j++;
-                } else if (origWord.toLowerCase() === typedWord.toLowerCase()) {
-                    // Same word ignoring case - capitalization error
-                    result.push(`<span  style="font-family: Hindi;" class="wrong-capitalization">${escapeHtml(typedWord)}</span>`);
-                    result.push(`<span  style="font-family: Hindi;" class="expected">[${escapeHtml(origWord)}]</span> `);
-                    i++;
-                    j++;
-                } else {
-                    // Spelling error or totally different word
-                    // Try lookahead to detect missing/extra words
-
-                    // If next orig matches current typed → missed word in typed
-                    if (origWords[i + 1] && origWords[i + 1].toLowerCase() === typedWord.toLowerCase()) {
-                        result.push(`<span  style="font-family: Hindi;" class="missed">[${escapeHtml(origWord)}]</span> `);
-                        i++;
-                    }
-                    // If next typed matches current orig → extra word typed
-                    else if (typedWords[j + 1] && typedWords[j + 1].toLowerCase() === origWord.toLowerCase()) {
-                        result.push(`<span  style="font-family: Hindi;" class="extra">${escapeHtml(typedWord)}</span> `);
-                        j++;
-                    } else {
-                        // Substitution error
-                        result.push(`<span  style="font-family: Hindi;" class="incorrect">${escapeHtml(typedWord)}</span>`);
-                        result.push(`<span  style="font-family: Hindi;" class="expected">[${escapeHtml(origWord)}]</span> `);
-                        i++;
-                        j++;
-                    }
-                }
-            }
-
-            return result.join('').trim();
-        }
-
-        function compareTexts(original, typed) {
-            const origTokens = tokenize(original);
-            const typedTokens = tokenize(typed);
-            return compareWords(origTokens, typedTokens);
-        }
-
-        function getResult(id) {
-            console.log('DOM fully loaded and parsed');
-            //   const queryString = window.location.search;
-            //   const urlParams = new URLSearchParams(queryString);
-            //   let id = urlParams.get('Id')
-            //   if (id == null) {
-            //     id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
-            //   }
-            console.log('id=', id)
-            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
-
-            var raw = JSON.stringify({
-                "Phone": SPR_StudentPhone,
-                "contentResultId": id,
-                "getTypingTestResult": 'getTypingTestResult',
-            });
-            console.log('raw=', raw)
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            let content = '';
-            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
-                .then(response => response.json())
-                .then(result => {
-                    console.log('result=', result)
-                    result = JSON.parse(result);
-                    console.log('typing result=>', result)
-
-
-
-                    content = result[0].Content_Words__c;
-                    let typedwords = result[0].Typed_Words__c;
-
-                    const originalText = content;
-
-                    const userTypedText = typedwords;
-
-                    let typingResult = compareTexts(originalText, userTypedText);
-                    if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
-
-                        // document.getElementById("comparisonOutput").style.fontFamily = 'Hindi';
-                        document.getElementById("resultMainDiv").style.fontFamily = 'Hindi';
-                        console.log('Hindi typing test1');
-                    } else {
-                        document.getElementById("resultMainDiv").style.fontFamily = 'monospace';
-                        console.log('English typing test');
-                    }
-                    console.log('typingResult=', typingResult)
-                   
-                    document.getElementById("resultMainDiv").innerHTML = typingResult;
-                    //document.getElementById("quote").innerHTML = typingResult;
-                })
-                .catch(error => console.log('error=', error));
-
-
-
-        }
+    
     </script>
     <!-- 
     <Script>

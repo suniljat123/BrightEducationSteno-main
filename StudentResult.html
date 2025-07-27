@@ -122,7 +122,7 @@
     function tokenize(text) {
       text = text.normalize("NFC");
       // Tokenize words and punctuation separately, ignoring whitespace tokens
-      const regex = /\w+(?:-\w+)*|[.,!?;:]+/g;
+      const regex =  /[\w;]+|[.,!?]+/g;// /\w+(?:-\w+)*|[.,!?;:]+/g;
       return text.match(regex) || [];
     }
 
@@ -194,9 +194,9 @@
     function compareTexts(original, typed) {
       const origTokens = tokenize(original);
       console.log("Original tokens:", origTokens);
-      console.log("original = ", original);
-      const typedTokens = tokenize(typed); 
-      return compareWords(origTokens, typed);
+      console.log("original:", original);
+      const typedTokens = tokenize(typed);
+      return compareWords(origTokens, typedTokens);
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -243,7 +243,7 @@
           const userTypedText = typedwords;
 
           const typingResult = compareTexts(originalText, userTypedText);
-         // console.log('typingResult=', typingResult); 
+          console.log('typingResult=', typingResult); 
           if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 
             document.getElementById("comparisonOutput").style.fontFamily = 'Hindi'; 

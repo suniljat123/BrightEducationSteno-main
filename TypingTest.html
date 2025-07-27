@@ -1092,7 +1092,7 @@ justify-content: space-around;">
         const quoteSection = document.getElementById("quote");
         // Update the input event listener to track more metrics
         userInput.addEventListener("input", (e) => {
-            console.log('input event triggered');
+            console.log('input event triggered',e.target.value);
             calculateTypingAccuracy();
 
             // Track backspaces

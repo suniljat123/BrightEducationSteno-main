@@ -38,6 +38,18 @@
   <h2>Custom Hindi Typing (with Font)</h2>
   <p class="info">Type using Hindi keyboard layout (e.g., Inscript or Remington), and it will render in your uploaded font.</p>
 
-  <textarea placeholder="Type here in Hindi using your keyboard layout..."></textarea>
+  <textarea placeholder="Type here in Hindi using your keyboard layout..." id="hindiInput"></textarea>
+  <script>
+    const inputBox = document.getElementById('hindiInput');
+
+    inputBox.addEventListener('input', () => {
+      console.clear();  // Optional: clear console on every input
+      console.log('Current text:', inputBox.value);
+    });
+
+    inputBox.addEventListener('keydown', (event) => {
+      console.log(`Key pressed: ${event.key}`);
+    });
+  </script>
 </body>
 </html>

@@ -2,12 +2,12 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <title>Custom Hindi Font Typing</title>
+  <title>Custom Hindi Typing (Console View)</title>
 
   <style>
     @font-face {
       font-family: 'Hindi';
-      src: url(font/Hindi.ttf) format('truetype');
+      src: url('Hindi.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
     }
@@ -27,24 +27,21 @@
       border-radius: 8px;
       border: 1px solid #ccc;
     }
-
-    .info {
-      margin-top: 10px;
-      font-size: 16px;
-    }
   </style>
 </head>
 <body>
-  <h2>Custom Hindi Typing (with Font)</h2>
-  <p class="info">Type using Hindi keyboard layout (e.g., Inscript or Remington), and it will render in your uploaded font.</p>
+  <h2>Custom Hindi Font Typing (Console Output)</h2>
+  <p>Type in Hindi using Remington or Inscript layout — you'll see real Hindi characters in the console too.</p>
 
-  <textarea placeholder="Type here in Hindi using your keyboard layout..." id="hindiInput"></textarea>
+  <textarea id="hindiInput" placeholder="यहाँ हिंदी में टाइप करें..."></textarea>
+
   <script>
     const inputBox = document.getElementById('hindiInput');
 
     inputBox.addEventListener('input', () => {
-      console.clear();  // Optional: clear console on every input
-      console.log('Current text:', inputBox.value);
+      const content = inputBox.value;
+      console.clear();
+      console.log("📌 Hindi content:", content);
     });
 
     inputBox.addEventListener('keydown', (event) => {

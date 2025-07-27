@@ -192,10 +192,12 @@
     }
 
     function compareTexts(original, typed) {
-      const origTokens = tokenize(original);
-      const typedTokens = tokenize(typed);
-      console.log('Original Tokens:', origTokens);
+      
       console.log('original:', original);
+      const origTokens = tokenize(original);
+      console.log('Original Tokens:', origTokens);
+      const typedTokens = tokenize(typed);
+     
       return compareWords(origTokens, typedTokens);
     }
 

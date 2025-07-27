@@ -1000,7 +1000,7 @@ justify-content: space-around;">
             console.log("Selected value: " + selectedValue);
             document.getElementById("timer").innerText = selectedValue + ':00s';
         });
-        let time = 600;
+        let time = 60;
         let totalTimeInSecond;
         $(document).ready(function () {
             const queryString = window.location.search;
@@ -1059,8 +1059,8 @@ justify-content: space-around;">
                         document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
                     }
 
-                    time = parseInt(result[0].Duration__c) * 600;
-                    totalTimeInSecond = parseInt(result[0].Duration__c) * 600;
+                    time = parseInt(result[0].Duration__c) * 60;
+                    totalTimeInSecond = parseInt(result[0].Duration__c) * 60;
                     //    document.getElementById("timer").innerText = convertSecondsToTime(time) + 's';
                     //    document.getElementById("timer").innerText = time + "s";
                     let content = result[0].Audio_Text__c;

@@ -891,7 +891,7 @@ justify-content: space-between;">
 ">
                                     </p>
 
-                                    Time: <span id="timer">1:00s
+                                    Time: <span id="timer">5:00s
                                     </span></p>
                                 </div>
 
@@ -1002,13 +1002,13 @@ justify-content: space-around;">
         });
         let time = 600;
         let totalTimeInSecond;
-        $(document).ready(function () { 
-            const queryString = window.location.search; 
-            const urlParams = new URLSearchParams(queryString); 
-            let id = urlParams.get('Id') 
-            if (id == null) { 
+        $(document).ready(function () {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            let id = urlParams.get('Id')
+            if (id == null) {
                 id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
-            } 
+            }
             renderNewQuote(id)
             let userInput = document.getElementById('quote-input')
             mistakes = 0;
@@ -1174,7 +1174,7 @@ justify-content: space-around;">
             let correctWordCnt = 0;
             let inCorrectWordCnt = 0;
             let skipWordCnt = 0;
- 
+
             document.querySelector(".result").style.display = "block";
             clearInterval(timer);
             document.getElementById("stop-test").style.display = "none";
@@ -1190,8 +1190,8 @@ justify-content: space-around;">
             const netWPM = grossWPM - (fullMistakes / timeTaken);
             const accuracyData = 100//calculateTypingAccuracy().split('@');
             const accuracy = 100//parseFloat(accuracyData[0]);
-            fullMistakes =0// parseInt(accuracyData[1]);
-            halfMistakes =0// parseInt(accuracyData[2]);
+            fullMistakes = 0// parseInt(accuracyData[1]);
+            halfMistakes = 0// parseInt(accuracyData[2]);
 
             // Net DPH (Depressions Per Hour)
             const netDPH = (keyStrokes - backspaceCount) * (60 / timeTaken);
@@ -1223,11 +1223,11 @@ justify-content: space-around;">
             let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
-let totaltypewords = typedwords.length;
+            let totaltypewords = typedwords.length;
             var raw = JSON.stringify({
                 "Phone": SPR_StudentPhone,
                 "courseDataId": courseDataId,
-                "accuracy": accuracy.toFixed(2), 
+                "accuracy": accuracy.toFixed(2),
                 "grossSpeed": grossWPM.toFixed(2),
                 "netSpeed": netWPM.toFixed(2),
                 "netDPH": netDPH.toFixed(0),
@@ -1255,21 +1255,21 @@ let totaltypewords = typedwords.length;
                 .then(response => response.json())
                 .then(result => {
                     console.log(result)
-                    let URL='StudentResult.html?Id='+result;
+                    let URL = 'StudentResult.html?Id=' + result;
                     window.open(URL, "_self");
-        })
+                })
                 .catch(error => console.log('error=', error));
         };
         // Modify the calculateTypingAccuracy function
-        function calculateTypingAccuracy() { 
-            let userInputText = document.getElementById('quote-input').value; 
+        function calculateTypingAccuracy() {
+            let userInputText = document.getElementById('quote-input').value;
             if (userInputText.length > 0) {
                 document.getElementById("stop-test").disabled = false;
                 document.getElementById("stop-test").style.cursor = "pointer";
             } else {
                 document.getElementById("stop-test").style.cursor = "not-allowed";
                 document.getElementById("stop-test").disabled = true;
-            }    
+            }
         }
         function handleGoBack() {
             history.back();
@@ -1279,7 +1279,7 @@ let totaltypewords = typedwords.length;
             part2.style.display = 'none';
             quote = '';
         }
-    
+
     </script>
     <!-- 
     <Script>

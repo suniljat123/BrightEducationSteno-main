@@ -196,7 +196,7 @@
       console.log("Original tokens:", origTokens);
       console.log("original = ", original);
       const typedTokens = tokenize(typed); 
-      return compareWords(original, typed);
+      return compareWords(origTokens, typed);
     }
 
     document.addEventListener("DOMContentLoaded", () => {

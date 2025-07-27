@@ -120,7 +120,7 @@
 
   <script>
     function tokenize(text) {
-      text = text.normalize("NFC");
+     // text = text.normalize("NFC");
       // Tokenize words and punctuation separately, ignoring whitespace tokens
       const regex =  /\w+(?:-\w+)*|[.,!?;:]+/g;
       return text.match(regex) || [];

@@ -194,7 +194,7 @@
     function compareTexts(original, typed) {
       const origTokens = tokenize(original);
       const typedTokens = tokenize(typed);
-      return compareWords(origTokens, typedTokens);
+      return compareWords(original.split(' '), typed.split(' '));
     }
 
     document.addEventListener("DOMContentLoaded", () => {

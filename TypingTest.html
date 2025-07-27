@@ -1012,11 +1012,9 @@ justify-content: space-around;">
             renderNewQuote(id)
             let userInput = document.getElementById('quote-input')
             mistakes = 0;
-            timer = "";
-            var dropdown = document.getElementById("duration");
-            dropdown.setAttribute("disabled", true);
+            timer = ""; 
             userInput.disabled = true;
-            timeReduce();
+           // timeReduce();
             document.getElementById("stop-test").style.cursor = "not-allowed";
             document.getElementById("stop-test").disabled = true;
         })

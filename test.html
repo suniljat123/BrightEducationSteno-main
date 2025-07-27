@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <title>Type in Hindi (Transliteration)</title>
+  <title>Type in Hindi Automatically</title>
   <script src="https://www.google.com/jsapi"></script>
   <style>
     body {
@@ -25,12 +25,12 @@
   </style>
 </head>
 <body>
-  <h1>हिंदी में टाइप करें</h1>
-  <p>English में लिखें, अपने आप हिंदी में बदल जाएगा (जैसे: "mera naam Sunil hai")</p>
-  <textarea id="hindiInput" placeholder="Type in Hindi using English..."></textarea>
-  <div id="status"></div>
+  <h1>हिंदी में टाइप करें (ऑटो कन्वर्जन)</h1>
+  <p>जैसे ही आप English में टाइप करेंगे, वो अपने आप हिंदी में बदल जाएगा</p>
+  <textarea id="hindiInput" placeholder="Type here in English..."></textarea>
 
   <script>
+    // Load Google Transliteration API
     google.load("elements", "1", {
       packages: "transliteration"
     });
@@ -38,15 +38,21 @@
     google.setOnLoadCallback(onLoad);
 
     function onLoad() {
-      var options = {
+      const options = {
         sourceLanguage: google.elements.transliteration.LanguageCode.ENGLISH,
         destinationLanguage: [google.elements.transliteration.LanguageCode.HINDI],
         transliterationEnabled: true
       };
 
-      var control = new google.elements.transliteration.TransliterationControl(options);
+      const control = new google.elements.transliteration.TransliterationControl(options);
       control.makeTransliteratable(['hindiInput']);
+
+      // Optional: shortcut key (Ctrl + G) to toggle on/off
+      control.showControl('translControl'); // adds a toggle UI
     }
   </script>
+
+  <!-- Optional control UI to toggle transliteration -->
+  <div id="translControl"></div>
 </body>
 </html>

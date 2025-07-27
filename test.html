@@ -2,10 +2,11 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <title>Hindi Input Checker</title>
+  <title>Type in Hindi (Transliteration)</title>
+  <script src="https://www.google.com/jsapi"></script>
   <style>
     body {
-      font-family: "Noto Sans Devanagari", "Mangal", "Arial", sans-serif;
+      font-family: "Noto Sans Devanagari", "Mangal", sans-serif;
       padding: 20px;
     }
     textarea {
@@ -13,11 +14,9 @@
       height: 300px;
       font-size: 18px;
       line-height: 1.6;
-      font-family: inherit;
       padding: 10px;
       border-radius: 8px;
       border: 1px solid #ccc;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
     }
     #status {
       margin-top: 10px;
@@ -26,31 +25,28 @@
   </style>
 </head>
 <body>
-  <h1>हिंदी इनपुट चेक करें</h1>
-  <p>नीचे कुछ हिंदी में टाइप करें और कंसोल में जांचें:</p>
-  <textarea id="hindiInput" placeholder="यहाँ हिंदी में लिखें..."></textarea>
+  <h1>हिंदी में टाइप करें</h1>
+  <p>English में लिखें, अपने आप हिंदी में बदल जाएगा (जैसे: "mera naam Sunil hai")</p>
+  <textarea id="hindiInput" placeholder="Type in Hindi using English..."></textarea>
   <div id="status"></div>
 
   <script>
-    const textarea = document.getElementById('hindiInput');
-    const statusDiv = document.getElementById('status');
-
-    textarea.addEventListener('input', () => {
-      const text = textarea.value;
-
-      // Regex to detect Devanagari script (used in Hindi)
-      const devanagariRegex = /[\u0900-\u097F]/;
-
-      if (devanagariRegex.test(text)) {
-        console.log("✅ Hindi characters detected:", text);
-        statusDiv.textContent = "✅ Hindi detected";
-        statusDiv.style.color = "green";
-      } else {
-        console.log("❌ No Hindi characters detected:", text);
-        statusDiv.textContent = "❌ Hindi not detected";
-        statusDiv.style.color = "red";
-      }
+    google.load("elements", "1", {
+      packages: "transliteration"
     });
+
+    google.setOnLoadCallback(onLoad);
+
+    function onLoad() {
+      var options = {
+        sourceLanguage: google.elements.transliteration.LanguageCode.ENGLISH,
+        destinationLanguage: [google.elements.transliteration.LanguageCode.HINDI],
+        transliterationEnabled: true
+      };
+
+      var control = new google.elements.transliteration.TransliterationControl(options);
+      control.makeTransliteratable(['hindiInput']);
+    }
   </script>
 </body>
 </html>

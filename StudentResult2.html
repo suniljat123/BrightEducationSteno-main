@@ -108,16 +108,21 @@
   </section>
 
   <script>
-    function tokenize(text) {
+    function tokenize(text, language) {
       text = text.normalize("NFC");
       console.log('Normalized text:');
-      const isHindi = /[\u0900-\u097F]/.test(text);
+      let isHindi = /[\u0900-\u097F]/.test(text);
+      if(language == 'Hindi'){
+        isHindi = true;
+      } else {
+        isHindi = false;
+      }
       // const regex = isHindi
       //   ? /[\p{L}\p{M}]+(?:-[\p{L}\p{M}]+)*|[.,!?;:\-]+|\s+/gu
       //   : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
       const regex = isHindi
-        ? /[\p{L}\p{M}0-9.;:-]+/gu
-        : /\w+(?:[-"'._]\w+)*|[.,!?;:\-]+|\s+/gu
+        ? /\w+(?:[-"'._]\w+)*|[.,!?;:\-]+|\s+/gu
+        : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
       const tokens = text.match(regex) || [];
       
       return tokens;
@@ -255,9 +260,9 @@
       return result;
     }
 
-    function compareTexts(original, typed) {
-      const origTokens = tokenize(original);
-      const typedTokens = tokenize(typed);
+    function compareTexts(original, typed, language) {
+      const origTokens = tokenize(original, language);
+      const typedTokens = tokenize(typed, language);
       const dp = lcsMatrix(origTokens, typedTokens);
       const [alignedOrig, alignedTyped] = backtrackLCS(dp, origTokens, typedTokens);
       return renderComparison(alignedOrig, alignedTyped);
@@ -306,7 +311,7 @@
 
           const userTypedText = typedwords;
 
-          const typingResult = compareTexts(originalText, userTypedText);
+          const typingResult = compareTexts(originalText, userTypedText,result[0].Course_Content__r.Test_Language__c);
           console.log('typingResult=', typingResult); 
           if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 

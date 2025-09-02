@@ -111,12 +111,16 @@
     function tokenize(text) {
       text = text.normalize("NFC");
       const isHindi = /[\u0900-\u097F]/.test(text);
+      // const regex = isHindi
+      //   ? /[\p{L}\p{M}]+(?:-[\p{L}\p{M}]+)*|[.,!?;:\-]+|\s+/gu
+      //   : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
       const regex = isHindi
-        ? /[\p{L}\p{M}]+(?:-[\p{L}\p{M}]+)*|[.,!?;:\-]+|\s+/gu
+        ? /[\p{L}\p{M}0-9.;:-]+/gu
         : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
       const tokens = text.match(regex) || [];
+      
       return tokens;
-    }
+    } 
 
     function lcsMatrix(a, b) {
       const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));

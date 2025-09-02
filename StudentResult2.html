@@ -110,13 +110,14 @@
   <script>
     function tokenize(text) {
       text = text.normalize("NFC");
+      console.log('Normalized text:');
       const isHindi = /[\u0900-\u097F]/.test(text);
-      const regex = isHindi
-        ? /[\p{L}\p{M}]+(?:-[\p{L}\p{M}]+)*|[.,!?;:\-]+|\s+/gu
-        : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
       // const regex = isHindi
-      //   ? /[\p{L}\p{M}0-9.;:-]+/gu
+      //   ? /[\p{L}\p{M}]+(?:-[\p{L}\p{M}]+)*|[.,!?;:\-]+|\s+/gu
       //   : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
+      const regex = isHindi
+        ? /[\p{L}\p{M}0-9.;:-]+/gu
+        : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
       const tokens = text.match(regex) || [];
       
       return tokens;

@@ -117,7 +117,7 @@
       //   : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
       const regex = isHindi
         ? /[\p{L}\p{M}0-9.;:-]+/gu
-        : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
+        : /[\p{L}\p{M}0-9.;:-]+/gu;
       const tokens = text.match(regex) || [];
       
       return tokens;

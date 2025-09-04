@@ -257,7 +257,7 @@
         const typedSpaced = typedWords.join(' ');
 
         if (typedWords.length === 0 && origWords.length > 0) {
-          result += `<span class="missed">${escapeHtml(origSpaced)}</span> `;
+          result += ` <span class="missed">${escapeHtml(origSpaced)}</span> `;
           skipWordCnt++;
         } else if (origWords.length === 0 && typedWords.length > 0) {
           result += `<span class="extra">${escapeHtml(typedSpaced)}</span> `;

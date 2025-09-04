@@ -263,7 +263,10 @@
           result += `<span class="extra">${escapeHtml(typedSpaced)}</span> `;
           extraWordCnt++;
         } else {
-          if (typedWords.length) result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
+          if (typedWords.length){
+            result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
+            incorrectWordsCnt++;
+          } 
           if (origWords.length) result += `<span class="expected">${escapeHtml(origSpaced)}</span> `;
         }
 

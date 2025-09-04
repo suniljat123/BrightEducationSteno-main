@@ -222,7 +222,9 @@
           t === o.slice(0, -1)
         ) {
           result += `<span class="incorrect">${escapeHtml(t)}</span><span class="expected">${escapeHtml(o)}</span> `;
-          incorrectWordsCnt++;
+           if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+            incorrectWordsCnt++;
+          }
           i++;
           continue;
         }
@@ -237,7 +239,9 @@
         // ✅ Case: Extra punctuation
         if (t && /^[.,!?;:]$/.test(t) && o === null) {
           result += `<span class="incorrect">${escapeHtml(t)}</span>`;
-          incorrectWordsCnt++;
+          if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+            incorrectWordsCnt++;
+          }
           i++;
           continue;
         }
@@ -271,7 +275,9 @@
         } else {
           if (typedWords.length) {
             result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
+            if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
             incorrectWordsCnt++;
+          }
           }
           if (origWords.length) result += `<span class="expected">${escapeHtml(origSpaced)}</span> `;
         }

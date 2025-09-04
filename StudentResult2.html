@@ -106,6 +106,7 @@
       <li><span Id="Extra Word Count:"></span></li>
       <li><span Id="Correct Word Count:"></span></li>
       <li><span Id="Total Words Count:"></span></li>
+      <li><span Id="Total Typed Words Count:"></span></li>
       <li><span Id="Accuracy"></span></li>
     </ul>
   </section>
@@ -190,7 +191,7 @@
         .replace(/>/g, "&gt;");
     }
 
-    function renderComparison(origTokens, typedTokens) {
+    function renderComparison(origTokens, typedTokens,originalContent) {
       let result = '';
       let i = 0;
       let incorrectWordsCnt = 0;
@@ -281,7 +282,9 @@
       document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
       document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
       document.getElementById("Correct Word Count:").innerText = "Correct Word Count: " + correctWordCnt;
-      let totalWords = correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
+      let totalWords =  originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
+      document.getElementById("Total Typed Words Count:").innerText = "Total Typed Words Count: " + (correctWordCnt + incorrectWordsCnt + extraWordCnt);
+      
       let accuracy = totalWords > 0 ? ((correctWordCnt / totalWords) * 100).toFixed(2) : 0;
       document.getElementById("Accuracy").innerText = "Accuracy: " + accuracy + "%";
       document.getElementById("Total Words Count:").innerText = "Total Words Count: " + totalWords;
@@ -293,7 +296,7 @@
       const typedTokens = tokenize(typed, language);
       const dp = lcsMatrix(origTokens, typedTokens);
       const [alignedOrig, alignedTyped] = backtrackLCS(dp, origTokens, typedTokens);
-      return renderComparison(alignedOrig, alignedTyped);
+      return renderComparison(alignedOrig, alignedTyped, original);
     }
 
     document.addEventListener("DOMContentLoaded", () => {

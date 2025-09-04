@@ -7,7 +7,7 @@
   <title>Typing Comparison</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-      @font-face {
+    @font-face {
       font-family: Hindi;
       src: url(font/Hindi.ttf);
     }
@@ -22,6 +22,7 @@
     .hindiFont {
       font-family: 'Hindi';
     }
+
     .correct {
       color: black;
     }
@@ -94,8 +95,9 @@
   <section class="container py-2">
     <p class="mb-1">Error Legend:</p>
     <ul class="mb-2">
-      <li><span class="incorrect"  >wrong</span> = Incorrect word</li>
-      <li><span class="incorrect"  >typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown</li>
+      <li><span class="incorrect">wrong</span> = Incorrect word</li>
+      <li><span class="incorrect">typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown
+      </li>
       <li><span class="missed">[expected]</span> = Missed word</li>
       <li><span class="extra">extra</span> = Extra word</li>
       <li><span class="space-fixed">joinedword</span> = Missing space or hyphen</li>
@@ -103,6 +105,7 @@
       <li><span Id="Skipped Word Count:"></span></li>
       <li><span Id="Extra Word Count:"></span></li>
       <li><span Id="Correct Word Count:"></span></li>
+      <li><span Id="Total Words Count:"></span></li>
       <li><span Id="Accuracy"></span></li>
     </ul>
   </section>
@@ -112,12 +115,12 @@
     <div id="comparisonOutput" class="result-box"></div>
   </section>
 
-  <script> 
+  <script>
     function tokenize(text, language) {
       text = text.normalize("NFC");
       console.log('Normalized text:');
       let isHindi = /[\u0900-\u097F]/.test(text);
-      if(language == 'Hindi'){
+      if (language == 'Hindi') {
         isHindi = true;
       } else {
         isHindi = false;
@@ -129,9 +132,9 @@
         ? /[/'`:{}\[\](),\p{L}\p{M}\p{N}%]+(?:[-:"'._`/%~+&;#)@{}\[\]][/'`:{}\[\](),\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///[/'`\[\]{}(),\p{L}\p{M}\p{N}%]+(?:[-"'._`/%~+&;#)@{}\[\]][/'`\[\]{}(),\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///['`\[\]{},\p{L}\p{M}\p{N}%]+(?:[-"'._`/%~+&;#)@{}\[\]]['`\[\]{},\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}¶`,"]*|[.,!?;:\/\-\[\]~+&;#)@{}¶`,"]+|\s+/gu///['\[\]{},\p{L}\p{M}\p{N}%]+(?:[-"'._/%~+&;#)@{}¶\[\]]['\[\]{},\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}¶,]*|[.,!?;:\/\-\[\]~+&;#)@{}¶,]+|\s+/gu    
         : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
       const tokens = text.match(regex) || [];
-      
+
       return tokens;
-    } 
+    }
 
     function lcsMatrix(a, b) {
       const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
@@ -190,10 +193,10 @@
     function renderComparison(origTokens, typedTokens) {
       let result = '';
       let i = 0;
-      let incorrectWordsCnt=0;
-      let skipWordCnt=0;
-      let extraWordCnt=0;
-      let correctWordCnt=0;
+      let incorrectWordsCnt = 0;
+      let skipWordCnt = 0;
+      let extraWordCnt = 0;
+      let correctWordCnt = 0;
       while (i < origTokens.length) {
         const o = origTokens[i];
         const t = typedTokens[i];
@@ -204,8 +207,8 @@
           console.log(`t ${t}`);
           result += `<span class="correct">${escapeHtml(o)}</span>`;
           if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
-    correctWordCnt++;
-  }
+            correctWordCnt++;
+          }
           i++;
           continue;
         }
@@ -265,10 +268,10 @@
           result += `<span class="extra">${escapeHtml(typedSpaced)}</span> `;
           extraWordCnt++;
         } else {
-          if (typedWords.length){
+          if (typedWords.length) {
             result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
             incorrectWordsCnt++;
-          } 
+          }
           if (origWords.length) result += `<span class="expected">${escapeHtml(origSpaced)}</span> `;
         }
 
@@ -278,9 +281,10 @@
       document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
       document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
       document.getElementById("Correct Word Count:").innerText = "Correct Word Count: " + correctWordCnt;
-      let totalWords = origTokens.length;
+      let totalWords = correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
       let accuracy = totalWords > 0 ? ((correctWordCnt / totalWords) * 100).toFixed(2) : 0;
       document.getElementById("Accuracy").innerText = "Accuracy: " + accuracy + "%";
+      document.getElementById("Total Words Count:").innerText = "Total Words Count: " + totalWords;
       return result;
     }
 
@@ -322,7 +326,7 @@
       fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
         .then(response => response.json())
         .then(result => {
-         // console.log('result=', result)
+          // console.log('result=', result)
           result = JSON.parse(result);
           console.log('typing result=>', result)
 
@@ -335,17 +339,17 @@
 
           const userTypedText = typedwords;
 
-          const typingResult = compareTexts(originalText, userTypedText,result[0].Course_Content__r.Test_Language__c);
-          console.log('typingResult=', typingResult); 
+          const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c);
+          console.log('typingResult=', typingResult);
           if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 
-            document.getElementById("comparisonOutput").style.fontFamily = 'Hindi'; 
+            document.getElementById("comparisonOutput").style.fontFamily = 'Hindi';
             console.log('Hindi typing test21');
           } else {
             document.getElementById("comparisonOutput").style.fontFamily = 'monospace';
             console.log('English typing test');
           }
-          document.getElementById("comparisonOutput").innerHTML = typingResult; 
+          document.getElementById("comparisonOutput").innerHTML = typingResult;
         })
         .catch(error => console.log('error=', error));
 

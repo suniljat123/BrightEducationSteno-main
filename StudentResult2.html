@@ -191,7 +191,7 @@
         .replace(/>/g, "&gt;");
     }
 
-    function renderComparison(origTokens, typedTokens, originalContent) {
+    function renderComparison(origTokens, typedTokens, originalContent,userTypedText) {
       let result = '';
       let i = 0;
       let incorrectWordsCnt = 0;
@@ -284,8 +284,9 @@
       document.getElementById("Skipped Word Count:").innerText = "Skipped and Extra Word Count: " + (skipWordCnt + extraWordCnt);
       document.getElementById("Correct Word Count:").innerText = "Correct Word Count: " + correctWordCnt;
       let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
-      document.getElementById("Total Typed Words Count:").innerText = "Total Typed Words Count: " + (correctWordCnt + incorrectWordsCnt + extraWordCnt);
-
+      let userTypedWords = userTypedText.trim().split(/\s+/);
+      document.getElementById("Total Typed Words Count:").innerText = "Total Typed Words Count: " + (userTypedWords.length);
+      
       let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
       document.getElementById("Accuracy").innerText = "Accuracy: " + accuracy + "%";
       document.getElementById("Total Words Count:").innerText = "Total Words Count: " + totalWords.length;
@@ -298,7 +299,7 @@
       const typedTokens = tokenize(typed, language);
       const dp = lcsMatrix(origTokens, typedTokens);
       const [alignedOrig, alignedTyped] = backtrackLCS(dp, origTokens, typedTokens);
-      return renderComparison(alignedOrig, alignedTyped, original);
+      return renderComparison(alignedOrig, alignedTyped, original, typed);
     }
 
     document.addEventListener("DOMContentLoaded", () => {

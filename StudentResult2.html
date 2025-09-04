@@ -285,9 +285,10 @@
       let totalWords =  originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
       document.getElementById("Total Typed Words Count:").innerText = "Total Typed Words Count: " + (correctWordCnt + incorrectWordsCnt + extraWordCnt);
       
-      let accuracy = totalWords > 0 ? ((correctWordCnt / totalWords) * 100).toFixed(2) : 0;
+      let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
       document.getElementById("Accuracy").innerText = "Accuracy: " + accuracy + "%";
-      document.getElementById("Total Words Count:").innerText = "Total Words Count: " + totalWords;
+      document.getElementById("Total Words Count:").innerText = "Total Words Count: " + totalWords.length;
+
       return result;
     }
 

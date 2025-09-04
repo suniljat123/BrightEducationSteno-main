@@ -203,7 +203,9 @@
           console.log(`o ${o}`);
           console.log(`t ${t}`);
           result += `<span class="correct">${escapeHtml(o)}</span>`;
-          correctWordCnt++;
+          if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+    correctWordCnt++;
+  }
           i++;
           continue;
         }

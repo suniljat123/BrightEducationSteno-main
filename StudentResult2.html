@@ -94,11 +94,16 @@
   <section class="container py-2">
     <p class="mb-1">Error Legend:</p>
     <ul class="mb-2">
-      <li><span class="incorrect">wrong</span> = Incorrect word</li>
-      <li><span class="incorrect">typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown</li>
+      <li><span class="incorrect"  >wrong</span> = Incorrect word</li>
+      <li><span class="incorrect"  >typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown</li>
       <li><span class="missed">[expected]</span> = Missed word</li>
       <li><span class="extra">extra</span> = Extra word</li>
       <li><span class="space-fixed">joinedword</span> = Missing space or hyphen</li>
+      <li><span Id="Incorrect Word Count:"></span></li>
+      <li><span Id="Skipped Word Count:"></span></li>
+      <li><span Id="Extra Word Count:"></span></li>
+      <li><span Id="Correct Word Count:"></span></li>
+      <li><span Id="Accuracy"></span></li>
     </ul>
   </section>
 
@@ -185,7 +190,10 @@
     function renderComparison(origTokens, typedTokens) {
       let result = '';
       let i = 0;
-
+      let incorrectWordsCnt=0;
+      let skipWordCnt=0;
+      let extraWordCnt=0;
+      let correctWordCnt=0;
       while (i < origTokens.length) {
         const o = origTokens[i];
         const t = typedTokens[i];
@@ -195,6 +203,7 @@
           console.log(`o ${o}`);
           console.log(`t ${t}`);
           result += `<span class="correct">${escapeHtml(o)}</span>`;
+          correctWordCnt++;
           i++;
           continue;
         }
@@ -207,6 +216,7 @@
           t === o.slice(0, -1)
         ) {
           result += `<span class="incorrect">${escapeHtml(t)}</span><span class="expected">${escapeHtml(o)}</span> `;
+          incorrectWordsCnt++;
           i++;
           continue;
         }
@@ -221,6 +231,7 @@
         // ✅ Case: Extra punctuation
         if (t && /^[.,!?;:]$/.test(t) && o === null) {
           result += `<span class="incorrect">${escapeHtml(t)}</span>`;
+          incorrectWordsCnt++;
           i++;
           continue;
         }
@@ -247,8 +258,10 @@
 
         if (typedWords.length === 0 && origWords.length > 0) {
           result += `<span class="missed">${escapeHtml(origSpaced)}</span> `;
+          skipWordCnt++;
         } else if (origWords.length === 0 && typedWords.length > 0) {
           result += `<span class="extra">${escapeHtml(typedSpaced)}</span> `;
+          extraWordCnt++;
         } else {
           if (typedWords.length) result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
           if (origWords.length) result += `<span class="expected">${escapeHtml(origSpaced)}</span> `;
@@ -256,7 +269,13 @@
 
         i = j;
       }
-
+      document.getElementById("Incorrect Word Count:").innerText = "Incorrect Word Count: " + incorrectWordsCnt;
+      document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
+      document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
+      document.getElementById("Correct Word Count:").innerText = "Correct Word Count: " + correctWordCnt;
+      let totalWords = origTokens.length;
+      let accuracy = totalWords > 0 ? ((correctWordCnt / totalWords) * 100).toFixed(2) : 0;
+      document.getElementById("Accuracy").innerText = "Accuracy: " + accuracy + "%";
       return result;
     }
 

@@ -1090,6 +1090,7 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       console.log('DOM fully loaded and parsed');
+       document.getElementById('header').style.backgroundColor = '#38434b'
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       let id = urlParams.get('Id')

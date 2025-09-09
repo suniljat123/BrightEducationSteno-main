@@ -1110,7 +1110,23 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-   
+    <script>
+        function handleShowbtn() {
+            console.log('btn start clicked');
+            var part1 = document.getElementById('planTableId');
+
+            var part2 = document.getElementById('showMoreSection');
+            part1.style.display = 'none';
+            part2.style.display = 'inline-block';
+        }
+        function handleGoBack() {
+            console.log('btn start clicked');
+            var part1 = document.getElementById('planTableId');
+            var part2 = document.getElementById('showMoreSection');
+            part1.style.display = 'block';
+            part2.style.display = 'none';
+        }
+    </script>
     <!-- Vendor JS Files -->
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
@@ -1126,7 +1142,129 @@
     <!--   Main JS File -->
     <script defer src="assets/js/main.js"></script>
     <script src="assets/js/MyComponents.js"></script>
-     
+    <script>
+        $(document).ready(function () {
+            checkIsSprStudent();
+            document.getElementById('header').style.backgroundColor = '#38434b'
+            console.log("calling31")
+            getResult();
+        })
+
+        function getResult() {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
+            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
+            var raw = JSON.stringify({
+                "Phone": SPR_StudentPhone,
+                "studentId": "a01GA00002LQoKlYAL",
+                "getResult": "getResult"
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            const TableData = document.getElementById('TableData');
+            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    if (result == 'No result found.') {
+                        // alert('No result found.')
+                        const tableHTML = `<tr class="d-style bgc-h-default-l4">
+                                        <td style="text-align: center;background: #8c93aa;" colspan="10">${result}</td>
+                                         
+
+                                    </tr>`;
+                        TableData.innerHTML += tableHTML;
+                    } else {
+                        result = JSON.parse(result);
+                        console.log('result=>', result)
+                        result.forEach((currentItem, idx) => {
+                            const dateString = currentItem.CreatedDate;
+                            const dateObject = new Date(dateString);
+
+                            const formattedDate = dateObject.toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                            });
+                            let marks = currentItem.Marks__c + '%';
+                            let speed = currentItem.Speed__c ? currentItem.Speed__c : ''
+                            let stenoMarks = currentItem.Steno_Marks__c ? currentItem.Steno_Marks__c : ''
+                            let marksOrSpeed = ''
+                            if (speed.length < 1) {
+                                marksOrSpeed = stenoMarks + '/100';
+                            } else {
+                                marksOrSpeed = speed;
+                            }
+                            const tableHTML = `
+                        <tr class="d-style bgc-h-default-l4">
+                                            <td>${idx + 1}</td>
+                                            <td>${formattedDate}</td>
+                                            <td>${currentItem.Name}</td>
+                                            <td>${currentItem.Total_Words__c}</td>
+                                            <td>${currentItem.Total_Type__c}</td>
+                                            <td>${currentItem.Incorrect_Words__c}</td>
+                                            <td>${marks}</td>
+                                            <td>${marksOrSpeed}</td>
+                                            <!--<td>${stenoMarks}</td>-->
+                                            <td>
+                                                ${currentItem.Rank__c} </td>
+                                            <td style="    justify-content: center;
+    display: flex;">
+                                                <a href="StudentResult.html?Id=${currentItem.Id}" class="btn btn-xs btn-info"><i
+                                                        class="fas fa-list"></i> Show</a>
+                                                         <a style="margin-left: 7px;background: #ffbe50;" href="TypingComp.html?id=${currentItem.Course_Content__c}" class="btn btn-xs btn-info"><i
+                                                        class="fas fa-list"></i> Compare</a>
+                                                <!-- <a href="result_comp.php?test_id=10309c857c6dcd2c0322867b20c2a424" class="btn btn-xs btn-warning"><i class="fas fa-balance-scale"></i> Compare</a> -->
+                                            </td>
+                                        </tr>
+               `;
+                            TableData.innerHTML += tableHTML;
+                        })
+
+                    }
+
+                })
+                .catch(error => console.log('error=', error));
+
+        }
+        function getAudio() {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
+
+            var raw = JSON.stringify({
+                "recordId": "a05GA00001RBCSjYAP",
+                "getAudio": "getAudio"
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            const TableData = document.getElementById('TableData');
+            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    console.log('audio1=', result)
+                    result = JSON.parse(result);
+                    console.log(result);
+                    let a = document.getElementById('audioPlay');
+                    a.innerHTML = 'hellooooo'
+
+
+                })
+                .catch(error => console.log('error=', error));
+
+        }
+
+    </script>
     <Script>
         //Random Quotes Api URL
         const quoteApiUrl = "https://api.quotable.io/random?minLength=80&maxLength=100";

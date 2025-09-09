@@ -1085,18 +1085,18 @@
 
         i = j;
       }
-      document.getElementById("Incorrect Word Count:").innerText = "Incorrect Word Count: " + incorrectWordsCnt;
+      document.getElementById("Incorrect Word Count:").innerText =  incorrectWordsCnt;
       // document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
       // document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
-      document.getElementById("Skipped Word Count:").innerText = "Skipped and Extra Word Count: " + (skipWordCnt + extraWordCnt);
-      document.getElementById("Correct Word Count:").innerText = "Correct Word Count: " + correctWordCnt;
+      document.getElementById("Skipped Word Count:").innerText =   (skipWordCnt + extraWordCnt);
+      document.getElementById("Correct Word Count:").innerText =    correctWordCnt;
       let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
       let userTypedWords = userTypedText.trim().split(/\s+/);
-      document.getElementById("Total Typed Words Count:").innerText = "Total Typed Words Count: " + (userTypedWords.length);
+      document.getElementById("Total Typed Words Count:").innerText = (userTypedWords.length);
 
       let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
-      document.getElementById("Accuracy").innerText = "Accuracy: " + accuracy + "%";
-      document.getElementById("Total Words Count:").innerText = "Total Words Count: " + totalWords.length;
+      document.getElementById("Accuracy").innerText =   accuracy + "%";
+      document.getElementById("Total Words Count:").innerText =  totalWords.length;
 
       return result;
     }

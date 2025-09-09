@@ -826,63 +826,40 @@
                     }
                 </style>
                 <!-- Our price plan section -->
-                <div class="plans-section" style="padding:21px;overflow-x: scroll!important;">
-
-                    <!-- -------------------------- TYping Modal Code is Here   -------------------- -->
-                    <!-- Main Body Starts -->
-                    <div id="typingModalId" class="container" style="
-padding: 1px 30px;
-
-display: none;
-max-width: 100rem;">
-                        <div class="stats" style="    text-align: right;
-font-size: 18px;
-margin-bottom: 30px;
-display: flex;
-justify-content: space-between;">
-                            <div style="display:flex; justify-content: center; align-items:center;">  
-                              <section class="container-fluid py-2">
-                                <div class="row">
-                                  <div class="col-12 col-md-3 mb-2 mb-md-0">
-                                    <button class="btn btn-primary w-100">Print/Save Result</button>
-                                  </div>
-                                  <div class="col-12 col-md-9">
-                                    <h4 class="text-center text-md-start">Candidate Result Sheet - Typing Test</h4>
-                                  </div>
-                                </div>
-                              </section>
-                            
-                              <section class="container py-2">
-                                <p class="mb-1">Error Legend:</p>
-                                <ul class="mb-2">
-                                  <li><span class="incorrect">wrong</span> = Incorrect word</li>
-                                  <li><span class="incorrect">typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown
-                                  </li>
-                                  <li><span class="missed">[expected]</span> = Missed word</li>
-                                  <li><span class="extra">extra</span> = Extra word</li>
-                                  <li><span class="space-fixed">joinedword</span> = Missing space or hyphen</li>
-                                  <li><span Id="Incorrect Word Count:"></span></li>
-                                  <li><span Id="Skipped Word Count:"></span></li>
-                                  <!-- <li><span Id="Extra Word Count:"></span></li> -->
-                                  <li><span Id="Correct Word Count:"></span></li>
-                                  <li><span Id="Total Words Count:"></span></li>
-                                  <li><span Id="Total Typed Words Count:"></span></li>
-                                  <li><span Id="Accuracy"></span></li>
-                                </ul>
-                              </section>
-                            
-                              <section class="container mb-5">
-                                <h5 class="mb-3">Typed Text Comparison:</h5>
-                                <div id="comparisonOutput" class="result-box"></div>
-                              </section>
-                            </div>
-                           
-
-                        </div>
-                        
-                        
-            </div>
-        </div>
+                <section class="container-fluid py-2">
+                  <div class="row">
+                    <div class="col-12 col-md-3 mb-2 mb-md-0">
+                      <button class="btn btn-primary w-100">Print/Save Result</button>
+                    </div>
+                    <div class="col-12 col-md-9">
+                      <h4 class="text-center text-md-start">Candidate Result Sheet - Typing Test</h4>
+                    </div>
+                  </div>
+                </section>
+              
+                <section class="container py-2">
+                  <p class="mb-1">Error Legend:</p>
+                  <ul class="mb-2">
+                    <li><span class="incorrect">wrong</span> = Incorrect word</li>
+                    <li><span class="incorrect">typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown
+                    </li>
+                    <li><span class="missed">[expected]</span> = Missed word</li>
+                    <li><span class="extra">extra</span> = Extra word</li>
+                    <li><span class="space-fixed">joinedword</span> = Missing space or hyphen</li>
+                    <li><span Id="Incorrect Word Count:"></span></li>
+                    <li><span Id="Skipped Word Count:"></span></li>
+                    <!-- <li><span Id="Extra Word Count:"></span></li> -->
+                    <li><span Id="Correct Word Count:"></span></li>
+                    <li><span Id="Total Words Count:"></span></li>
+                    <li><span Id="Total Typed Words Count:"></span></li>
+                    <li><span Id="Accuracy"></span></li>
+                  </ul>
+                </section>
+              
+                <section class="container mb-5">
+                  <h5 class="mb-3">Typed Text Comparison:</h5>
+                  <div id="comparisonOutput" class="result-box"></div>
+                </section>
     </div><!-- .modal-aside -->
 </div>
   

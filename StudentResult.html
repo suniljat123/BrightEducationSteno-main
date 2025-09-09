@@ -5,27 +5,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Typing Comparison</title>
-  <link href="assets/img/BrightEducationSteno.png" rel="icon" />
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
-  
-  <!-- Google Fonts -->
-  <!-- Google Fonts -->
-  <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet" />
-  
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
-  
-  <!--  Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet" />
-  <link href="assets/css/slider.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+   <!-- Vendor CSS Files -->
+   <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+   <!--  Main CSS File -->
+   <link href="assets/css/style.css" rel="stylesheet" />
+   <link href="assets/css/slider.css" rel="stylesheet" />
   <style>
     @font-face {
       font-family: Hindi;
@@ -97,25 +89,13 @@
       min-height: 150px;
     }
   </style>
- 
-
-
 </head>
 
 <body>
-<!-- ======= Header ======= -->
-
-<app-contactcareernavbar></app-contactcareernavbar>
-<!-- <app-navbar></app-navbar> -->
-<!-- End Header -->
-
-<!-- ======= Hero Section ======= -->
-
-<div class="section-title" style="padding-left: 4rem; padding-top: 10rem">
-    <h2>Your Result</h2>
-    <p>Scorecard</p>
-</div>
-<div class="body-container">
+  <!-- Designed and Developed by Sunil Barara -->
+  <!--Mobile Number: 7878438668 -->
+  <app-contactcareernavbar></app-contactcareernavbar>
+  <div class="body-container">
     <div class="main-container bgc-white">
         <div role="main" class="main-content">
             <div class="page-content">
@@ -860,322 +840,48 @@
                     }
                 </style>
                 <!-- Our price plan section -->
-                <div class="plans-section" id="planTableId" style="padding:21px;">
-
-                    <!-- Main Body Starts -->
-                    <div class="page-content">
-                        <!-- "DataTables" page styles, specific to this page for demo only -->
-                        <style>
-                            .body-container {
-                                /* so that sticky thead works */
-                                overflow: visible;
-                            }
-
-                            thead.is-stuck>tr>th {
-                                border-bottom: 1px solid #e8e8e8 !important;
-                            }
-                        </style>
-
-
-
-                        <div class="card bcard h-auto" style="overflow-x:scroll!important;">
-                            <table id="datatable"
-                                class="d-style w-100 table text-dark-m1 text-95 border-y-1 brc-black-tp11 collapsed dtr-table">
-                                <!-- add `collapsed` by default ... it will be removed by default -->
-                                <!-- thead with .sticky-nav -->
-                                <thead class="text-secondary-m1 text-uppercase text-85">
-                                    <tr>
-                                        <th class="bgc-yellow-l3">S.No.</th>
-                                        <th class="bgc-yellow-l3">Date</th>
-                                        <th class="bgc-yellow-l3">Test Name</th>
-                                        <th class="bgc-yellow-l3">Total Words</th>
-                                        <th class="bgc-yellow-l3">Total Typed</th>
-                                        <th class="bgc-yellow-l3">Incorrect</th>
-                                        <th class="bgc-yellow-l3">Accuracy</th>
-                                        <th class="bgc-yellow-l3">Speed/Marks</th>
-                                        <!-- <th class="bgc-yellow-l3">Marks</th> -->
-                                        <th class="bgc-yellow-l3">Rank</th>
-                                        <th class="bgc-yellow-l3">Answer Sheet</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="pos-rel" id="TableData">
-                                    <!-- <tr>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            1
-                                        </td> <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td style="    justify-content: center;
-                                        display: flex;">
-                                                                                    <a href="ResultShowPage.html?id=${currentItem.Id}" class="btn btn-xs btn-info"><i
-                                                                                            class="fas fa-list"></i> Show</a>
-                                                                                             <a style="margin-left: 7px;background: #ffbe50;" href="TypingComp.html?id=${currentItem.Course_Content__c}" class="btn btn-xs btn-info"><i
-                                                                                            class="fas fa-list"></i> Compare</a>
-                                                                                    <!-- <a href="result_comp.php?test_id=10309c857c6dcd2c0322867b20c2a424" class="btn btn-xs btn-warning"><i class="fas fa-balance-scale"></i> Compare</a> 
-                                                                                </td>
-                                    </tr> -->
-                                </tbody>
-                            </table>
-
-                        </div>
-
-
-                        <!-- include common vendor scripts used in demo pages -->
-                        <script src="js/jquery.min.js"></script>
-
-
-
-
-
-
+                <section class="container-fluid py-2">
+                  <div class="row">
+                    <div class="col-12 col-md-3 mb-2 mb-md-0">
+                      <button class="btn btn-primary w-100">Print/Save Result</button>
                     </div>
-
-
-                </div>
-
-                <!-- End of result table code -->
-                <div id="showMoreSection" style="display:none;" class="page-content">
-                    <button width="2px" style="    background-color: #ff4a17;
-                    color: white;
-                    border-width: 0px;
-                    height: 31px;
-                    border-radius: 5px;
-                    margin-left: 80vw;" onclick="handleGoBack()">Go Back</button>
-
-                    <head>
-                        <link rel="stylesheet" href="js/custom.css">
-                        <style>
-                            .timer {
-                                width: 100px;
-                                font-size: 2.5em;
-                                text-align: center;
-                            }
-
-                            @font-face {
-                                font-family: Hindi;
-                                src: url(font/Hindi.ttf);
-                            }
-
-                            @font-face {
-                                font-family: 'Hindi';
-                                src: url('font/Hindi.ttf') format('truetype');
-                                font-weight: normal;
-                                font-style: normal;
-                            }
-
-                            .hindiFont {
-                                font-family: 'Hindi';
-                                font-size: 22px !important;
-                            }
-
-                            textarea {
-                                border: 1px solid #999999;
-                                width: 100%;
-                                margin: 5px 0;
-                                padding: 3px;
-                                font-size: 25px !important;
-                            }
-                        </style>
-                        <script src="js/ajax.js"></script>
-                        <title>Answer Sheet | Bright Education Steno</title>
-                    </head>
-                    <!-- Header -->
-                    <center>
-                        <h4>Bright Education Steno</h4>
-                    </center>
-
-                    <div class="container border">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Roll Number: GSJ3210</span>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Student Name: Rakesh Choudhary </span>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Test Name: Test 23 Jan 70 wpm legal</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Test Speed: (Hindi-70WPM)</span>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Duration: 55 Mins</span>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Submitted On: 2024-01-28 08:12:46</span>
-                            </div>
-                        </div>
+                    <div class="col-12 col-md-9">
+                      <h4 class="text-center text-md-start">Candidate Result Sheet - Typing Test</h4>
                     </div>
-                    <br>
-                    <style>
-                        skip-tag {
-                            color: red !important;
-                        }
-
-                        del {
-                            color: green !important;
-                        }
-
-                        ins {
-                            color: red !important;
-                        }
-
-                        ins2 {
-                            color: red !important;
-                        }
-
-
-                        ins::before {
-                            content: "¿";
-                        }
-
-                        ins::after {
-                            content: "À";
-                        }
-
-                        ins2::before {
-                            content: "¿";
-                        }
-
-                        ins2::after {
-                            content: "À ";
-                        }
-
-                        del::before {
-                            content: "¿";
-                        }
-
-                        del::after {
-                            content: "À";
-                        }
-
-                        skip-tag::before {
-                            content: "¿";
-                        }
-
-                        skip-tag::after {
-                            content: "À";
-                        }
-
-                        p {
-                            white-space: pre-wrap !important;
-                        }
-
-                        .containerbackground {
-                            text-align: center;
-                            justify-content: justify !important;
-                            margin: 0;
-                            left: 0;
-                            right: 0;
-                            position: absolute;
-                            top: 50%;
-                            z-index: 2;
-                            transform: rotate(300deg);
-                            -webkit-transform: rotate(300deg);
-                            color: #c6afaf61;
-                        }
-                    </style>
-                    <!-- Page content -->
-                    <div class="container-fluid mt-0">
-
-                        <center>
-                            <div class="mt-0">
-                                <span
-                                    class="badge bgc-white border-2 brc-blue text-dark-tp3 badge-pill badge-lg pb-4 px-3 bgc-h-blue-l3"
-                                    style="    border: 2px solid #3e89e4;
-color: black;
-padding: .275rem .5rem;
-font-size: 17px;
-line-height: 2.1;
-height: 2.75rem;
-width: 141px;
-border-radius: 38px;margin-right: 5px;">Total: 555</span>
-                                <span
-                                    class="badge bgc-white border-2 brc-green-m1 text-dark-tp3 badge-pill badge-lg pb-4 px-3 bgc-h-green-l4"
-                                    style="    border: 2px solid #57c19b;
-color: black;
-padding: .275rem .5rem;
-font-size: 17px;
-line-height: 2.1;
-height: 2.75rem;
-width: 141px;
-border-radius: 38px;margin-right: 5px;">Typed: 0</span>
-                                <span
-                                    class="badge bgc-white border-2 brc-red-m1 text-dark-tp3 badge-pill badge-lg pb-4 px-3 bgc-h-red-l3"
-                                    style="    border: 2px solid red;
-color: black;
-padding: .275rem .5rem;
-font-size: 17px;
-line-height: 2.1;
-height: 2.75rem;
-width: 141px;
-border-radius: 38px;margin-right: 5px;">Incorrect: 555</span>
-                                <span
-                                    class="badge bgc-white border-2 brc-blue-m1 text-dark-tp3 badge-pill badge-lg pb-4 px-3 bgc-h-blue-l3"
-                                    style="    border: 2px solid #5b9be8;
-color: black;
-padding: .275rem .5rem;
-font-size: 17px;
-line-height: 2.1;
-height: 2.75rem;
-width: 141px;
-border-radius: 38px;margin-right: 5px;">Marks: 0</span>
-                            </div>
-                        </center>
-
-                        <br>
-
-
-                    </div>
-                    <script>
-                        if (window.history.replaceState) {
-                            window.history.replaceState(null, null, window.location.href);
-                        }
-                    </script>
-
-
-                </div>
-            </div>
-
-            <div id="audioPlay">
-
-            </div>
-        </div>
-    </div>
-</div><!-- .modal-aside -->
+                  </div>
+                </section>
+              
+                <section class="container py-2">
+                  <p class="mb-1">Error Legend:</p>
+                  <ul class="mb-2">
+                    <li><span class="incorrect">wrong</span> = Incorrect word</li>
+                    <li><span class="incorrect">typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown
+                    </li>
+                    <li><span class="missed">[expected]</span> = Missed word</li>
+                    <li><span class="extra">extra</span> = Extra word</li>
+                    <li><span class="space-fixed">joinedword</span> = Missing space or hyphen</li>
+                    <li><span Id="Incorrect Word Count:"></span></li>
+                    <li><span Id="Skipped Word Count:"></span></li>
+                    <!-- <li><span Id="Extra Word Count:"></span></li> -->
+                    <li><span Id="Correct Word Count:"></span></li>
+                    <li><span Id="Total Words Count:"></span></li>
+                    <li><span Id="Total Typed Words Count:"></span></li>
+                    <li><span Id="Accuracy"></span></li>
+                  </ul>
+                </section>
+              
+                <section class="container mb-5">
+                  <h5 class="mb-3">Typed Text Comparison:</h5>
+                  <div id="comparisonOutput" class="result-box"></div>
+                </section>
+    </div><!-- .modal-aside -->
 </div>
-</div>
-<app-whatsapp></app-whatsapp>
-<app-footer></app-footer>
-<div id="preloader"></div>
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+  
+  <app-whatsapp></app-whatsapp>
+  <app-footer></app-footer>
+  <!-- <div id="preloader"></div> -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+          class="bi bi-arrow-up-short"></i></a>
           <script defer src="assets/js/main.js"></script>
           <script src="assets/js/MyComponents.js"></script>
  <script>

@@ -142,7 +142,8 @@ class Testimonials extends HTMLElement {
 class Navbar extends HTMLElement {
   constructor() {
     super();
-    this.innerHTML = ` 
+    this.innerHTML = `  <!-- Designed and Developed by Sunil Barara -->
+  <!--Mobile Number: 7878438668 -->
     <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo">
@@ -202,7 +203,8 @@ class Navbar extends HTMLElement {
 class AllNavbar extends HTMLElement {
   constructor() {
     super();
-    this.innerHTML = `<header id="header" class="fixed-top"  >
+    this.innerHTML = ` <!-- Designed and Developed by Sunil Barara -->
+  <!--Mobile Number: 7878438668 --><header id="header" class="fixed-top"  >
     <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo">
         <a href="./"><img src="assets/img/cloudlogo.png" height="100" width="100" /></a>
@@ -443,7 +445,8 @@ class AllNavbar extends HTMLElement {
 class ContactCareerNavbar extends HTMLElement {
   constructor() {
     super();
-    this.innerHTML = `<header id="header" class="fixed-top">
+    this.innerHTML = ` <!-- Designed and Developed by Sunil Barara -->
+  <!--Mobile Number: 7878438668 --><header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
       <h1 class="logo">
         <a href="Home.html"><img src="assets/img/BrightEducationSteno.png" height="60" width="70" /></a>
@@ -495,7 +498,8 @@ class ContactCareerNavbar extends HTMLElement {
 class Whatsapp_Chat extends HTMLElement {
   constructor() {
     super();
-    this.innerHTML = ` <div style="position: fixed;bottom: 10px;z-index: 36;right: 22px;" class="Whatsapp d-block" id="whatsapp_logo">
+    this.innerHTML = ` <!-- Designed and Developed by Sunil Barara -->
+  <!--Mobile Number: 7878438668 --> <div style="position: fixed;bottom: 10px;z-index: 36;right: 22px;" class="Whatsapp d-block" id="whatsapp_logo">
     <a href=" https://wa.me/+919602596476?text=Hello,%20I%20came%20across%20BrightEducationSteno%20website.%20I%20want%20to%20join%20course." target="_blank"> <img src="./assets/img/Whatsapp_Logo.png" alt="Whatsapp_Logo"
         style="width: 50px;"></a>
 

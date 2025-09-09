@@ -7,7 +7,7 @@
   <title>Typing Comparison</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-     @font-face {
+    @font-face {
       font-family: Hindi;
       src: url(font/Hindi.ttf);
     }
@@ -22,6 +22,7 @@
     .hindiFont {
       font-family: 'Hindi';
     }
+
     .correct {
       color: black;
     }
@@ -39,7 +40,6 @@
 
     .extra {
       color: orange;
-      text-decoration: underline;
     }
 
     .missed {
@@ -62,6 +62,13 @@
       font-size: 1rem;
     }
 
+    .hypen-missed {
+      color: purple;
+      font-style: italic;
+      font-weight: bold;
+      padding: 0 2px;
+    }
+
     .result-box {
       border: 1px solid #ddd;
       padding: 1rem;
@@ -73,7 +80,7 @@
 </head>
 
 <body>
-
+  <app-contactcareernavbar></app-contactcareernavbar>
   <section class="container-fluid py-2">
     <div class="row">
       <div class="col-12 col-md-3 mb-2 mb-md-0">
@@ -94,6 +101,13 @@
       <li><span class="missed">[expected]</span> = Missed word</li>
       <li><span class="extra">extra</span> = Extra word</li>
       <li><span class="space-fixed">joinedword</span> = Missing space or hyphen</li>
+      <li><span Id="Incorrect Word Count:"></span></li>
+      <li><span Id="Skipped Word Count:"></span></li>
+      <!-- <li><span Id="Extra Word Count:"></span></li> -->
+      <li><span Id="Correct Word Count:"></span></li>
+      <li><span Id="Total Words Count:"></span></li>
+      <li><span Id="Total Typed Words Count:"></span></li>
+      <li><span Id="Accuracy"></span></li>
     </ul>
   </section>
 
@@ -101,29 +115,32 @@
     <h5 class="mb-3">Typed Text Comparison:</h5>
     <div id="comparisonOutput" class="result-box"></div>
   </section>
-
+  <app-whatsapp></app-whatsapp>
+  <app-footer></app-footer>
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+          class="bi bi-arrow-up-short"></i></a>
   <script>
-    function tokenize(text) {
+    function tokenize(text, language) {
       text = text.normalize("NFC");
-      const isHindi = /[\u0900-\u097F]/.test(text);
-      const regex = isHindi
-        ? /[\p{L}\p{M}\d]+(?:-[\p{L}\p{M}\d]+)*|[.,!?;:]+|\s+/gu
-        : /\d+[A-Za-z]+(?:-[A-Za-z\d]+)*|\w+(?:-\w+)*|[.,!?;:]+|\s+/gu;
-      const tokens = text.match(regex) || [];
-      const merged = [];
-      for (let i = 0; i < tokens.length; i++) {
-        const isWord = isHindi
-          ? /[\p{L}\p{M}]+/u.test(tokens[i])
-          : /\w+/.test(tokens[i]);
-
-        if (isWord && i + 1 < tokens.length && /^[.,!?;:-]$/.test(tokens[i + 1])) {
-          merged.push(tokens[i] + tokens[i + 1]);
-          i++;
-        } else {
-          merged.push(tokens[i]);
-        }
+      console.log('Normalized text:');
+      let isHindi = /[\u0900-\u097F]/.test(text);
+      if (language == 'Hindi') {
+        isHindi = true;
+      } else {
+        isHindi = false;
       }
-      return merged;
+      // const regex = isHindi
+      //   ? /[\p{L}\p{M}]+(?:-[\p{L}\p{M}]+)*|[.,!?;:\-]+|\s+/gu
+      //   : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
+      const regex = isHindi
+        ?  /[/'`:={}()<>\[\];,\p{L}\p{M}\p{N}%]+(?:[-<>=?;"'._`/%~+&;#)@{}\[\]][/'`:={}()<>\[\];,\p{L}\p{M}\p{N}%]+)*[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu
+        // /[/'`:={}()<>\[\],\p{L}\p{M}\p{N}%]+(?:[-<>=?:"'._`/%~+&;#)@{}\[\]][/'`:={}()<>\[\],\p{L}\p{M}\p{N}%]+)*[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu
+        //  // ///[/'`:={}()\[\],\p{L}\p{M}\p{N}%]+(?:[-=:"'._`/%~+&;#)@{}\[\]][/'`:={}()\[\],\p{L}\p{M}\p{N}%]+)*[.,!?;:=\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:=\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///[/'`:{}\[\](),\p{L}\p{M}\p{N}%]+(?:[-:"'._`/%~+&;#)@{}\[\]][/'`:{}\[\](),\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///[/'`\[\]{}(),\p{L}\p{M}\p{N}%]+(?:[-"'._`/%~+&;#)@{}\[\]][/'`\[\]{}(),\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///['`\[\]{},\p{L}\p{M}\p{N}%]+(?:[-"'._`/%~+&;#)@{}\[\]]['`\[\]{},\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}¶`,"]*|[.,!?;:\/\-\[\]~+&;#)@{}¶`,"]+|\s+/gu///['\[\]{},\p{L}\p{M}\p{N}%]+(?:[-"'._/%~+&;#)@{}¶\[\]]['\[\]{},\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}¶,]*|[.,!?;:\/\-\[\]~+&;#)@{}¶,]+|\s+/gu    
+        : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
+      const tokens = text.match(regex) || [];
+
+      return tokens;
     }
 
     function lcsMatrix(a, b) {
@@ -180,88 +197,121 @@
         .replace(/>/g, "&gt;");
     }
 
-    function renderComparison(origTokens, typedTokens) {
+    function renderComparison(origTokens, typedTokens, originalContent,userTypedText) {
       let result = '';
       let i = 0;
-
+      let incorrectWordsCnt = 0;
+      let skipWordCnt = 0;
+      let extraWordCnt = 0;
+      let correctWordCnt = 0;
       while (i < origTokens.length) {
         const o = origTokens[i];
         const t = typedTokens[i];
 
+        // ✅ Case: Exact match
         if (o === t && o !== null) {
+          console.log(`o ${o}`);
+          console.log(`t ${t}`);
           result += `<span class="correct">${escapeHtml(o)}</span>`;
+          if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+            correctWordCnt++;
+          }
           i++;
-        } else {
-          let origChunk = [], typedChunk = [], j = i;
-
-          while (
-            j < origTokens.length &&
-            (origTokens[j] !== typedTokens[j] || origTokens[j] === null || typedTokens[j] === null)
-          ) {
-            origChunk.push(origTokens[j]);
-            typedChunk.push(typedTokens[j]);
-            j++;
-          }
-
-          const isPunct = x => /^[.,!?;:\-]+$/.test(x);
-          const isSpace = x => /^\s+$/.test(x);
-          const filterWords = arr => arr.filter(x => x && !/^\s+$/.test(x));
-          const origWords = filterWords(origChunk);
-          const typedWords = filterWords(typedChunk);
-
-          const origSpaced = origChunk.filter(x => x !== null).join('');
-
-
-          const typedSpaced = typedWords.join(' ');
-
-          const cleanOrigJoin = origWords.join('').replace(/[-]/g, '');
-          const cleanTyped = typedWords[0]?.replace(/[-]/g, '');
-
-          // Fix: Detect merged words like "Indiais" vs "India-is"
-          if (
-            typedWords.length === 1 &&
-            origWords.length > 1 &&
-            cleanOrigJoin === cleanTyped
-          ) {
-            result += `<span class="space-fixed">${escapeHtml(typedWords[0])}</span><span class="expected"> [${escapeHtml(origSpaced)}]</span> `;
-          } else if (typedWords.length === 0 && origWords.length > 0) {
-            result += `<span class="missed">${escapeHtml(origSpaced)}</span> `;
-          } else if (origWords.length === 0 && typedWords.length > 0) {
-            result += ` <span class="extra">${escapeHtml(typedSpaced)}</span> `;
-          } else {
-            const typedJoined = typedWords.join('');
-            const origJoined = origWords.join('');
-
-            const showAsMissed = (
-              typedWords.length === 1 &&
-              origWords.length >= 2 &&
-              typedJoined.length <= origJoined.length / 2
-            );
-
-            if (showAsMissed) {
-              result += `<span class="missed">${escapeHtml(origWords.slice(0, origWords.length - 1).join(' ') || '')}</span> `;
-              result += `<span class="incorrect">${escapeHtml(typedJoined)}</span>`;
-              const lastWord = origWords[origWords.length - 1];
-              result += `<span class="expected">${escapeHtml(lastWord || '')}</span> `;
-            } else {
-              if (typedWords.length) result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
-              if (origWords.length) result += `<span class="expected">${escapeHtml(origSpaced)}</span> `;
-            }
-          }
-
-          i = j;
+          continue;
         }
+
+        // ❌ Case: Word in original ends with punctuation (e.g., 'identity,') and typed missed it (e.g., 'identity')
+        if (
+          o !== null &&
+          t !== null &&
+          /^[\w-]+[.,!?;:]$/.test(o) &&
+          t === o.slice(0, -1)
+        ) {
+          result += `<span class="incorrect">${escapeHtml(t)}</span><span class="expected">${escapeHtml(o)}</span> `;
+           if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+            incorrectWordsCnt++;
+          }
+          i++;
+          continue;
+        }
+
+        // ✅ Case: Missed punctuation
+        if (o && /^[.,!?;:]$/.test(o) && t === null) {
+          result += `<span class="expected">${escapeHtml(o)}</span>`;
+          i++;
+          continue;
+        }
+
+        // ✅ Case: Extra punctuation
+        if (t && /^[.,!?;:]$/.test(t) && o === null) {
+          result += `<span class="incorrect">${escapeHtml(t)}</span>`;
+          if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+            incorrectWordsCnt++;
+          }
+          i++;
+          continue;
+        }
+
+        // 🔄 Handle other incorrects / mismatches
+        let origChunk = [], typedChunk = [], j = i;
+        while (
+          j < origTokens.length &&
+          (origTokens[j] !== typedTokens[j] || origTokens[j] === null || typedTokens[j] === null)
+        ) {
+          origChunk.push(origTokens[j]);
+          typedChunk.push(typedTokens[j]);
+          j++;
+        }
+
+        const isPunct = x => /^[.,!?;:\-]+$/.test(x);
+        const isSpace = x => /^\s+$/.test(x);
+        const filterWords = arr => arr.filter(x => x && !isPunct(x) && !isSpace(x));
+        const origWords = filterWords(origChunk);
+        const typedWords = filterWords(typedChunk);
+
+        const origSpaced = origWords.join(' ');
+        const typedSpaced = typedWords.join(' ');
+
+        if (typedWords.length === 0 && origWords.length > 0) {
+          result += ` <span class="missed">${escapeHtml(origSpaced)}</span> `;
+          skipWordCnt++;
+        } else if (origWords.length === 0 && typedWords.length > 0) {
+          result += `<span class="extra">${escapeHtml(typedSpaced)}</span> `;
+          extraWordCnt++;
+        } else {
+          if (typedWords.length) {
+            result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
+            if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+            incorrectWordsCnt++;
+          }
+          }
+          if (origWords.length) result += `<span class="expected">${escapeHtml(origSpaced)}</span> `;
+        }
+
+        i = j;
       }
+      document.getElementById("Incorrect Word Count:").innerText = "Incorrect Word Count: " + incorrectWordsCnt;
+      // document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
+      // document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
+      document.getElementById("Skipped Word Count:").innerText = "Skipped and Extra Word Count: " + (skipWordCnt + extraWordCnt);
+      document.getElementById("Correct Word Count:").innerText = "Correct Word Count: " + correctWordCnt;
+      let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
+      let userTypedWords = userTypedText.trim().split(/\s+/);
+      document.getElementById("Total Typed Words Count:").innerText = "Total Typed Words Count: " + (userTypedWords.length);
+      
+      let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
+      document.getElementById("Accuracy").innerText = "Accuracy: " + accuracy + "%";
+      document.getElementById("Total Words Count:").innerText = "Total Words Count: " + totalWords.length;
 
       return result;
     }
 
-    function compareTexts(original, typed) {
-      const origTokens = tokenize(original);
-      const typedTokens = tokenize(typed);
+    function compareTexts(original, typed, language) {
+      const origTokens = tokenize(original, language);
+      const typedTokens = tokenize(typed, language);
       const dp = lcsMatrix(origTokens, typedTokens);
       const [alignedOrig, alignedTyped] = backtrackLCS(dp, origTokens, typedTokens);
-      return renderComparison(alignedOrig, alignedTyped);
+      return renderComparison(alignedOrig, alignedTyped, original, typed);
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -294,7 +344,7 @@
       fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
         .then(response => response.json())
         .then(result => {
-         // console.log('result=', result)
+          // console.log('result=', result)
           result = JSON.parse(result);
           console.log('typing result=>', result)
 
@@ -307,17 +357,17 @@
 
           const userTypedText = typedwords;
 
-          const typingResult = compareTexts(originalText, userTypedText);
-          console.log('typingResult=', typingResult); 
+          const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c);
+          // console.log('typingResult=', typingResult);
           if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 
-            document.getElementById("comparisonOutput").style.fontFamily = 'Hindi'; 
-            console.log('Hindi typing test21');
+            document.getElementById("comparisonOutput").style.fontFamily = 'Hindi';
+            //console.log('Hindi typing test21');
           } else {
             document.getElementById("comparisonOutput").style.fontFamily = 'monospace';
-            console.log('English typing test');
+            //console.log('English typing test');
           }
-          document.getElementById("comparisonOutput").innerHTML = typingResult; 
+          document.getElementById("comparisonOutput").innerHTML = typingResult;
         })
         .catch(error => console.log('error=', error));
 

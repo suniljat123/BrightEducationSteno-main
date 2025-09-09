@@ -130,7 +130,7 @@
       //   ? /[\p{L}\p{M}]+(?:-[\p{L}\p{M}]+)*|[.,!?;:\-]+|\s+/gu
       //   : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
       const regex = isHindi
-        ?  /[/'`:={}()<>\[\];,\p{L}\p{M}\p{N}%]+(?:[-<>=?;"'._`/%~+&;#)@{}\[\]][/'`:={}()<>\[\];,\p{L}\p{M}\p{N}%]+)*[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu
+        ? /[/'`:={}()<>\[\];,\p{L}\p{M}\p{N}%]+(?:[-<>=?;"'._`/%~+&;#)@{}\[\]][/'`:={}()<>\[\];,\p{L}\p{M}\p{N}%]+)*[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu
         // /[/'`:={}()<>\[\],\p{L}\p{M}\p{N}%]+(?:[-<>=?:"'._`/%~+&;#)@{}\[\]][/'`:={}()<>\[\],\p{L}\p{M}\p{N}%]+)*[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu
         //  // ///[/'`:={}()\[\],\p{L}\p{M}\p{N}%]+(?:[-=:"'._`/%~+&;#)@{}\[\]][/'`:={}()\[\],\p{L}\p{M}\p{N}%]+)*[.,!?;:=\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:=\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///[/'`:{}\[\](),\p{L}\p{M}\p{N}%]+(?:[-:"'._`/%~+&;#)@{}\[\]][/'`:{}\[\](),\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///[/'`\[\]{}(),\p{L}\p{M}\p{N}%]+(?:[-"'._`/%~+&;#)@{}\[\]][/'`\[\]{}(),\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///['`\[\]{},\p{L}\p{M}\p{N}%]+(?:[-"'._`/%~+&;#)@{}\[\]]['`\[\]{},\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}¶`,"]*|[.,!?;:\/\-\[\]~+&;#)@{}¶`,"]+|\s+/gu///['\[\]{},\p{L}\p{M}\p{N}%]+(?:[-"'._/%~+&;#)@{}¶\[\]]['\[\]{},\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}¶,]*|[.,!?;:\/\-\[\]~+&;#)@{}¶,]+|\s+/gu    
         : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
@@ -193,7 +193,7 @@
         .replace(/>/g, "&gt;");
     }
 
-    function renderComparison(origTokens, typedTokens, originalContent,userTypedText) {
+    function renderComparison(origTokens, typedTokens, originalContent, userTypedText) {
       let result = '';
       let i = 0;
       let incorrectWordsCnt = 0;
@@ -224,7 +224,7 @@
           t === o.slice(0, -1)
         ) {
           result += `<span class="incorrect">${escapeHtml(t)}</span><span class="expected">${escapeHtml(o)}</span> `;
-           if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+          if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
             incorrectWordsCnt++;
           }
           i++;
@@ -278,8 +278,8 @@
           if (typedWords.length) {
             result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
             if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
-            incorrectWordsCnt++;
-          }
+              incorrectWordsCnt++;
+            }
           }
           if (origWords.length) result += `<span class="expected">${escapeHtml(origSpaced)}</span> `;
         }
@@ -294,7 +294,7 @@
       let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
       let userTypedWords = userTypedText.trim().split(/\s+/);
       document.getElementById("Total Typed Words Count:").innerText = "Total Typed Words Count: " + (userTypedWords.length);
-      
+
       let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
       document.getElementById("Accuracy").innerText = "Accuracy: " + accuracy + "%";
       document.getElementById("Total Words Count:").innerText = "Total Words Count: " + totalWords.length;
@@ -340,30 +340,32 @@
       fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
         .then(response => response.json())
         .then(result => {
-           console.log('result=', result)
+          console.log('result=', result)
           result = JSON.parse(result);
           console.log('typing result=>', result)
+          if (result.length > 0) {
+            content = result[0].Content_Words__c;
+            let typedwords = result[0].Typed_Words__c;
 
+            const originalText = content;
 
+            const userTypedText = typedwords;
 
-          content = result[0].Content_Words__c;
-          let typedwords = result[0].Typed_Words__c;
+            const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c);
+            // console.log('typingResult=', typingResult);
+            if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 
-          const originalText = content;
-
-          const userTypedText = typedwords;
-
-          const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c);
-          // console.log('typingResult=', typingResult);
-          if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
-
-            document.getElementById("comparisonOutput").style.fontFamily = 'Hindi';
-            //console.log('Hindi typing test21');
-          } else {
-            document.getElementById("comparisonOutput").style.fontFamily = 'monospace';
-            //console.log('English typing test');
+              document.getElementById("comparisonOutput").style.fontFamily = 'Hindi';
+              //console.log('Hindi typing test21');
+            } else {
+              document.getElementById("comparisonOutput").style.fontFamily = 'monospace';
+              //console.log('English typing test');
+            }
+            document.getElementById("comparisonOutput").innerHTML = typingResult;
           }
-          document.getElementById("comparisonOutput").innerHTML = typingResult;
+
+
+
         })
         .catch(error => console.log('error=', error));
 

@@ -50,1056 +50,785 @@
     </div>
     <div class="body-container">
         <div class="main-container bgc-white">
-            <div role="main" class="main-content">
-                <div class="page-content">
-                    <style>
-                        .success {
-                            color: #44b267;
+          <div role="main" class="main-content">
+            <div class="page-content">
+                <style>
+                    .success {
+                        color: #44b267;
+                    }
+
+                    .fail {
+                        color: #e81c4e;
+                    }
+
+
+                    /*-- special --*/
+                    .special,
+                    #news,
+                    .w3_content_agilleinfo_inner,
+                    .team-section,
+                    .plans-section {
+                        padding: 25px 0;
+                    }
+
+                    h3.tittle,
+                    h2.ptbl-inner-h-title,
+                    h3.ptbl-inner-h-title {
+                        color: #e83f3f;
+                        font-size: 2.5em;
+                        margin: 0;
+                        text-align: center;
+                        font-weight: 600;
+                        letter-spacing: 3px;
+                    }
+
+                    h2.ptbl-inner-h-title,
+                    h3.ptbl-inner-h-title {
+                        margin-bottom: 1em;
+                        text-transform: uppercase;
+                    }
+
+                    h3.tittle.two {
+                        color: #fff;
+                    }
+
+                    .priceing-table-main {
+                        margin: 4em 0 0 0;
+                    }
+
+                    .price-list ul {
+                        padding: 0px;
+                        list-style: none;
+                    }
+
+                    .price-gd-top {
+                        background: #00acee;
+                        text-align: center;
+                    }
+
+                    .price-gd-top h4 {
+                        font-size: 1.8em;
+                        color: #fff;
+                        padding: 0.4em 1em;
+                        background: #0e99ce;
+                        font-weight: 300;
+                    }
+
+                    .price-gd-top h3 {
+                        padding: 0.2em 0em 0.1em 0em;
+                        font-size: 2.5em;
+                        color: #fff;
+                    }
+
+                    .price-gd-top h5 {
+                        font-size: 1em;
+                        color: #fff;
+                        padding: 0.2em 0em 0.8em 0em;
+                    }
+
+                    .price-gd-bottom {
+                        background: #fff;
+                        text-align: center;
+                        padding: 1em 0em;
+                    }
+
+                    .price-gd-top.pric-clr2 h4 {
+                        background: #d4b906;
+                    }
+
+                    .price-gd-top.pric-clr2 {
+                        background: #ecce04
+                    }
+
+                    .price-selet.pric-sclr2 a {
+                        background: #ecce04
+                    }
+
+                    .price-gd-top.pric-clr3 {
+                        background: #2baf2b;
+                    }
+
+                    .price-gd-top.pric-clr3 h4 {
+                        background: #209a20;
+                    }
+
+                    .price-gd-top.pric-clr4 {
+                        background: #e83f3f;
+                    }
+
+                    .price-gd-top.pric-clr4 h4 {
+                        background: #d62c2c;
+                    }
+
+                    .price-selet.pric-sclr4 a {
+                        background: #e83f3f;
+                    }
+
+                    .price-selet.pric-sclr3 a {
+                        background: #2baf2b;
+                    }
+
+                    .price-list ul li {
+                        padding: 0.5em 0em;
+                        font-size: 0.9em;
+                        color: #999999;
+                        border-bottom: 1px dotted #ddd;
+                    }
+
+                    .price-selet {
+                        padding: 1em 0em;
+                        text-align: center;
+                        background: #fff;
+                    }
+
+                    .price-selet a {
+                        font-size: 1.1em;
+                        color: #fff;
+                        display: block;
+                    }
+
+                    .price-selet a {
+                        font-size: 0.9em;
+                        color: #ffffff;
+                        display: inline-block;
+                        padding: 0.5em 2em;
+                        background: #00acee;
+                        text-decoration: none;
+                        border-radius: 25px;
+                        -webkit-border-radius: 25px;
+                        -o-border-radius: 25px;
+                    }
+
+                    .price-block {
+                        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.15);
+                        transition: 0.5s all;
+                        -webkit-transition: 0.5s all;
+                        -moz-transition: 0.5s all;
+                        -o-transition: 0.5s all;
+                    }
+
+                    .price-block:hover,
+                    .ptblayouts-pricing:hover,
+                    .w3-agileits-vpn-grid:hover {
+                        transform: scale(1.1);
+                        -webkit-transform: scale(1.1);
+                        -moz-transform: scale(1.1);
+                        -o-transform: scale(1.1);
+                        -ms-transform: scale(1.1);
+                        z-index: 1;
+                    }
+
+                    .download-div {
+                        text-align: center;
+                        margin-top: 40px;
+                        padding: 40px 0px;
+                        clear: both;
+                    }
+
+                    .download {
+                        padding: 10px 30px;
+                        background-color: #006699;
+                        color: #000000;
+                        font-size: 24px;
+                        text-transform: uppercase;
+                        text-decoration: none;
+                        margin-top: 2px;
+                        border-radius: 10px;
+                    }
+
+                    .plan-left h5:first-child {
+                        margin-bottom: 3px;
+                        letter-spacing: 0px;
+                        font-weight: 700;
+                        color: #333;
+                        font-size: 25px;
+                    }
+
+                    .plan-left h5:nth-child(2) {
+                        margin-bottom: 40px;
+                        letter-spacing: 0px;
+                        font-weight: 400;
+                        color: #565656;
+                        font-size: 22px;
+                    }
+
+                    .plan-left p {
+                        letter-spacing: 0px;
+                        font-size: 12px;
+                    }
+
+                    .small-testimonial {
+                        background: #064b73;
+                        border-radius: 0.50rem;
+                        padding: 20px;
+                        border: 4px solid #fff;
+                        margin-top: 40px;
+                    }
+
+                    .small-testimonial h6 {
+                        font-size: 11px;
+                        color: #fff;
+                        margin: 0px 0px 20px;
+                    }
+
+                    .plan-right h4 {
+                        letter-spacing: 0px;
+                        font-weight: 600;
+                        margin-bottom: 6px;
+                    }
+
+                    .single-plan {
+                        padding: 20px;
+                        background-color: #eff9ff;
+                        border-radius: 6px;
+                        transition: all ease 0.5s;
+                    }
+
+                    .single-plan:hover {
+                        padding: 20px;
+                        background-color: #147ab5;
+                        border-radius: 6px;
+                        transition: all ease 0.5s;
+                        box-shadow: 1px 1px 12px 0px rgb(0 0 0 / 32%);
+                    }
+
+                    .single-plan .main-icon {
+                        font-size: 60px;
+                        color: #6590d4;
+                        margin-bottom: 10px;
+                        transition: all ease 0.5s;
+                    }
+
+                    .single-plan:hover .main-icon {
+                        color: #ffffff;
+                        transition: all ease 0.5s;
+                    }
+
+                    .single-plan .main-title {
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #333;
+                        transition: all ease 0.5s;
+                    }
+
+                    .single-plan:hover .main-title {
+                        color: #fff;
+                        transition: all ease 0.5s;
+                    }
+
+                    .single-plan p.plan-price {
+                        font-size: 26px;
+                        font-weight: 700;
+                        color: #333;
+                        margin-bottom: 30px;
+                        transition: all ease 0.5s;
+                    }
+
+                    .single-plan:hover p.plan-price {
+                        color: #ffffff;
+                        transition: all ease 0.5s;
+                    }
+
+                    .single-plan .plan-price span.dollar {
+                        font-weight: 400;
+                        color: #bdbdbd;
+                        margin-right: 3px;
+                    }
+
+                    .single-plan .plan-price span.plan-month {
+                        font-weight: 400;
+                        color: #8a8a8a;
+                        margin-right: 3px;
+                        font-size: 14px;
+                    }
+
+                    .multi-option i {
+                        font-size: 18px;
+                        color: #333;
+                        margin-top: 2px;
+                    }
+
+                    .multi-option a {
+                        font-size: 14px;
+                        font-weight: 600;
+                        margin-left: 10px;
+                        color: #333;
+                    }
+
+                    .single-plan:hover .multi-option i {
+                        color: #fff;
+                        transition: all ease 0.5s;
+                    }
+
+                    .single-plan:hover .multi-option a {
+                        color: #fff;
+                        transition: all ease 0.5s;
+                    }
+
+                    .multi-option {
+                        margin-bottom: 8px;
+                    }
+
+                    .single-plan:hover .btn-primary {
+                        color: #2262c6 !important;
+                        background-color: #fff !important;
+                        border-color: #fff;
+                    }
+
+                    .single-plan.most-popular {
+                        transform: scale(1.02);
+                        box-shadow: 1px 1px 12px 0px rgb(0 0 0 / 32%);
+                    }
+
+                    .single-plan.most-popular .badge {
+                        font-size: 9px;
+                        margin-left: 12px;
+                    }
+
+                    .happy-container {
+                        /* background: #2b6080;*/
+                        border-radius: 0.50rem;
+                        padding: 10px;
+                        border: 2px solid #2b6080;
+                        color: #2b6080 !important;
+                    }
+
+                    .happy-container i,
+                    .happy-container h5,
+                    .happy-container p {
+                        color: #2b6080 !important;
+                    }
+
+                    /* PRICING 2 */
+                    .pricing-2 {
+                        background-color: #f6faff;
+                        font-family: 'Poppins', sans-serif;
+                        /* background: linear-gradient(to right, #fdfeff 0%, #e1edff 100%); */
+                    }
+
+                    /*Navbar*/
+                    nav .navbar-brand {
+                        font-size: 30px;
+                        font-weight: 700;
+                        color: #2262c6;
+                    }
+
+                    .navbar-expand .navbar-nav .nav-link {
+                        color: #2262c6;
+                        padding: 0 17px;
+                    }
+
+                    .pricing-header-wrapper h1 {
+                        font-size: 46px;
+                        font-weight: 700;
+                        color: #2262c6;
+                        margin-bottom: 8px;
+                    }
+
+                    .pricing-header-wrapper .pricing-input-group {
+                        border: 1px solid rgba(34, 98, 198, 0.41);
+                        border-radius: 4px;
+                        padding: 5px 10px 5px 9px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        background-color: white;
+                        width: 50%;
+                        margin: 0 auto;
+                    }
+
+                    .pricing-header-wrapper .pricing-input-icon {
+                        font-size: 20px;
+                        padding-top: 2px;
+                        margin-right: 6px;
+                    }
+
+                    .pricing-header-wrapper input.pricing-input {
+                        border: 0px;
+                        font-size: 16px;
+                        min-width: calc(100% - 55px);
+                    }
+
+                    .pricing-header-wrapper p {
+                        color: #2262c6;
+                        font-size: 14px;
+                        margin-bottom: 27px;
+                        line-height: 25px;
+                    }
+
+                    .pricing-footer {
+                        background: #2566cb;
+                        padding: 12px 40px;
+                    }
+
+                    .pricing-footer p {
+                        margin: 0px;
+                        color: #fff;
+                        letter-spacing: 0px;
+                        font-size: 12px;
+                    }
+
+                    .pricing-footer p a {
+                        color: #fff;
+                    }
+
+                    /* SWITCHER */
+                    .switcher-container {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                    }
+
+                    span.switcher {
+                        position: relative;
+                        width: 170px;
+                        height: 35px;
+                        border-radius: 25px;
+                        margin: 0px 0px;
+                    }
+
+                    span.switcher input {
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                        position: relative;
+                        width: 170px;
+                        height: 35px;
+                        border-radius: 10px;
+                        background-color: #1E1E1E;
+                        outline: none;
+                    }
+
+                    span.switcher input:before,
+                    span.switcher input:after {
+                        z-index: 2;
+                        position: absolute;
+                        top: 50%;
+                        -webkit-transform: translateY(-50%);
+                        transform: translateY(-50%);
+                        color: #FFFFFF;
+                    }
+
+                    span.switcher input:before {
+                        content: 'Monthly';
+                        left: 20px;
+                    }
+
+                    span.switcher input:after {
+                        content: 'Annually';
+                        right: 20px;
+                    }
+
+                    span.switcher label {
+                        z-index: 1;
+                        position: absolute;
+                        top: 4px;
+                        bottom: 4px;
+                        border-radius: 6px;
+                    }
+
+                    span.switcher.switcher-1 input {
+                        -webkit-transition: .25s -.1s;
+                        transition: .25s -.1s;
+                    }
+
+                    span.switcher.switcher-1 input:checked {
+                        background-color: #d2e4ff;
+                    }
+
+                    span.switcher.switcher-1 input:checked:before {
+                        color: #FFFFFF;
+                        -webkit-transition: color .5s .2s;
+                        transition: color .5s .2s;
+                    }
+
+                    span.switcher.switcher-1 input:checked:after {
+                        color: #2262c6;
+                        -webkit-transition: color .5s;
+                        transition: color .5s;
+                        cursor: pointer;
+                    }
+
+                    span.switcher.switcher-1 input:checked+label {
+                        left: 12px;
+                        right: 89px;
+                        background: #2262c6;
+                        -webkit-transition: left .5s, right .4s .2s;
+                        transition: left .5s, right .4s .2s;
+                        margin-bottom: 0px;
+                    }
+
+                    span.switcher.switcher-1 input:not(:checked) {
+                        background: #d2e4ff;
+                        -webkit-transition: background .5s -.1s;
+                        transition: background .5s -.1s;
+                    }
+
+                    span.switcher.switcher-1 input:not(:checked):before {
+                        color: #2262c6;
+                        -webkit-transition: color .5s;
+                        transition: color .5s;
+                        cursor: pointer;
+                    }
+
+                    span.switcher.switcher-1 input:not(:checked):after {
+                        color: #ffffff;
+                        -webkit-transition: color .5s .2s;
+                        transition: color .5s .2s;
+                    }
+
+                    span.switcher.switcher-1 input:not(:checked)+label {
+                        left: 82px;
+                        right: 13px;
+                        background: #2262c6;
+                        -webkit-transition: left .4s .2s, right .5s, background .35s -.1s;
+                        transition: left .4s .2s, right .5s, background .35s -.1s;
+                        margin-bottom: 0px;
+                    }
+
+                    @-webkit-keyframes turn-on {
+                        0% {
+                            left: 100%;
                         }
 
-                        .fail {
-                            color: #e81c4e;
+                        100% {
+                            left: 0%;
+                        }
+                    }
+
+                    @keyframes turn-on {
+                        0% {
+                            left: 100%;
                         }
 
+                        100% {
+                            left: 0%;
+                        }
+                    }
 
-                        /*-- special --*/
-                        .special,
-                        #news,
-                        .w3_content_agilleinfo_inner,
-                        .team-section,
-                        .plans-section {
-                            padding: 25px 0;
+                    @-webkit-keyframes turn-off {
+                        0% {
+                            right: 100%;
                         }
 
-                        h3.tittle,
-                        h2.ptbl-inner-h-title,
-                        h3.ptbl-inner-h-title {
-                            color: #e83f3f;
-                            font-size: 2.5em;
-                            margin: 0;
-                            text-align: center;
-                            font-weight: 600;
-                            letter-spacing: 3px;
+                        100% {
+                            right: 0%;
+                        }
+                    }
+
+                    @keyframes turn-off {
+                        0% {
+                            right: 100%;
                         }
 
-                        h2.ptbl-inner-h-title,
-                        h3.ptbl-inner-h-title {
-                            margin-bottom: 1em;
-                            text-transform: uppercase;
+                        100% {
+                            right: 0%;
                         }
+                    }
 
-                        h3.tittle.two {
-                            color: #fff;
-                        }
+                    .pricing-2 .single-plan {
+                        padding: 20px;
+                        background-color: #ffffff;
+                        border-radius: 6px;
+                        transition: all ease 0.5s;
+                        border: 2px solid #2262c6;
+                    }
 
-                        .priceing-table-main {
-                            margin: 4em 0 0 0;
-                        }
+                    .pricing-2 .single-plan:hover {
+                        padding: 20px;
+                        background-color: #147ab5;
+                        border-radius: 6px;
+                        transition: all ease 0.5s;
+                        box-shadow: 1px 1px 12px 0px rgb(0 0 0 / 32%);
+                    }
 
-                        .price-list ul {
-                            padding: 0px;
-                            list-style: none;
-                        }
+                    #monthlyPlan,
+                    #monthlyPlanTwo,
+                    #monthlyPlanThree {
+                        display: none;
+                    }
 
-                        .price-gd-top {
-                            background: #00acee;
-                            text-align: center;
-                        }
+                    #annuallPlan,
+                    #annuallPlanTwo,
+                    #annuallPlanThree {
+                        display: inline-block;
+                    }
 
-                        .price-gd-top h4 {
-                            font-size: 1.8em;
-                            color: #fff;
-                            padding: 0.4em 1em;
-                            background: #0e99ce;
-                            font-weight: 300;
-                        }
+                    .save-msg {
+                        position: absolute;
+                        bottom: -21px;
+                        right: 8px;
+                        font-family: cursive;
+                        font-weight: 700;
+                        color: #009688;
+                        font-size: 15px;
+                    }
 
-                        .price-gd-top h3 {
-                            padding: 0.2em 0em 0.1em 0em;
-                            font-size: 2.5em;
-                            color: #fff;
-                        }
+                    /* RIBBON */
+                    .box {
+                        position: relative;
+                        background: #fff;
+                        box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+                    }
 
-                        .price-gd-top h5 {
-                            font-size: 1em;
-                            color: #fff;
-                            padding: 0.2em 0em 0.8em 0em;
-                        }
+                    .ribbon {
+                        width: 150px;
+                        height: 150px;
+                        overflow: hidden;
+                        position: absolute;
+                    }
 
-                        .price-gd-bottom {
-                            background: #fff;
-                            text-align: center;
-                            padding: 1em 0em;
-                        }
+                    .ribbon::before,
+                    .ribbon::after {
+                        position: absolute;
+                        z-index: -1;
+                        content: '';
+                        display: block;
+                        border: 5px solid #2980b9;
+                    }
 
-                        .price-gd-top.pric-clr2 h4 {
-                            background: #d4b906;
-                        }
+                    .ribbon span {
+                        position: absolute;
+                        display: block;
+                        width: 225px;
+                        padding: 10px 0;
+                        background-color: #2262c6;
+                        box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+                        color: #fff;
+                        font-size: 13px;
+                        text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+                        text-transform: uppercase;
+                        text-align: center;
+                    }
 
-                        .price-gd-top.pric-clr2 {
-                            background: #ecce04
-                        }
+                    .ribbon-top-right {
+                        top: -10px;
+                        right: -10px;
+                    }
 
-                        .price-selet.pric-sclr2 a {
-                            background: #ecce04
-                        }
+                    .ribbon-top-right::before,
+                    .ribbon-top-right::after {
+                        border-top-color: transparent;
+                        border-right-color: transparent;
+                    }
 
-                        .price-gd-top.pric-clr3 {
-                            background: #2baf2b;
-                        }
+                    .ribbon-top-right::before {
+                        top: 0;
+                        left: 0;
+                    }
 
-                        .price-gd-top.pric-clr3 h4 {
-                            background: #209a20;
-                        }
+                    .ribbon-top-right::after {
+                        bottom: 0;
+                        right: 0;
+                    }
 
-                        .price-gd-top.pric-clr4 {
-                            background: #e83f3f;
-                        }
+                    .ribbon-top-right span {
+                        left: -25px;
+                        top: 41px;
+                        transform: rotate(45deg);
+                    }
 
-                        .price-gd-top.pric-clr4 h4 {
-                            background: #d62c2c;
-                        }
-
-                        .price-selet.pric-sclr4 a {
-                            background: #e83f3f;
-                        }
-
-                        .price-selet.pric-sclr3 a {
-                            background: #2baf2b;
-                        }
-
-                        .price-list ul li {
-                            padding: 0.5em 0em;
-                            font-size: 0.9em;
-                            color: #999999;
-                            border-bottom: 1px dotted #ddd;
-                        }
-
-                        .price-selet {
-                            padding: 1em 0em;
-                            text-align: center;
-                            background: #fff;
-                        }
-
-                        .price-selet a {
-                            font-size: 1.1em;
-                            color: #fff;
-                            display: block;
-                        }
-
-                        .price-selet a {
-                            font-size: 0.9em;
-                            color: #ffffff;
-                            display: inline-block;
-                            padding: 0.5em 2em;
-                            background: #00acee;
-                            text-decoration: none;
-                            border-radius: 25px;
-                            -webkit-border-radius: 25px;
-                            -o-border-radius: 25px;
-                        }
-
-                        .price-block {
-                            box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.15);
-                            transition: 0.5s all;
-                            -webkit-transition: 0.5s all;
-                            -moz-transition: 0.5s all;
-                            -o-transition: 0.5s all;
-                        }
-
-                        .price-block:hover,
-                        .ptblayouts-pricing:hover,
-                        .w3-agileits-vpn-grid:hover {
-                            transform: scale(1.1);
-                            -webkit-transform: scale(1.1);
-                            -moz-transform: scale(1.1);
-                            -o-transform: scale(1.1);
-                            -ms-transform: scale(1.1);
-                            z-index: 1;
-                        }
-
-                        .download-div {
-                            text-align: center;
-                            margin-top: 40px;
-                            padding: 40px 0px;
-                            clear: both;
-                        }
-
-                        .download {
-                            padding: 10px 30px;
-                            background-color: #006699;
-                            color: #000000;
-                            font-size: 24px;
-                            text-transform: uppercase;
-                            text-decoration: none;
-                            margin-top: 2px;
-                            border-radius: 10px;
-                        }
-
-                        .plan-left h5:first-child {
-                            margin-bottom: 3px;
-                            letter-spacing: 0px;
-                            font-weight: 700;
-                            color: #333;
-                            font-size: 25px;
-                        }
-
-                        .plan-left h5:nth-child(2) {
-                            margin-bottom: 40px;
-                            letter-spacing: 0px;
-                            font-weight: 400;
-                            color: #565656;
-                            font-size: 22px;
-                        }
-
-                        .plan-left p {
-                            letter-spacing: 0px;
-                            font-size: 12px;
-                        }
-
-                        .small-testimonial {
-                            background: #064b73;
-                            border-radius: 0.50rem;
-                            padding: 20px;
-                            border: 4px solid #fff;
-                            margin-top: 40px;
-                        }
-
-                        .small-testimonial h6 {
-                            font-size: 11px;
-                            color: #fff;
-                            margin: 0px 0px 20px;
-                        }
-
-                        .plan-right h4 {
-                            letter-spacing: 0px;
-                            font-weight: 600;
-                            margin-bottom: 6px;
-                        }
-
-                        .single-plan {
-                            padding: 20px;
-                            background-color: #eff9ff;
-                            border-radius: 6px;
-                            transition: all ease 0.5s;
-                        }
-
-                        .single-plan:hover {
-                            padding: 20px;
-                            background-color: #147ab5;
-                            border-radius: 6px;
-                            transition: all ease 0.5s;
-                            box-shadow: 1px 1px 12px 0px rgb(0 0 0 / 32%);
-                        }
-
-                        .single-plan .main-icon {
-                            font-size: 60px;
-                            color: #6590d4;
-                            margin-bottom: 10px;
-                            transition: all ease 0.5s;
-                        }
-
-                        .single-plan:hover .main-icon {
-                            color: #ffffff;
-                            transition: all ease 0.5s;
-                        }
-
-                        .single-plan .main-title {
-                            font-size: 18px;
-                            font-weight: 600;
-                            color: #333;
-                            transition: all ease 0.5s;
-                        }
-
-                        .single-plan:hover .main-title {
-                            color: #fff;
-                            transition: all ease 0.5s;
-                        }
-
-                        .single-plan p.plan-price {
-                            font-size: 26px;
-                            font-weight: 700;
-                            color: #333;
-                            margin-bottom: 30px;
-                            transition: all ease 0.5s;
-                        }
-
-                        .single-plan:hover p.plan-price {
-                            color: #ffffff;
-                            transition: all ease 0.5s;
-                        }
-
-                        .single-plan .plan-price span.dollar {
-                            font-weight: 400;
-                            color: #bdbdbd;
-                            margin-right: 3px;
-                        }
-
-                        .single-plan .plan-price span.plan-month {
-                            font-weight: 400;
-                            color: #8a8a8a;
-                            margin-right: 3px;
-                            font-size: 14px;
-                        }
-
-                        .multi-option i {
-                            font-size: 18px;
-                            color: #333;
-                            margin-top: 2px;
-                        }
-
-                        .multi-option a {
-                            font-size: 14px;
-                            font-weight: 600;
-                            margin-left: 10px;
-                            color: #333;
-                        }
-
-                        .single-plan:hover .multi-option i {
-                            color: #fff;
-                            transition: all ease 0.5s;
-                        }
-
-                        .single-plan:hover .multi-option a {
-                            color: #fff;
-                            transition: all ease 0.5s;
-                        }
-
-                        .multi-option {
-                            margin-bottom: 8px;
-                        }
-
-                        .single-plan:hover .btn-primary {
-                            color: #2262c6 !important;
-                            background-color: #fff !important;
-                            border-color: #fff;
-                        }
-
-                        .single-plan.most-popular {
-                            transform: scale(1.02);
-                            box-shadow: 1px 1px 12px 0px rgb(0 0 0 / 32%);
-                        }
-
-                        .single-plan.most-popular .badge {
-                            font-size: 9px;
-                            margin-left: 12px;
-                        }
-
-                        .happy-container {
-                            /* background: #2b6080;*/
-                            border-radius: 0.50rem;
-                            padding: 10px;
-                            border: 2px solid #2b6080;
-                            color: #2b6080 !important;
-                        }
-
-                        .happy-container i,
-                        .happy-container h5,
-                        .happy-container p {
-                            color: #2b6080 !important;
-                        }
-
-                        /* PRICING 2 */
-                        .pricing-2 {
-                            background-color: #f6faff;
-                            font-family: 'Poppins', sans-serif;
-                            /* background: linear-gradient(to right, #fdfeff 0%, #e1edff 100%); */
-                        }
-
-                        /*Navbar*/
+                    /************************************** Media Query **************************************/
+                    @media(max-width: 575px) {
                         nav .navbar-brand {
-                            font-size: 30px;
-                            font-weight: 700;
-                            color: #2262c6;
+                            font-size: 24px;
                         }
 
                         .navbar-expand .navbar-nav .nav-link {
-                            color: #2262c6;
-                            padding: 0 17px;
+                            font-size: 11px;
+                            /* color: #ffffff !important; */
                         }
 
-                        .pricing-header-wrapper h1 {
-                            font-size: 46px;
-                            font-weight: 700;
-                            color: #2262c6;
-                            margin-bottom: 8px;
-                        }
-
-                        .pricing-header-wrapper .pricing-input-group {
-                            border: 1px solid rgba(34, 98, 198, 0.41);
-                            border-radius: 4px;
-                            padding: 5px 10px 5px 9px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: space-between;
-                            background-color: white;
-                            width: 50%;
-                            margin: 0 auto;
-                        }
-
-                        .pricing-header-wrapper .pricing-input-icon {
-                            font-size: 20px;
-                            padding-top: 2px;
-                            margin-right: 6px;
+                        .pricing-input-group {
+                            width: auto !important;
                         }
 
                         .pricing-header-wrapper input.pricing-input {
-                            border: 0px;
-                            font-size: 16px;
-                            min-width: calc(100% - 55px);
+                            font-size: 11px;
+                            min-width: calc(100% - 105px);
                         }
 
-                        .pricing-header-wrapper p {
-                            color: #2262c6;
-                            font-size: 14px;
-                            margin-bottom: 27px;
-                            line-height: 25px;
+                        .pricing-input-group .btn {
+                            font-size: 10px;
                         }
 
                         .pricing-footer {
-                            background: #2566cb;
-                            padding: 12px 40px;
+                            padding: 12px 20px;
+                        }
+
+                        .pricing-footer .d-flex {
+                            flex-direction: column;
                         }
 
                         .pricing-footer p {
-                            margin: 0px;
-                            color: #fff;
-                            letter-spacing: 0px;
-                            font-size: 12px;
-                        }
-
-                        .pricing-footer p a {
-                            color: #fff;
-                        }
-
-                        /* SWITCHER */
-                        .switcher-container {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            position: relative;
-                        }
-
-                        span.switcher {
-                            position: relative;
-                            width: 170px;
-                            height: 35px;
-                            border-radius: 25px;
-                            margin: 0px 0px;
-                        }
-
-                        span.switcher input {
-                            -webkit-appearance: none;
-                            -moz-appearance: none;
-                            appearance: none;
-                            position: relative;
-                            width: 170px;
-                            height: 35px;
-                            border-radius: 10px;
-                            background-color: #1E1E1E;
-                            outline: none;
-                        }
-
-                        span.switcher input:before,
-                        span.switcher input:after {
-                            z-index: 2;
-                            position: absolute;
-                            top: 50%;
-                            -webkit-transform: translateY(-50%);
-                            transform: translateY(-50%);
-                            color: #FFFFFF;
-                        }
-
-                        span.switcher input:before {
-                            content: 'Monthly';
-                            left: 20px;
-                        }
-
-                        span.switcher input:after {
-                            content: 'Annually';
-                            right: 20px;
-                        }
-
-                        span.switcher label {
-                            z-index: 1;
-                            position: absolute;
-                            top: 4px;
-                            bottom: 4px;
-                            border-radius: 6px;
-                        }
-
-                        span.switcher.switcher-1 input {
-                            -webkit-transition: .25s -.1s;
-                            transition: .25s -.1s;
-                        }
-
-                        span.switcher.switcher-1 input:checked {
-                            background-color: #d2e4ff;
-                        }
-
-                        span.switcher.switcher-1 input:checked:before {
-                            color: #FFFFFF;
-                            -webkit-transition: color .5s .2s;
-                            transition: color .5s .2s;
-                        }
-
-                        span.switcher.switcher-1 input:checked:after {
-                            color: #2262c6;
-                            -webkit-transition: color .5s;
-                            transition: color .5s;
-                            cursor: pointer;
-                        }
-
-                        span.switcher.switcher-1 input:checked+label {
-                            left: 12px;
-                            right: 89px;
-                            background: #2262c6;
-                            -webkit-transition: left .5s, right .4s .2s;
-                            transition: left .5s, right .4s .2s;
-                            margin-bottom: 0px;
-                        }
-
-                        span.switcher.switcher-1 input:not(:checked) {
-                            background: #d2e4ff;
-                            -webkit-transition: background .5s -.1s;
-                            transition: background .5s -.1s;
-                        }
-
-                        span.switcher.switcher-1 input:not(:checked):before {
-                            color: #2262c6;
-                            -webkit-transition: color .5s;
-                            transition: color .5s;
-                            cursor: pointer;
-                        }
-
-                        span.switcher.switcher-1 input:not(:checked):after {
-                            color: #ffffff;
-                            -webkit-transition: color .5s .2s;
-                            transition: color .5s .2s;
-                        }
-
-                        span.switcher.switcher-1 input:not(:checked)+label {
-                            left: 82px;
-                            right: 13px;
-                            background: #2262c6;
-                            -webkit-transition: left .4s .2s, right .5s, background .35s -.1s;
-                            transition: left .4s .2s, right .5s, background .35s -.1s;
-                            margin-bottom: 0px;
-                        }
-
-                        @-webkit-keyframes turn-on {
-                            0% {
-                                left: 100%;
-                            }
-
-                            100% {
-                                left: 0%;
-                            }
-                        }
-
-                        @keyframes turn-on {
-                            0% {
-                                left: 100%;
-                            }
-
-                            100% {
-                                left: 0%;
-                            }
-                        }
-
-                        @-webkit-keyframes turn-off {
-                            0% {
-                                right: 100%;
-                            }
-
-                            100% {
-                                right: 0%;
-                            }
-                        }
-
-                        @keyframes turn-off {
-                            0% {
-                                right: 100%;
-                            }
-
-                            100% {
-                                right: 0%;
-                            }
-                        }
-
-                        .pricing-2 .single-plan {
-                            padding: 20px;
-                            background-color: #ffffff;
-                            border-radius: 6px;
-                            transition: all ease 0.5s;
-                            border: 2px solid #2262c6;
-                        }
-
-                        .pricing-2 .single-plan:hover {
-                            padding: 20px;
-                            background-color: #147ab5;
-                            border-radius: 6px;
-                            transition: all ease 0.5s;
-                            box-shadow: 1px 1px 12px 0px rgb(0 0 0 / 32%);
-                        }
-
-                        #monthlyPlan,
-                        #monthlyPlanTwo,
-                        #monthlyPlanThree {
-                            display: none;
-                        }
-
-                        #annuallPlan,
-                        #annuallPlanTwo,
-                        #annuallPlanThree {
-                            display: inline-block;
-                        }
-
-                        .save-msg {
-                            position: absolute;
-                            bottom: -21px;
-                            right: 8px;
-                            font-family: cursive;
-                            font-weight: 700;
-                            color: #009688;
-                            font-size: 15px;
-                        }
-
-                        /* RIBBON */
-                        .box {
-                            position: relative;
-                            background: #fff;
-                            box-shadow: 0 0 15px rgba(0, 0, 0, .1);
-                        }
-
-                        .ribbon {
-                            width: 150px;
-                            height: 150px;
-                            overflow: hidden;
-                            position: absolute;
-                        }
-
-                        .ribbon::before,
-                        .ribbon::after {
-                            position: absolute;
-                            z-index: -1;
-                            content: '';
-                            display: block;
-                            border: 5px solid #2980b9;
-                        }
-
-                        .ribbon span {
-                            position: absolute;
-                            display: block;
-                            width: 225px;
-                            padding: 10px 0;
-                            background-color: #2262c6;
-                            box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
-                            color: #fff;
-                            font-size: 13px;
-                            text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-                            text-transform: uppercase;
                             text-align: center;
                         }
+                    }
 
-                        .ribbon-top-right {
-                            top: -10px;
-                            right: -10px;
+                    /* Tablet Media Query */
+                    @media (min-width: 600px) and (max-width: 1068px) {
+                        .navbar-expand .navbar-nav .nav-link {
+                            color: #ffffff !important;
                         }
 
-                        .ribbon-top-right::before,
-                        .ribbon-top-right::after {
-                            border-top-color: transparent;
-                            border-right-color: transparent;
+                        .single-helpdesk-option h6 {
+                            font-size: 16px;
                         }
 
-                        .ribbon-top-right::before {
-                            top: 0;
-                            left: 0;
+                        .helpdesk-header-wrapper {
+                            background-size: auto;
                         }
 
-                        .ribbon-top-right::after {
-                            bottom: 0;
-                            right: 0;
+                        .helpdesk-input-group button {
+                            background: #2d59d8;
                         }
+                    }
 
-                        .ribbon-top-right span {
-                            left: -25px;
-                            top: 41px;
-                            transform: rotate(45deg);
-                        }
-
-                        /************************************** Media Query **************************************/
-                        @media(max-width: 575px) {
-                            nav .navbar-brand {
-                                font-size: 24px;
-                            }
-
-                            .navbar-expand .navbar-nav .nav-link {
-                                font-size: 11px;
-                                /* color: #ffffff !important; */
-                            }
-
-                            .pricing-input-group {
-                                width: auto !important;
-                            }
-
-                            .pricing-header-wrapper input.pricing-input {
-                                font-size: 11px;
-                                min-width: calc(100% - 105px);
-                            }
-
-                            .pricing-input-group .btn {
-                                font-size: 10px;
-                            }
-
-                            .pricing-footer {
-                                padding: 12px 20px;
-                            }
-
-                            .pricing-footer .d-flex {
-                                flex-direction: column;
-                            }
-
-                            .pricing-footer p {
-                                text-align: center;
-                            }
-                        }
-
-                        /* Tablet Media Query */
-                        @media (min-width: 600px) and (max-width: 1068px) {
-                            .navbar-expand .navbar-nav .nav-link {
-                                color: #ffffff !important;
-                            }
-
-                            .single-helpdesk-option h6 {
-                                font-size: 16px;
-                            }
-
-                            .helpdesk-header-wrapper {
-                                background-size: auto;
-                            }
-
-                            .helpdesk-input-group button {
-                                background: #2d59d8;
-                            }
-                        }
-
-                        .bg-light-info {
-                            background-color: #bae7ff !important;
-                            border-color: #bae7ff;
-                            color: #2196f3;
-                        }
-                    </style>
-                    <!-- Our price plan section -->
-                    <div class="plans-section" id="planTableId" style="padding:21px;">
-
-                        <!-- Main Body Starts -->
-                        <div class="page-content">
-                            <!-- "DataTables" page styles, specific to this page for demo only -->
-                            <style>
-                                .body-container {
-                                    /* so that sticky thead works */
-                                    overflow: visible;
-                                }
-
-                                thead.is-stuck>tr>th {
-                                    border-bottom: 1px solid #e8e8e8 !important;
-                                }
-                            </style>
-
-
-
-                            <div class="card bcard h-auto" style="overflow-x:scroll!important;">
-                                <table id="datatable"
-                                    class="d-style w-100 table text-dark-m1 text-95 border-y-1 brc-black-tp11 collapsed dtr-table">
-                                    <!-- add `collapsed` by default ... it will be removed by default -->
-                                    <!-- thead with .sticky-nav -->
-                                    <thead class="text-secondary-m1 text-uppercase text-85">
-                                        <tr>
-                                            <th class="bgc-yellow-l3">S.No.</th>
-                                            <th class="bgc-yellow-l3">Date</th>
-                                            <th class="bgc-yellow-l3">Test Name</th>
-                                            <th class="bgc-yellow-l3">Total Words</th>
-                                            <th class="bgc-yellow-l3">Total Typed</th>
-                                            <th class="bgc-yellow-l3">Incorrect</th>
-                                            <th class="bgc-yellow-l3">Accuracy</th>
-                                            <th class="bgc-yellow-l3">Speed/Marks</th>
-                                            <!-- <th class="bgc-yellow-l3">Marks</th> -->
-                                            <th class="bgc-yellow-l3">Rank</th>
-                                            <th class="bgc-yellow-l3">Answer Sheet</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="pos-rel" id="TableData">
-                                        <!-- <tr>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                1
-                                            </td> <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td style="    justify-content: center;
-                                            display: flex;">
-                                                                                        <a href="ResultShowPage.html?id=${currentItem.Id}" class="btn btn-xs btn-info"><i
-                                                                                                class="fas fa-list"></i> Show</a>
-                                                                                                 <a style="margin-left: 7px;background: #ffbe50;" href="TypingComp.html?id=${currentItem.Course_Content__c}" class="btn btn-xs btn-info"><i
-                                                                                                class="fas fa-list"></i> Compare</a>
-                                                                                        <!-- <a href="result_comp.php?test_id=10309c857c6dcd2c0322867b20c2a424" class="btn btn-xs btn-warning"><i class="fas fa-balance-scale"></i> Compare</a> 
-                                                                                    </td>
-                                        </tr> -->
-                                    </tbody>
-                                </table>
-
-                            </div>
-
-
-                            <!-- include common vendor scripts used in demo pages -->
-                            <script src="js/jquery.min.js"></script>
-
-
-
-
-
-
-                        </div>
-
-
+                    .bg-light-info {
+                        background-color: #bae7ff !important;
+                        border-color: #bae7ff;
+                        color: #2196f3;
+                    }
+                </style>
+                <!-- Our price plan section -->
+                <section class="container-fluid py-2">
+                  <div class="row">
+                    <div class="col-12 col-md-3 mb-2 mb-md-0">
+                      <button class="btn btn-primary w-100">Print/Save Result</button>
                     </div>
-
-                    <!-- End of result table code -->
-                    <div id="showMoreSection" style="display:none;" class="page-content">
-                        <button width="2px" style="    background-color: #ff4a17;
-                        color: white;
-                        border-width: 0px;
-                        height: 31px;
-                        border-radius: 5px;
-                        margin-left: 80vw;" onclick="handleGoBack()">Go Back</button>
-
-                        <head>
-                            <link rel="stylesheet" href="js/custom.css">
-                            <style>
-                                .timer {
-                                    width: 100px;
-                                    font-size: 2.5em;
-                                    text-align: center;
-                                }
-
-                                @font-face {
-                                    font-family: Hindi;
-                                    src: url(font/Hindi.ttf);
-                                }
-
-                                @font-face {
-                                    font-family: 'Hindi';
-                                    src: url('font/Hindi.ttf') format('truetype');
-                                    font-weight: normal;
-                                    font-style: normal;
-                                }
-
-                                .hindiFont {
-                                    font-family: 'Hindi';
-                                    font-size: 22px !important;
-                                }
-
-                                textarea {
-                                    border: 1px solid #999999;
-                                    width: 100%;
-                                    margin: 5px 0;
-                                    padding: 3px;
-                                    font-size: 25px !important;
-                                }
-                            </style>
-                            <script src="js/ajax.js"></script>
-                            <title>Answer Sheet | Bright Education Steno</title>
-                        </head>
-                        <!-- Header -->
-                        <center>
-                            <h4>Bright Education Steno</h4>
-                        </center>
-
-                        <div class="container border">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <span>Roll Number: GSJ3210</span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <span>Student Name: Rakesh Choudhary </span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <span>Test Name: Test 23 Jan 70 wpm legal</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <span>Test Speed: (Hindi-70WPM)</span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <span>Duration: 55 Mins</span>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <span>Submitted On: 2024-01-28 08:12:46</span>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <style>
-                            skip-tag {
-                                color: red !important;
-                            }
-
-                            del {
-                                color: green !important;
-                            }
-
-                            ins {
-                                color: red !important;
-                            }
-
-                            ins2 {
-                                color: red !important;
-                            }
-
-
-                            ins::before {
-                                content: "¿";
-                            }
-
-                            ins::after {
-                                content: "À";
-                            }
-
-                            ins2::before {
-                                content: "¿";
-                            }
-
-                            ins2::after {
-                                content: "À ";
-                            }
-
-                            del::before {
-                                content: "¿";
-                            }
-
-                            del::after {
-                                content: "À";
-                            }
-
-                            skip-tag::before {
-                                content: "¿";
-                            }
-
-                            skip-tag::after {
-                                content: "À";
-                            }
-
-                            p {
-                                white-space: pre-wrap !important;
-                            }
-
-                            .containerbackground {
-                                text-align: center;
-                                justify-content: justify !important;
-                                margin: 0;
-                                left: 0;
-                                right: 0;
-                                position: absolute;
-                                top: 50%;
-                                z-index: 2;
-                                transform: rotate(300deg);
-                                -webkit-transform: rotate(300deg);
-                                color: #c6afaf61;
-                            }
-                        </style>
-                        <!-- Page content -->
-                        <div class="container-fluid mt-0">
-
-                            <center>
-                                <div class="mt-0">
-                                    <span
-                                        class="badge bgc-white border-2 brc-blue text-dark-tp3 badge-pill badge-lg pb-4 px-3 bgc-h-blue-l3"
-                                        style="    border: 2px solid #3e89e4;
-    color: black;
-    padding: .275rem .5rem;
-    font-size: 17px;
-    line-height: 2.1;
-    height: 2.75rem;
-    width: 141px;
-    border-radius: 38px;margin-right: 5px;">Total: 555</span>
-                                    <span
-                                        class="badge bgc-white border-2 brc-green-m1 text-dark-tp3 badge-pill badge-lg pb-4 px-3 bgc-h-green-l4"
-                                        style="    border: 2px solid #57c19b;
-    color: black;
-    padding: .275rem .5rem;
-    font-size: 17px;
-    line-height: 2.1;
-    height: 2.75rem;
-    width: 141px;
-    border-radius: 38px;margin-right: 5px;">Typed: 0</span>
-                                    <span
-                                        class="badge bgc-white border-2 brc-red-m1 text-dark-tp3 badge-pill badge-lg pb-4 px-3 bgc-h-red-l3"
-                                        style="    border: 2px solid red;
-    color: black;
-    padding: .275rem .5rem;
-    font-size: 17px;
-    line-height: 2.1;
-    height: 2.75rem;
-    width: 141px;
-    border-radius: 38px;margin-right: 5px;">Incorrect: 555</span>
-                                    <span
-                                        class="badge bgc-white border-2 brc-blue-m1 text-dark-tp3 badge-pill badge-lg pb-4 px-3 bgc-h-blue-l3"
-                                        style="    border: 2px solid #5b9be8;
-    color: black;
-    padding: .275rem .5rem;
-    font-size: 17px;
-    line-height: 2.1;
-    height: 2.75rem;
-    width: 141px;
-    border-radius: 38px;margin-right: 5px;">Marks: 0</span>
-                                </div>
-                            </center>
-
-                            <br>
-
-
-                        </div>
-                        <script>
-                            if (window.history.replaceState) {
-                                window.history.replaceState(null, null, window.location.href);
-                            }
-                        </script>
-
-
+                    <div class="col-12 col-md-9">
+                      <h4 class="text-center text-md-start">Candidate Result Sheet - Typing Test</h4>
                     </div>
-                </div>
+                  </div>
+                </section>
+              
+                <section class="container py-2">
+                  <p class="mb-1">Error Legend:</p>
+                  <ul class="mb-2">
+                    <li><span class="incorrect">wrong</span> = Incorrect word</li>
+                    <li><span class="incorrect">typed</span> <span class="expected">[expected]</span> = Incorrect with expected shown
+                    </li>
+                    <li><span class="missed">[expected]</span> = Missed word</li>
+                    <li><span class="extra">extra</span> = Extra word</li>
+                    <li><span class="space-fixed">joinedword</span> = Missing space or hyphen</li>
+                    <li><span Id="Incorrect Word Count:"></span></li>
+                    <li><span Id="Skipped Word Count:"></span></li>
+                    <!-- <li><span Id="Extra Word Count:"></span></li> -->
+                    <li><span Id="Correct Word Count:"></span></li>
+                    <li><span Id="Total Words Count:"></span></li>
+                    <li><span Id="Total Typed Words Count:"></span></li>
+                    <li><span Id="Accuracy"></span></li>
+                  </ul>
+                </section>
+              
+                <section class="container mb-5">
+                  <h5 class="mb-3">Typed Text Comparison:</h5>
+                  <div id="comparisonOutput" class="result-box"></div>
+                </section>
+    </div><!-- .modal-aside -->
 
-                <div id="audioPlay">
-
-                </div>
-            </div>
         </div>
     </div><!-- .modal-aside -->
     </div>
@@ -1110,23 +839,7 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <script>
-        function handleShowbtn() {
-            console.log('btn start clicked');
-            var part1 = document.getElementById('planTableId');
-
-            var part2 = document.getElementById('showMoreSection');
-            part1.style.display = 'none';
-            part2.style.display = 'inline-block';
-        }
-        function handleGoBack() {
-            console.log('btn start clicked');
-            var part1 = document.getElementById('planTableId');
-            var part2 = document.getElementById('showMoreSection');
-            part1.style.display = 'block';
-            part2.style.display = 'none';
-        }
-    </script>
+   
     <!-- Vendor JS Files -->
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
@@ -1142,275 +855,7 @@
     <!--   Main JS File -->
     <script defer src="assets/js/main.js"></script>
     <script src="assets/js/MyComponents.js"></script>
-    <script>
-        $(document).ready(function () {
-            checkIsSprStudent();
-            document.getElementById('header').style.backgroundColor = '#38434b'
-            console.log("calling31")
-            getResult();
-        })
-
-        function getResult() {
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
-            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
-            var raw = JSON.stringify({
-                "Phone": SPR_StudentPhone,
-                "studentId": "a01GA00002LQoKlYAL",
-                "getResult": "getResult"
-            });
-
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            const TableData = document.getElementById('TableData');
-            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
-                .then(response => response.json())
-                .then(result => {
-                    if (result == 'No result found.') {
-                        // alert('No result found.')
-                        const tableHTML = `<tr class="d-style bgc-h-default-l4">
-                                        <td style="text-align: center;background: #8c93aa;" colspan="10">${result}</td>
-                                         
-
-                                    </tr>`;
-                        TableData.innerHTML += tableHTML;
-                    } else {
-                        result = JSON.parse(result);
-                        console.log('result=>', result)
-                        result.forEach((currentItem, idx) => {
-                            const dateString = currentItem.CreatedDate;
-                            const dateObject = new Date(dateString);
-
-                            const formattedDate = dateObject.toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
-                            });
-                            let marks = currentItem.Marks__c + '%';
-                            let speed = currentItem.Speed__c ? currentItem.Speed__c : ''
-                            let stenoMarks = currentItem.Steno_Marks__c ? currentItem.Steno_Marks__c : ''
-                            let marksOrSpeed = ''
-                            if (speed.length < 1) {
-                                marksOrSpeed = stenoMarks + '/100';
-                            } else {
-                                marksOrSpeed = speed;
-                            }
-                            const tableHTML = `
-                        <tr class="d-style bgc-h-default-l4">
-                                            <td>${idx + 1}</td>
-                                            <td>${formattedDate}</td>
-                                            <td>${currentItem.Name}</td>
-                                            <td>${currentItem.Total_Words__c}</td>
-                                            <td>${currentItem.Total_Type__c}</td>
-                                            <td>${currentItem.Incorrect_Words__c}</td>
-                                            <td>${marks}</td>
-                                            <td>${marksOrSpeed}</td>
-                                            <!--<td>${stenoMarks}</td>-->
-                                            <td>
-                                                ${currentItem.Rank__c} </td>
-                                            <td style="    justify-content: center;
-    display: flex;">
-                                                <a href="StudentResult.html?Id=${currentItem.Id}" class="btn btn-xs btn-info"><i
-                                                        class="fas fa-list"></i> Show</a>
-                                                         <a style="margin-left: 7px;background: #ffbe50;" href="TypingComp.html?id=${currentItem.Course_Content__c}" class="btn btn-xs btn-info"><i
-                                                        class="fas fa-list"></i> Compare</a>
-                                                <!-- <a href="result_comp.php?test_id=10309c857c6dcd2c0322867b20c2a424" class="btn btn-xs btn-warning"><i class="fas fa-balance-scale"></i> Compare</a> -->
-                                            </td>
-                                        </tr>
-               `;
-                            TableData.innerHTML += tableHTML;
-                        })
-
-                    }
-
-                })
-                .catch(error => console.log('error=', error));
-
-        }
-        function getAudio() {
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
-
-            var raw = JSON.stringify({
-                "recordId": "a05GA00001RBCSjYAP",
-                "getAudio": "getAudio"
-            });
-
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            const TableData = document.getElementById('TableData');
-            fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
-                .then(response => response.json())
-                .then(result => {
-                    console.log('audio1=', result)
-                    result = JSON.parse(result);
-                    console.log(result);
-                    let a = document.getElementById('audioPlay');
-                    a.innerHTML = 'hellooooo'
-
-
-                })
-                .catch(error => console.log('error=', error));
-
-        }
-
-    </script>
-    <Script>
-        //Random Quotes Api URL
-        const quoteApiUrl = "https://api.quotable.io/random?minLength=80&maxLength=100";
-        const quoteSection = document.getElementById("quote");
-        const userInput = document.getElementById("quote-input");
-        let quote = "";
-        let time = 60;
-        let timer = "";
-        let mistakes = 0;
-
-        //Display random quotes
-        const renderNewQuote = async () => {
-            //Fetch contents from url
-            const response = await fetch(quoteApiUrl);
-
-            //Store response
-            let data = await response.json();
-            //Access quote
-            quote = data.content;
-            quote = 'A steno machine, stenotype machine, shorthand machine, stenograph or steno writer is a specialized chorded keyboard or typewriter used by stenographers for shorthand use. In order to pass the United States Registered Professional Reporter test, a trained court reporter or closed captioner must write speeds of approximately 180, 200, and 225 words per minute (wpm) at very high accuracy in the categories of literary, jury charge, and testimony, respectively.[1] Some stenographers can reach 300 words per minute. The website of the California Official Court Reporters Association (COCRA) gives the official record for American English as 375 wpm.[2]  Duration: 1 minute and 14 seconds.1:14 Demonstration Marc Grandjean (1928) The stenotype keyboard has far fewer keys than a conventional alphanumeric keyboard. Multiple keys are pressed simultaneously (known as "chording" or "stroking") to spell out whole syllables, words, and phrases with a single hand motion. This system makes realtime transcription practical for court reporting and live closed captioning. Because the keyboard does not contain all the letters of the English alphabet, letter combinations are substituted for the missing letters. There are several schools of thought on how to record various sounds, such as the StenEd, Phoenix, and Magnum Steno theories.';
-
-            //Array of characters in the quote
-            let arr = quote.split("").map((value) => {
-                //wrap the characters in a span tag
-                return "<span class='quote-chars'>" + value + "</span>";
-            });
-            //join array for displaying
-            quoteSection.innerHTML += arr.join("");
-        };
-
-        //Logic for comparing input words with quote
-        userInput.addEventListener("input", () => {
-            let quoteChars = document.querySelectorAll(".quote-chars");
-            //Create an arrat from received span tags
-            quoteChars = Array.from(quoteChars);
-
-            //array of user input characters
-            let userInputChars = userInput.value.split("");
-
-            //loop through each character in quote
-            quoteChars.forEach((char, index) => {
-                //Check if char(quote character) = userInputChars[index](input character)
-                if (char.innerText == userInputChars[index]) {
-                    char.classList.add("success");
-                }
-                //If user hasn't entered anything or backspaced
-                else if (userInputChars[index] == null) {
-                    //Remove class if any
-                    if (char.classList.contains("success")) {
-                        char.classList.remove("success");
-                    } else {
-                        char.classList.remove("fail");
-                    }
-                }
-                //If user enter wrong character
-                else {
-                    //Checks if we alreasy have added fail class
-                    if (!char.classList.contains("fail")) {
-                        //increment and display mistakes
-                        mistakes += 1;
-                        char.classList.add("fail");
-                    }
-                    document.getElementById("mistakes").innerText = mistakes;
-                }
-                //Returns true if all the characters are entered correctly
-                let check = quoteChars.every((element) => {
-                    return element.classList.contains("success");
-                });
-                //End test if all characters are correct
-                if (check) {
-                    displayResult();
-                }
-            });
-        });
-
-        //Update Timer on screen
-        function updateTimer() {
-            if (time == 0) {
-                //End test if timer reaches 0
-                displayResult();
-            } else {
-                document.getElementById("timer").innerText = --time + "s";
-            }
-        }
-
-        //Sets timer
-        const timeReduce = () => {
-            time = 60;
-            timer = setInterval(updateTimer, 1000);
-        };
-
-        //End Test
-        const displayResult = () => {
-            //display result div
-            document.querySelector(".result").style.display = "block";
-            clearInterval(timer);
-            document.getElementById("stop-test").style.display = "none";
-            userInput.disabled = true;
-            let timeTaken = 1;
-            if (time != 0) {
-                timeTaken = (60 - time) / 100;
-            }
-            document.getElementById("wpm").innerText =
-                (userInput.value.length / 5 / timeTaken).toFixed(2) + " wpm";
-            document.getElementById("accuracy").innerText =
-                Math.round(
-                    ((userInput.value.length - mistakes) / userInput.value.length) * 100
-                ) + " %";
-        };
-
-        //Start Test
-        const startTest = () => {
-            mistakes = 0;
-            timer = "";
-            userInput.disabled = false;
-            timeReduce();
-            document.getElementById("start-test").style.display = "none";
-            document.getElementById("stop-test").style.display = "block";
-        };
-
-        window.onload = () => {
-            userInput.value = "";
-            document.getElementById("start-test").style.display = "block";
-            document.getElementById("stop-test").style.display = "none";
-            userInput.disabled = true;
-            renderNewQuote();
-        };
-    </Script>
-
-    <script>
-        var refreshTime = 420000; // every 10 minutes in milliseconds
-        window.setInterval(function () {
-            $.ajax({
-                cache: false,
-                type: "GET",
-                url: "refresh_session.php?login_mobile=7878438668",
-                success: function (data) {
-                    if (data == 'duplicate') {
-                        alert('Duplicate Session: Do Not Use Your ID in Another Device.');
-                        window.location = "login.php";
-                    }
-                }
-            });
-        }, refreshTime);
-    </script>
-
+     
     <!-- include common vendor scripts used in demo pages -->
     <script src="js/jsone.js"></script>
     <script src="js/jstwo.js"></script>
@@ -1420,6 +865,264 @@
             event.preventDefault();
         });
     </script>
+ <script>
+  function tokenize(text, language) {
+    text = text.normalize("NFC");
+    console.log('Normalized text:');
+    let isHindi = /[\u0900-\u097F]/.test(text);
+    if (language == 'Hindi') {
+      isHindi = true;
+    } else {
+      isHindi = false;
+    }
+    // const regex = isHindi
+    //   ? /[\p{L}\p{M}]+(?:-[\p{L}\p{M}]+)*|[.,!?;:\-]+|\s+/gu
+    //   : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
+    const regex = isHindi
+      ? /[?|'`|:={}()<>\[\];,\p{L}\p{M}\p{N}%]+(?:[-<>=?|;"'._`/%~+&;#)@{}\[\]][?|'`|:={}()<>\[\];,\p{L}\p{M}\p{N}%]+)*[.,!?;:<>=?|\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:<>=?|\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu
+      ///[/'`:={}()<>\[\];,\p{L}\p{M}\p{N}%]+(?:[-<>=?;"'._`/%~+&;#)@{}\[\]][/'`:={}()<>\[\];,\p{L}\p{M}\p{N}%]+)*[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu
+      // /[/'`:={}()<>\[\],\p{L}\p{M}\p{N}%]+(?:[-<>=?:"'._`/%~+&;#)@{}\[\]][/'`:={}()<>\[\],\p{L}\p{M}\p{N}%]+)*[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:<>=?\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu
+      //  // ///[/'`:={}()\[\],\p{L}\p{M}\p{N}%]+(?:[-=:"'._`/%~+&;#)@{}\[\]][/'`:={}()\[\],\p{L}\p{M}\p{N}%]+)*[.,!?;:=\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:=\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///[/'`:{}\[\](),\p{L}\p{M}\p{N}%]+(?:[-:"'._`/%~+&;#)@{}\[\]][/'`:{}\[\](),\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///[/'`\[\]{}(),\p{L}\p{M}\p{N}%]+(?:[-"'._`/%~+&;#)@{}\[\]][/'`\[\]{}(),\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']*|[.,!?;:\/\-\[\]~+&;#)@{}\u00B6`,"']+|\s+/gu///['`\[\]{},\p{L}\p{M}\p{N}%]+(?:[-"'._`/%~+&;#)@{}\[\]]['`\[\]{},\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}¶`,"]*|[.,!?;:\/\-\[\]~+&;#)@{}¶`,"]+|\s+/gu///['\[\]{},\p{L}\p{M}\p{N}%]+(?:[-"'._/%~+&;#)@{}¶\[\]]['\[\]{},\p{L}\p{M}\p{N}%]+)*[.,!?;:\/\-\[\]~+&;#)@{}¶,]*|[.,!?;:\/\-\[\]~+&;#)@{}¶,]+|\s+/gu    
+      : /\w+(?:-\w+)*[.,!?;:]?|[.,!?;:\-]+|\s+/gu;
+    const tokens = text.match(regex) || [];
+
+    return tokens;
+  }
+
+  function lcsMatrix(a, b) {
+    const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+    for (let i = 1; i <= a.length; i++) {
+      for (let j = 1; j <= b.length; j++) {
+        if (a[i - 1] === b[j - 1]) {
+          dp[i][j] = dp[i - 1][j - 1] + 1;
+        } else {
+          dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+        }
+      }
+    }
+    return dp;
+  }
+
+  function backtrackLCS(dp, a, b) {
+    let i = a.length, j = b.length;
+    const alignedOrig = [], alignedTyped = [];
+
+    while (i > 0 && j > 0) {
+      if (a[i - 1] === b[j - 1]) {
+        alignedOrig.unshift(a[i - 1]);
+        alignedTyped.unshift(b[j - 1]);
+        i--; j--;
+      } else if (dp[i - 1][j] >= dp[i][j - 1]) {
+        alignedOrig.unshift(a[i - 1]);
+        alignedTyped.unshift(null);
+        i--;
+      } else {
+        alignedOrig.unshift(null);
+        alignedTyped.unshift(b[j - 1]);
+        j--;
+      }
+    }
+
+    while (i > 0) {
+      alignedOrig.unshift(a[i - 1]);
+      alignedTyped.unshift(null);
+      i--;
+    }
+    while (j > 0) {
+      alignedOrig.unshift(null);
+      alignedTyped.unshift(b[j - 1]);
+      j--;
+    }
+
+    return [alignedOrig, alignedTyped];
+  }
+
+  function escapeHtml(text) {
+    return (text || "").replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function renderComparison(origTokens, typedTokens, originalContent, userTypedText) {
+    let result = '';
+    let i = 0;
+    let incorrectWordsCnt = 0;
+    let skipWordCnt = 0;
+    let extraWordCnt = 0;
+    let correctWordCnt = 0;
+    while (i < origTokens.length) {
+      const o = origTokens[i];
+      const t = typedTokens[i];
+
+      // ✅ Case: Exact match
+      if (o === t && o !== null) {
+        console.log(`o ${o}`);
+        console.log(`t ${t}`);
+        result += `<span class="correct">${escapeHtml(o)}</span>`;
+        if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+          correctWordCnt++;
+        }
+        i++;
+        continue;
+      }
+
+      // ❌ Case: Word in original ends with punctuation (e.g., 'identity,') and typed missed it (e.g., 'identity')
+      if (
+        o !== null &&
+        t !== null &&
+        /^[\w-]+[.,!?;:]$/.test(o) &&
+        t === o.slice(0, -1)
+      ) {
+        result += `<span class="incorrect">${escapeHtml(t)}</span><span class="expected">${escapeHtml(o)}</span> `;
+        if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+          incorrectWordsCnt++;
+        }
+        i++;
+        continue;
+      }
+
+      // ✅ Case: Missed punctuation
+      if (o && /^[.,!?;:]$/.test(o) && t === null) {
+        result += `<span class="expected">${escapeHtml(o)}</span>`;
+        i++;
+        continue;
+      }
+
+      // ✅ Case: Extra punctuation
+      if (t && /^[.,!?;:]$/.test(t) && o === null) {
+        result += `<span class="incorrect">${escapeHtml(t)}</span>`;
+        if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+          incorrectWordsCnt++;
+        }
+        i++;
+        continue;
+      }
+
+      // 🔄 Handle other incorrects / mismatches
+      let origChunk = [], typedChunk = [], j = i;
+      while (
+        j < origTokens.length &&
+        (origTokens[j] !== typedTokens[j] || origTokens[j] === null || typedTokens[j] === null)
+      ) {
+        origChunk.push(origTokens[j]);
+        typedChunk.push(typedTokens[j]);
+        j++;
+      }
+
+      const isPunct = x => /^[.,!?;:\-]+$/.test(x);
+      const isSpace = x => /^\s+$/.test(x);
+      const filterWords = arr => arr.filter(x => x && !isPunct(x) && !isSpace(x));
+      const origWords = filterWords(origChunk);
+      const typedWords = filterWords(typedChunk);
+
+      const origSpaced = origWords.join(' ');
+      const typedSpaced = typedWords.join(' ');
+
+      if (typedWords.length === 0 && origWords.length > 0) {
+        result += ` <span class="missed">${escapeHtml(origSpaced)}</span> `;
+        skipWordCnt++;
+      } else if (origWords.length === 0 && typedWords.length > 0) {
+        result += `<span class="extra">${escapeHtml(typedSpaced)}</span> `;
+        extraWordCnt++;
+      } else {
+        if (typedWords.length) {
+          result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
+          if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
+            incorrectWordsCnt++;
+          }
+        }
+        if (origWords.length) result += `<span class="expected">${escapeHtml(origSpaced)}</span> `;
+      }
+
+      i = j;
+    }
+    document.getElementById("Incorrect Word Count:").innerText = "Incorrect Word Count: " + incorrectWordsCnt;
+    // document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
+    // document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
+    document.getElementById("Skipped Word Count:").innerText = "Skipped and Extra Word Count: " + (skipWordCnt + extraWordCnt);
+    document.getElementById("Correct Word Count:").innerText = "Correct Word Count: " + correctWordCnt;
+    let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
+    let userTypedWords = userTypedText.trim().split(/\s+/);
+    document.getElementById("Total Typed Words Count:").innerText = "Total Typed Words Count: " + (userTypedWords.length);
+
+    let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
+    document.getElementById("Accuracy").innerText = "Accuracy: " + accuracy + "%";
+    document.getElementById("Total Words Count:").innerText = "Total Words Count: " + totalWords.length;
+
+    return result;
+  }
+
+  function compareTexts(original, typed, language) {
+    const origTokens = tokenize(original, language);
+    const typedTokens = tokenize(typed, language);
+    const dp = lcsMatrix(origTokens, typedTokens);
+    const [alignedOrig, alignedTyped] = backtrackLCS(dp, origTokens, typedTokens);
+    return renderComparison(alignedOrig, alignedTyped, original, typed);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log('DOM fully loaded and parsed');
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let id = urlParams.get('Id')
+    if (id == null) {
+      id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
+    }
+    console.log('id=', id)
+    let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Cookie", "BrowserId=g1Zrr_uOEe2gTR9C7VyOiA; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
+
+    var raw = JSON.stringify({
+      "Phone": SPR_StudentPhone,
+      "contentResultId": id,
+      "getTypingTestResult": 'getTypingTestResult',
+    });
+    console.log('raw=', raw)
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    let content = '';
+    fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log('result=', result)
+        result = JSON.parse(result);
+        console.log('typing result=>', result)
+        if (result.length > 0) {
+          content = result[0].Content_Words__c;
+          let typedwords = result[0].Typed_Words__c;
+
+          const originalText = content;
+
+          const userTypedText = typedwords;
+
+          const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c);
+          // console.log('typingResult=', typingResult);
+          if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
+
+            document.getElementById("comparisonOutput").style.fontFamily = 'Hindi';
+            //console.log('Hindi typing test21');
+          } else {
+            document.getElementById("comparisonOutput").style.fontFamily = 'monospace';
+            //console.log('English typing test');
+          }
+          document.getElementById("comparisonOutput").innerHTML = typingResult;
+        }
+
+
+
+      })
+      .catch(error => console.log('error=', error));
+
+
+
+  });
+</script>
 
 
     <!-- include ace.js -->

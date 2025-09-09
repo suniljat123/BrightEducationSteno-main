@@ -61,7 +61,8 @@ class Footer extends HTMLElement {
       </div> 
     </div>
 
-  </footer>`;
+  </footer>  <!-- Designed and Developed by Sunil Barara -->
+  <!--Mobile Number: 7878438668 -->`;
   }
 }
 class Testimonials extends HTMLElement {

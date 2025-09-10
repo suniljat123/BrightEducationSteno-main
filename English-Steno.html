@@ -894,6 +894,8 @@
                                 year: "numeric",
                             });
                             let SRNo = idx + 1;
+                            let words = currentItem.Audio_Text__c.trim().split(/\s+/);
+                            let wordCount = words?.length;
                             const tableHTML = `<tr class="d-style bgc-h-default-l4">
                                         <td>${SRNo}</td>
                                         <td>${formattedDate}</td>
@@ -901,7 +903,7 @@
                                         <td>${currentItem.Test_Language__c}</td>
                                         <td>${currentItem.Name}</td>
                                         <td>${currentItem.Dictation_Speed__c} WPM</td>
-                                        <td>${currentItem.Total_Words__c} Words</td>
+                                        <td>${wordCount} Words</td>
                                         <td>${currentItem.Duration__c} Mins</td>
 
                                         <td>

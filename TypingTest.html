@@ -1117,8 +1117,7 @@ font-size: 16px;
                 }
             }
         }
-        function convertSecondsToTime(seconds) {
-            console.log('Seconds=', seconds)
+        function convertSecondsToTime(seconds) { 
             var minutes = Math.floor(seconds / 60);
             var remainingSeconds = seconds % 60;
 
@@ -1130,7 +1129,7 @@ font-size: 16px;
         }
         const displayResult = () => {
             let userInput = document.getElementById('quote-input')
-            document.getElementById("resultMainDiv").style.display = 'block';
+            //document.getElementById("resultMainDiv").style.display = 'block';
             document.getElementById("quote-input").style.display = 'none';
             document.getElementById("quote").style.display = 'none';
             document.getElementById("timeDivId").style.display = 'none';

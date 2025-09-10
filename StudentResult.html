@@ -896,7 +896,7 @@
                                 </span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Wrong Words: <span class="Incorrect Word Count:"> </span></span>
+                                <span>Wrong Words: <span class="IncorrectWordCount"> </span></span>
                             </div>
                         </div>
                         <div class="row">
@@ -928,7 +928,7 @@
                        
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Incorrect Word: <span class="Incorrect Word Count:"> </span></span>
+                                <span>Incorrect Word: <span class="IncorrectWordCount"> </span></span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Skipped And Extra Word: <span id="Skipped Word Count:"> </span></span>
@@ -1133,7 +1133,7 @@
                         }
                         i = j;
                     }
-                    document.getElementsByClassName("Incorrect Word Count:").innerText = incorrectWordsCnt;
+                    document.getElementsByClassName("IncorrectWordCount").innerText = incorrectWordsCnt;
                     // document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
                     // document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
                     document.getElementById("Skipped Word Count:").innerText = (skipWordCnt + extraWordCnt);

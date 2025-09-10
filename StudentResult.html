@@ -1041,7 +1041,7 @@
                         .replace(/>/g, "&gt;");
                 }
 
-                function renderComparison(origTokens, typedTokens, originalContent, userTypedText) {
+                function renderComparison(origTokens, typedTokens, originalContent, userTypedText, totalTime, timeTaken) {
                     let result = '';
                     let i = 0;
                     let incorrectWordsCnt = 0;
@@ -1158,16 +1158,21 @@
                         AccuracyElements[i].innerText = (accuracy + "%");
                     }
                     document.getElementById("Total Words Count:").innerText = totalWords.length;
+                    let netSpeed =(userTypedWords.length - incorrectWordsCnt) / (timeTaken / 60);
+                    let grossSpeed = (userTypedWords.length) / (timeTaken / 60);
+                    document.getElementById("Net Speed Method2").innerText = netSpeed.toFixed(2) + " WPM";
+                    document.getElementById("Gross Speed Method2").innerText = grossSpeed.toFixed(2) + " WPM";
+                    // Marks Calculation out of 50
                     //TotalTypedWordsCount-incorrectWordsCnt/time
                     return result;
                 }
 
-                function compareTexts(original, typed, language) {
+                function compareTexts(original, typed, language, totaltime, timeTaken) {
                     const origTokens = tokenize(original, language);
                     const typedTokens = tokenize(typed, language);
                     const dp = lcsMatrix(origTokens, typedTokens);
                     const [alignedOrig, alignedTyped] = backtrackLCS(dp, origTokens, typedTokens);
-                    return renderComparison(alignedOrig, alignedTyped, original, typed);
+                    return renderComparison(alignedOrig, alignedTyped, original, typed, totaltime, timeTaken);
                 }
 
                 document.addEventListener("DOMContentLoaded", () => {
@@ -1215,7 +1220,7 @@
 
                                 const userTypedText = typedwords;
 
-                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c);
+                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c,result[0].Total_Time__c,result[0],Time_Taken__c);
                                 // console.log('typingResult=', typingResult);
                                 if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 

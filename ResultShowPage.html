@@ -1076,7 +1076,7 @@
                             year: "numeric",
                         });
                         console.log('result Ranks=>', result);
-                        var ContentWords = result[0].Content_Words__c;
+                        var ContentWords = result[0].Course_Content__r.Audio_Text__c;
                         var TypedWords = result[0].Typed_Words__c;
                         displayResult(ContentWords, TypedWords, result[0].Course_Content__r.Test_Language__c);
                         document.getElementById('sprSubmittedDate').innerText = formattedDate;

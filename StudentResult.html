@@ -1041,7 +1041,7 @@
                         .replace(/>/g, "&gt;");
                 }
 
-                function renderComparison(origTokens, typedTokens, originalContent, userTypedText, timeTaken) {
+                function renderComparison(origTokens, typedTokens, originalContent, userTypedText, totalTime, timeTaken) {
                     let result = '';
                     let i = 0;
                     let incorrectWordsCnt = 0;
@@ -1167,12 +1167,12 @@
                     return result;
                 }
 
-                function compareTexts(original, typed, language, timeTaken) {
+                function compareTexts(original, typed, language, totaltime, timeTaken) {
                     const origTokens = tokenize(original, language);
                     const typedTokens = tokenize(typed, language);
                     const dp = lcsMatrix(origTokens, typedTokens);
                     const [alignedOrig, alignedTyped] = backtrackLCS(dp, origTokens, typedTokens);
-                    return renderComparison(alignedOrig, alignedTyped, original, typed, timeTaken);
+                    return renderComparison(alignedOrig, alignedTyped, original, typed, totaltime, timeTaken);
                 }
 
                 document.addEventListener("DOMContentLoaded", () => {
@@ -1220,7 +1220,7 @@
 
                                 const userTypedText = typedwords;
 
-                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c,result[0].Time_Taken__c);
+                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c,result[0].Total_Time__c,result[0].Time_Taken__c);
                                 // console.log('typingResult=', typingResult);
                                 if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 

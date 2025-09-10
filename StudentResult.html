@@ -891,7 +891,7 @@
                                 </span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Total Backspace Pressed: <span class="TotalBackSpacePressed"> </span>
+                                <span>Total Backspace Pressed: <span id="TotalBackSpacePressed"> </span>
                                 </span>
                             </div>
 
@@ -1200,17 +1200,18 @@
                     let takenSeconds = timeTaken % 60;
                     let formattedTakenTime = takenMinutes + ":" + (takenSeconds < 10 ? "0" : "") + takenSeconds;
                     document.getElementById("TimeTaken").innerText = formattedTakenTime;
+                    document.getElementById("TotalBackSpacePressed").innerText = backspaceCount;
                     // Marks Calculation out of 50
                     //TotalTypedWordsCount-incorrectWordsCnt/time
                     return result;
                 }
 
-                function compareTexts(original, typed, language, totaltime, timeTaken) {
+                function compareTexts(original, typed, language, totaltime, timeTaken, backspaceCount, keyStrokes, isTypingCourse) {
                     const origTokens = tokenize(original, language);
                     const typedTokens = tokenize(typed, language);
                     const dp = lcsMatrix(origTokens, typedTokens);
                     const [alignedOrig, alignedTyped] = backtrackLCS(dp, origTokens, typedTokens);
-                    return renderComparison(alignedOrig, alignedTyped, original, typed, totaltime, timeTaken);
+                    return renderComparison(alignedOrig, alignedTyped, original, typed, totaltime, timeTaken, backspaceCount, keyStrokes, isTypingCourse);
                 }
 
                 document.addEventListener("DOMContentLoaded", () => {
@@ -1258,7 +1259,7 @@
 
                                 const userTypedText = typedwords;
 
-                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c, result[0].Total_Time__c, result[0].Time_Taken__c);
+                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c, result[0].Total_Time__c, result[0].Time_Taken__c,result[0]?.BackSpace_Count__c,result[0]?.KeyStrokes__c,result[0]?.Course_Content__r?.Is_Typing_Course_Content__c);
                                 // console.log('typingResult=', typingResult);
                                 if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 

@@ -1146,7 +1146,7 @@
           result = JSON.parse(result);
           console.log('typing result=>', result)
           if (result.length > 0) {
-            content = result[0].Content_Words__c;
+            content = result[0].Course_Content__r.Audio_Text__c;
             document.getElementById('rollNumber').innerText = result[0]?.Students__r?.Roll_Number__c;
             document.getElementById('sprTestName').innerText = result[0]?.Course_Content__r?.Name;
             document.getElementById('sprStudentName').innerText = result[0]?.Students__r?.Name;

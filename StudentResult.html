@@ -1139,8 +1139,7 @@
                     }
                     // document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
                     // document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
-                    document.getElementById("Skipped Word Count:").innerText = (skipWordCnt + extraWordCnt);
-                    // document.getElementsByClassName("CorrectWordCount").innerText = correctWordCnt;
+                    document.getElementById("Skipped Word Count:").innerText = (skipWordCnt + extraWordCnt); 
                     let correctWordsElements = document.getElementsByClassName("CorrectWordCount");
                     for (let i = 0; i < correctWordsElements.length; i++) {
                         correctWordsElements[i].innerText = correctWordCnt;

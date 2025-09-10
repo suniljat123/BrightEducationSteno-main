@@ -1170,26 +1170,7 @@ font-size: 16px;
             // Marks calculation (example: 50 - (fullMistakes * 2) - (halfMistakes * 1))
             const marksOutOf50 = Math.max(0, 50 - (fullMistakes * 2) - (halfMistakes * 1));
             const marksOutOf25 = Math.max(0, 25 - (fullMistakes * 1) - (halfMistakes * 0.5));
-
-            // Error Stocks (Gross Error + 5)
-            const errorStocks = fullMistakes + 5;
-
-            // Update the results display
-            const wrapper = document.querySelector(".wrapper");
-            wrapper.innerHTML = `
-        <p>Gross Speed: <span id="gross-wpm">${grossWPM.toFixed(2)} WPM</span></p>
-        <p>Net Speed: <span id="net-wpm">${netWPM.toFixed(2)} WPM</span></p>
-        <p>Accuracy: <span id="accuracy">${accuracy.toFixed(2)}%</span></p>
-        <p>Full Mistakes: <span id="full-mistakes">${fullMistakes}</span></p>
-        <p>Half Mistakes: <span id="half-mistakes">${halfMistakes}</span></p>
-        <p>Net DPH: <span id="net-dph">${netDPH.toFixed(0)}</span></p>
-        <p>Marks (50): <span id="marks-50">${marksOutOf50.toFixed(1)}</span></p>
-        <p>Marks (25): <span id="marks-25">${marksOutOf25.toFixed(1)}</span></p>
-        <p>Error Stocks: <span id="error-stocks">${errorStocks}</span></p>
-        <p>Backspaces: <span id="backspaces">${backspaceCount}</span></p>
-        <p>Total Keystrokes: <span id="keystrokes">${keyStrokes}</span></p>
-    `;
-
+ 
             // Send data to server
             let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
             var myHeaders = new Headers();
@@ -1203,8 +1184,7 @@ font-size: 16px;
                 "netSpeed": netWPM.toFixed(2),
                 "netDPH": netDPH.toFixed(0),
                 "marksOutOf50": marksOutOf50.toFixed(1),
-                "marksOutOf25": marksOutOf25.toFixed(1),
-                "errorStocks": errorStocks,
+                "marksOutOf25": marksOutOf25.toFixed(1), 
                 "backspaceCount": backspaceCount,
                 "totalKeystrokes": keyStrokes,
                 "totalWords": quoteSection.innerText.length + '',

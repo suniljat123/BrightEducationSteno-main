@@ -1234,6 +1234,14 @@
                 document.addEventListener("DOMContentLoaded", () => {
                     console.log('DOM fully loaded and parsed');
                     document.getElementById('header').style.backgroundColor = '#38434b'
+                    let allTypingResultSummaryElements = document.getElementsByClassName("typing-result-summary");
+                        for (let i = 0; i < allTypingResultSummaryElements.length; i++) {
+                            allTypingResultSummaryElements[i].style.display = "none";
+                        }
+                        let allStenoResultSummaryElements = document.getElementsByClassName("steno-result-summary");
+                        for (let i = 0; i < allStenoResultSummaryElements.length; i++) {
+                            allStenoResultSummaryElements[i].style.display = "none";
+                        }
                     const queryString = window.location.search;
                     const urlParams = new URLSearchParams(queryString);
                     let id = urlParams.get('Id')

@@ -52,10 +52,10 @@
 </head>
 
 <body>
-   <!-- Designed and Developed by Sunil Barara -->
-  <!--Mobile Number: 7878438668 -->
+    <!-- Designed and Developed by Sunil Barara -->
+    <!--Mobile Number: 7878438668 -->
     <app-contactcareernavbar></app-contactcareernavbar>
-    
+
 
     <div class="section-title" style="padding-left: 4rem; padding-top: 10rem">
         <h2>Typing Test</h2>
@@ -1009,9 +1009,9 @@ justify-content: space-around;">
             renderNewQuote(id)
             let userInput = document.getElementById('quote-input')
             mistakes = 0;
-            timer = ""; 
+            timer = "";
             userInput.disabled = true;
-           // timeReduce();
+            // timeReduce();
             document.getElementById("stop-test").style.cursor = "not-allowed";
             document.getElementById("stop-test").disabled = true;
         })
@@ -1087,7 +1087,7 @@ justify-content: space-around;">
         const quoteSection = document.getElementById("quote");
         // Update the input event listener to track more metrics
         userInput.addEventListener("input", (e) => {
-            console.log('input event triggered',e.target.value);
+            console.log('input event triggered', e.target.value);
             calculateTypingAccuracy();
 
             // Track backspaces
@@ -1233,7 +1233,8 @@ justify-content: space-around;">
                 "totalKeystrokes": keyStrokes,
                 "totalWords": quoteSection.innerText.length + '',
                 "totalType": totaltypewords,
-                "timeTaken": timeTaken * 60, // in seconds
+                "timeTaken": timeTaken, // in seconds
+                "totalTime": totalTimeInSecond,
                 "contentData": quoteSection.innerText,
                 "studentTypedData": totalTypedString,
                 "submitTypedData": 'submitTypedData'

@@ -887,16 +887,27 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Total Typed Character: <span id="Total Typed Character Method2">
+                                <span>Total Typed Words: <span class="Total Typed Words Count:">
                                     </span>
                                 </span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Correct Characters: <span id="Correct Characters Method2"> </span>
+                                <span>Correct Words: <span class="Correct Word Count:"> </span>
                                 </span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Wrong Characters: <span id="Wrong Characters Method2"> </span></span>
+                                <span>Wrong Words: <span class="Incorrect Word Count:"> </span></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <span>Accuracy: <span class="Accuracy"> </span></span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <span>Gross Speed: <span id="Gross Speed Method2"> </span></span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <span>Net Speed: <span id="Net Speed Method2"> </span></span>
                             </div>
                         </div>
                         <div class="row">
@@ -914,26 +925,16 @@
                             </div>
                              
                         </div>
+                       
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Accuracy: <span id="Accuracy Method2"> </span></span>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Gross Speed: <span id="Gross Speed Method2"> </span></span>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Net Speed: <span id="Net Speed Method2"> </span></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Incorrect Word: <span id="Incorrect Word Count:"> </span></span>
+                                <span>Incorrect Word: <span class="Incorrect Word Count:"> </span></span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Skipped And Extra Word: <span id="Skipped Word Count:"> </span></span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Correct Word: <span id="Correct Word Count:"> </span></span>
+                                <span>Correct Word: <span class="Correct Word Count:"> </span></span>
                             </div>
                         </div>
                         <div class="row"> 
@@ -941,10 +942,10 @@
                                 <span>Total Words: <span id="Total Words Count:"> </span></span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Total Typed Words: <span id="Total Typed Words Count:"> </span></span>
+                                <span>Total Typed Words: <span class="Total Typed Words Count:"> </span></span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Accuracy: <span id="Accuracy"> </span></span>
+                                <span>Accuracy: <span class="Accuracy"> </span></span>
                             </div>
                         </div>
                     </div>
@@ -1132,17 +1133,17 @@
                         }
                         i = j;
                     }
-                    document.getElementById("Incorrect Word Count:").innerText = incorrectWordsCnt;
+                    document.getElementsByClassName("Incorrect Word Count:").innerText = incorrectWordsCnt;
                     // document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
                     // document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
                     document.getElementById("Skipped Word Count:").innerText = (skipWordCnt + extraWordCnt);
-                    document.getElementById("Correct Word Count:").innerText = correctWordCnt;
+                    document.getElementsByClassName("Correct Word Count:").innerText = correctWordCnt;
                     let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
                     let userTypedWords = userTypedText.trim().split(/\s+/);
-                    document.getElementById("Total Typed Words Count:").innerText = (userTypedWords.length);
+                    document.getElementsByClassName("Total Typed Words Count:").innerText = (userTypedWords.length);
 
                     let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
-                    document.getElementById("Accuracy").innerText = accuracy + "%";
+                    document.getElementsByClassName("Accuracy").innerText = accuracy + "%";
                     document.getElementById("Total Words Count:").innerText = totalWords.length;
 
                     return result;

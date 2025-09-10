@@ -1009,7 +1009,9 @@ justify-content: space-around;">
                                 year: "numeric",
                             });
                             let SRNo = idx + 1;
-
+                            
+                            let words = currentItem.Audio_Text__c.trim().split(/\s+/);
+                            let wordCount = words?.length;
                             const tableHTML = `<tr class="d-style bgc-h-default-l4">
                                         <td>${SRNo}</td>
                                         <td>${formattedDate}</td>
@@ -1017,7 +1019,7 @@ justify-content: space-around;">
                                         <td>${currentItem.Test_Language__c}</td>
                                         <td>${currentItem.Name}</td>
                                          
-                                        <td>${currentItem.Total_Words__c} Words</td> 
+                                        <td>${wordCount} Words</td> 
 
                                          <td>
                                     <center>

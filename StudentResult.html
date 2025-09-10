@@ -881,7 +881,32 @@
                                 <span>Test Name: <span id="sprTestName"> </span></span>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <span>Total Words: <span id="TotalWords"> </span></span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <span>Skip Words: <span id="TotalSkipWordCount">
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <span>Total Backspace Pressed: <span class="TotalBackSpacePressed"> </span>
+                                </span>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <span>Total Time Alloted: <span id="TotalTimeAlloted"> </span></span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <span>Time Taken: <span id="TimeTaken">
+                                    </span>
+                                </span>
+                            </div>
+                             
+                        </div>
                         <div class="row">
                             <span style="color: red;">one Word = Group of Letters Seperated by Space</span>
                         </div>
@@ -1140,6 +1165,7 @@
                     // document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
                     // document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
                     document.getElementById("Skipped Word Count:").innerText = (skipWordCnt + extraWordCnt); 
+                    document.getElementById("TotalSkipWordCount").innerText = skipWordCnt; 
                     let correctWordsElements = document.getElementsByClassName("CorrectWordCount");
                     for (let i = 0; i < correctWordsElements.length; i++) {
                         correctWordsElements[i].innerText = correctWordCnt;
@@ -1158,10 +1184,22 @@
                         AccuracyElements[i].innerText = (accuracy + "%");
                     }
                     document.getElementById("Total Words Count:").innerText = totalWords.length;
+                    document.getElementById("TotalWords").innerText = totalWords.length;
                     let netSpeed =(userTypedWords.length - incorrectWordsCnt) / (timeTaken / 60);
                     let grossSpeed = (userTypedWords.length) / (timeTaken / 60);
                     document.getElementById("Net Speed Method2").innerText = netSpeed.toFixed(2) + " WPM";
                     document.getElementById("Gross Speed Method2").innerText = grossSpeed.toFixed(2) + " WPM";
+                    let minutes = Math.floor(totalTime / 60);
+let seconds = totalTime % 60;
+
+// Add leading zero if seconds < 10
+let formattedTime = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+
+document.getElementById("TotalTimeAlloted").innerText = formattedTime;
+                    let takenMinutes = Math.floor(timeTaken / 60);
+                    let takenSeconds = timeTaken % 60;
+                    let formattedTakenTime = takenMinutes + ":" + (takenSeconds < 10 ? "0" : "") + takenSeconds;
+                    document.getElementById("TimeTaken").innerText = formattedTakenTime;
                     // Marks Calculation out of 50
                     //TotalTypedWordsCount-incorrectWordsCnt/time
                     return result;

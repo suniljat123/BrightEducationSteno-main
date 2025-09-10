@@ -865,7 +865,7 @@
                   </ul>
                 </section> -->
                     <div class="container border">
-                      
+
 
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
@@ -881,13 +881,13 @@
                                 <span>Test Name: <span id="sprTestName"> </span></span>
                             </div>
                         </div>
-                         
+
                         <div class="row">
                             <span style="color: red;">one Word = Group of Letters Seperated by Space</span>
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Total Typed Words: <span class="Total Typed Words Count:">
+                                <span>Total Typed Words: <span class="TotalTypedWordsCount">
                                     </span>
                                 </span>
                             </div>
@@ -911,11 +911,11 @@
                             </div>
                         </div>
                         <div class="row">
-                            <span style="color: red;"s>Marks Distribution (as RHC)</span>
+                            <span style="color: red;" s>Marks Distribution (as RHC)</span>
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span >Marks Out of 50: <span id="Marks Out of 50">
+                                <span>Marks Out of 50: <span id="Marks Out of 50">
                                     </span>
                                 </span>
                             </div>
@@ -923,9 +923,9 @@
                                 <span>Marks Out of 25: <span id="Marks Out of 25"> </span>
                                 </span>
                             </div>
-                             
+
                         </div>
-                       
+
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Incorrect Word: <span class="IncorrectWordCount"> </span></span>
@@ -937,12 +937,12 @@
                                 <span>Correct Word: <span class="CorrectWordCount"> </span></span>
                             </div>
                         </div>
-                        <div class="row"> 
+                        <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Total Words: <span id="Total Words Count:"> </span></span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
-                                <span>Total Typed Words: <span class="Total Typed Words Count:"> </span></span>
+                                <span>Total Typed Words: <span class="TotalTypedWordsCount"> </span></span>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Accuracy: <span class="Accuracy"> </span></span>
@@ -1133,24 +1133,31 @@
                         }
                         i = j;
                     }
-                    let elements = document.getElementsByClassName("IncorrectWordCount"); 
-for (let i = 0; i < elements.length; i++) {
-  elements[i].innerText = incorrectWordsCnt;
-}
+                    let elements = document.getElementsByClassName("IncorrectWordCount");
+                    for (let i = 0; i < elements.length; i++) {
+                        elements[i].innerText = incorrectWordsCnt;
+                    }
                     // document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
                     // document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
                     document.getElementById("Skipped Word Count:").innerText = (skipWordCnt + extraWordCnt);
                     // document.getElementsByClassName("CorrectWordCount").innerText = correctWordCnt;
-                    let correctWordsElements = document.getElementsByClassName("CorrectWordCount"); 
-for (let i = 0; i < correctWordsElements.length; i++) {
-    correctWordsElements[i].innerText =   correctWordCnt;
-}
+                    let correctWordsElements = document.getElementsByClassName("CorrectWordCount");
+                    for (let i = 0; i < correctWordsElements.length; i++) {
+                        correctWordsElements[i].innerText = correctWordCnt;
+                    }
                     let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
                     let userTypedWords = userTypedText.trim().split(/\s+/);
-                    document.getElementsByClassName("Total Typed Words Count:").innerText = (userTypedWords.length);
-
+                   
+                    let TotalTypedWordsElements =  document.getElementsByClassName("TotalTypedWordsCount").innerText;
+                    for (let i = 0; i < TotalTypedWordsElements.length; i++) {
+                        TotalTypedWordsElements[i].innerText = (userTypedWords.length);
+                    }
                     let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
-                    document.getElementsByClassName("Accuracy").innerText = accuracy + "%";
+                   
+                    let AccuracyElements =  document.getElementsByClassName("TotalTypedWordsCount").innerText;
+                    for (let i = 0; i < AccuracyElements.length; i++) {
+                        AccuracyElements[i].innerText = accuracy + "%";
+                    }
                     document.getElementById("Total Words Count:").innerText = totalWords.length;
 
                     return result;

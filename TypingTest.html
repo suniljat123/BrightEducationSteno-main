@@ -1027,11 +1027,11 @@ font-size: 16px;
 
                         document.getElementById("quote").style.fontFamily = 'Hindi';
                         document.getElementById("quote-input").style.fontFamily = 'Hindi';
-                        document.getElementById("wrapperResultId").style.fontFamily = 'Hindi';
+                       // document.getElementById("wrapperResultId").style.fontFamily = 'Hindi';
                     } else {
                         document.getElementById("quote").style.fontFamily = 'monospace';
                         document.getElementById("quote-input").style.fontFamily = 'monospace';
-                        document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
+                       // document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
                     }
 
                     time = parseInt(result[0].Duration__c) * 60;
@@ -1135,7 +1135,7 @@ font-size: 16px;
             document.getElementById("quote").style.display = 'none';
             document.getElementById("timeDivId").style.display = 'none';
 
-            var resultSection = document.getElementById("wrapperResultId");
+         //   var resultSection = document.getElementById("wrapperResultId");
             var quotee = document.getElementById("quote").innerText;
             const words = quotee.split(/\s+/);
             let typedwords = document.getElementById("quote-input").value.replace(/\s+/g, ' ').trim().split(' ');

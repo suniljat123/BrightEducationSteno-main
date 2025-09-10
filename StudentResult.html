@@ -1147,13 +1147,13 @@
                     let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
                     let userTypedWords = userTypedText.trim().split(/\s+/);
                    
-                    let TotalTypedWordsElements =  document.getElementsByClassName("TotalTypedWordsCount").innerText;
+                    let TotalTypedWordsElements =  document.getElementsByClassName("TotalTypedWordsCount");
                     for (let i = 0; i < TotalTypedWordsElements.length; i++) {
                         TotalTypedWordsElements[i].innerText = (userTypedWords.length);
                     }
                     let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
                    
-                    let AccuracyElements =  document.getElementsByClassName("TotalTypedWordsCount").innerText;
+                    let AccuracyElements =  document.getElementsByClassName("TotalTypedWordsCount");
                     for (let i = 0; i < AccuracyElements.length; i++) {
                         AccuracyElements[i].innerText = accuracy + "%";
                     }

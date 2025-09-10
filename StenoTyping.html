@@ -999,23 +999,7 @@ font-size: 16px;
         let timer = "";
         let mistakes = 0;
         let totaltypewords = 0;
-
-        // --------------------------------------------
-        /*
-        
-                var quotee='I am very happy to be present here today for opening the new building of your University. All that you have said about this new University, which is only six years old, is commendable in many respects. Although you have not had adequate equipment and the necessary wherewithal in the beginning, these serious shortcomings did not bother you. In right earnest you started the work.';
-                //Array of characters in the quote
-                let arr = quotee.split(" ");
-                console.log('1005');
-                quoteSection=arr;  
-          //    console.log('986->',quoteSection);
-               // document.getElementById("quote").style.fontFamily = 'monospace';
-                document.getElementById("quote-input").style.fontFamily = 'monospace';
-        */
-        // --------------------------------------------
-
-
-
+ 
 
         userInput.addEventListener("input", () => {
             calculateTypingAccuracy()
@@ -1139,16 +1123,6 @@ font-size: 16px;
 
             return minutesStr + ":" + secondsStr;
         }
-
-
-        /*   function updateTimer() {
-               if (time == 0) {
-                   //End test if timer reaches 0
-                   displayResult();
-               } else {
-                   document.getElementById("timer").innerText = --time + "s";
-               }
-           }  */
         function updateTimer() {
             var timerElement = document.getElementById("timer");
             var currentTime = timerElement.innerText;
@@ -1156,7 +1130,6 @@ font-size: 16px;
             var minutes = parseInt(timeParts[0]);
             var seconds = parseInt(timeParts[1]);
             if (minutes == 0 && seconds == 0) {
-                //End test if timer reaches 0
                 displayResult();
             } else {
                 var totalSeconds = minutes * 60 + seconds;
@@ -1195,47 +1168,7 @@ font-size: 16px;
             let correctWordCnt = 0;
             let inCorrectWordCnt = 0;
             let skipWordCnt = 0;
-            while (i < words.length || j < typedwords.length) {
-                if (j >= typedwords.length || (i < words.length && words[i] !== typedwords[j])) {
-                    if (j < typedwords.length && !words.includes(typedwords[j])) {
-                        // Incorrect word
-                        inCorrectWordCnt++;
-                        const span = document.createElement('span');
-                        span.classList.add('incorrect-word');
-                        span.textContent = typedwords[j];
-
-                        const correctSpan = document.createElement('span');
-                        correctSpan.classList.add('correct-word');
-                        correctSpan.textContent = words[i];
-
-                        resultSection.appendChild(span);
-                        resultSection.appendChild(correctSpan);
-                        j++;
-                        i++; // Skip the correct word already displayed
-                    } else {
-                        // Skipped word
-                        skipWordCnt++;
-                        const span = document.createElement('span');
-                        span.classList.add('skipped');
-                        span.textContent = words[i] + ' ';
-                        resultSection.appendChild(span);
-                        i++;
-                    }
-                } else {
-                    // Correct word
-                    correctWordCnt++;
-                    const span = document.createElement('span');
-                    span.classList.add('correct-input');
-                    span.textContent = words[i] + ' ';
-                    resultSection.appendChild(span);
-                    i++;
-                    j++;
-                }
-            }
-            console.log('correct=', correctWordCnt)
-            console.log('incorrect=', inCorrectWordCnt)
-            console.log('skip=', skipWordCnt)
-
+           
             //   end of new changess ---------------------------------
 
 
@@ -1248,21 +1181,6 @@ font-size: 16px;
             if (time != 0) {
                 timeTaken = (totalTimeInSecond - time) / 100;
             }
-
-            let accuracy = calculateTypingAccuracy();
-            console.log('correctWords=', correctWords)
-            console.log(' quoteSection.length=', quoteSection.length)
-            let marks = (correctWords / quoteSection.length) * 100;
-            document.getElementById("wpm").innerText = marks.toFixed(2) + '/100';
-            let wrongWords = accuracy.substr(accuracy.indexOf('@') + 1, accuracy.length)
-            accuracy = parseInt(accuracy.substr(0, accuracy.indexOf('@')));
-            if (accuracy == 'Infinity' || accuracy == 'NaN') {
-                accuracy = 0;
-                document.getElementById("accuracy").innerText = '0%';
-            } else {
-                document.getElementById("accuracy").innerText = accuracy.toFixed(2) + '%';
-            }
-
             let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -1276,7 +1194,7 @@ font-size: 16px;
                 "stenoMarks": marks.toFixed(2) + "",
                 "totalWords": quoteSection.length + '',
                 "totalType": totaltypewords,
-                "timeTaken": timeTaken,
+                "timeTaken": totalTimeInSecond-time,
                 "totalTime":totalTimeInSecond,
                 "submitTypedData": 'submitTypedData'
             });
@@ -1290,7 +1208,8 @@ font-size: 16px;
             fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    console.log('result=', result)
+                    let URL = 'StudentResult.html?Id=' + result;
+                    window.open(URL, "_self");
 
                 })
                 .catch(error => console.log('error=', error));

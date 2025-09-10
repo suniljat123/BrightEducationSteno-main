@@ -1147,7 +1147,7 @@
                     let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
                     let userTypedWords = userTypedText.trim().split(/\s+/);
                    
-                    let TotalTypedWordsElements =  document.getElementsByClassName("TotalTypedWordsCount");
+                    let TotalTypedWordsElements =  document.getElementsByClassName("TotalTypedWordsCount"); 
                     for (let i = 0; i < TotalTypedWordsElements.length; i++) {
                         TotalTypedWordsElements[i].innerText = (userTypedWords.length);
                     }

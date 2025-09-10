@@ -980,7 +980,7 @@ justify-content: space-around;">
     <script defer src="assets/js/main.js"></script>
     <script src="assets/js/MyComponents.js"></script>
     <script>
-let backspaceCount=0;
+        let backspaceCount = 0;
         $(document).ready(function () {
             checkIsSprStudent();
             document.getElementById('header').style.backgroundColor = '#38434b'
@@ -996,6 +996,8 @@ let backspaceCount=0;
             // Print or do something with the selected value
             console.log("Selected value: " + selectedValue);
             document.getElementById("timer").innerText = selectedValue + ':00';
+            time = parseInt(selectedValue) * 60;
+            totalTimeInSecond = parseInt(selectedValue) * 60;
         });
         let time = 60;
         let totalTimeInSecond;
@@ -1056,8 +1058,6 @@ let backspaceCount=0;
 
                     time = parseInt(result[0].Duration__c) * 60;
                     totalTimeInSecond = parseInt(result[0].Duration__c) * 60;
-                    //    document.getElementById("timer").innerText = convertSecondsToTime(time) + 's';
-                    //    document.getElementById("timer").innerText = time + "s";
                     let content = result[0].Audio_Text__c;
                     content = content.replace('<p>', '');
                     content = content.replace('</p>', '');
@@ -1233,7 +1233,7 @@ let backspaceCount=0;
                 "totalKeystrokes": keyStrokes,
                 "totalWords": quoteSection.innerText.length + '',
                 "totalType": totaltypewords,
-                "timeTaken": time , // in seconds
+                "timeTaken": time, // in seconds
                 "totalTime": totalTimeInSecond,
                 "contentData": quoteSection.innerText,
                 "studentTypedData": totalTypedString,
@@ -1275,45 +1275,7 @@ let backspaceCount=0;
             part2.style.display = 'none';
             quote = '';
         }
-    </script>
-    <!-- 
-    <Script>
-        let time = 60;
-        let totalTimeInSecond;
-        $(document).ready(function () {
-            const TableData = document.getElementById('TableData');
-            let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            let id = urlParams.get('Id')
-            if (id == null) {
-
-                id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
-            }
-            console.log('id===>', id)
-            renderNewQuote(id)
-
-        })
-        //Random Quotes Api URL 
-        
-        let quote = "";
-        let courseDataId = ''
-        let timer = "";
-        let mistakes = 0;
-        let totaltypewords = 0;
-         
-        function handleStartTest(id) {
-            renderNewQuote(id);
-            var part1 = document.getElementById('datatable');
-            var part2 = document.getElementById('typingModalId');
-            part1.style.display = 'none';
-            part2.style.display = 'inline-block';
-
-        }
-         
-    </Script>
- 
-    </script> -->
+    </script> 
 
     <!-- include common vendor scripts used in demo pages -->
     <script src="js/jsone.js"></script>

@@ -1153,9 +1153,9 @@
                     }
                     let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
                    
-                    let AccuracyElements =  document.getElementsByClassName("TotalTypedWordsCount");
+                    let AccuracyElements =  document.getElementsByClassName("Accuracy");
                     for (let i = 0; i < AccuracyElements.length; i++) {
-                        AccuracyElements[i].innerText = accuracy + "%";
+                        AccuracyElements[i].innerText = (accuracy + "%");
                     }
                     document.getElementById("Total Words Count:").innerText = totalWords.length;
 

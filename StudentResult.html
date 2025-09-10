@@ -894,7 +894,7 @@
                                 <span>Total Backspace Pressed: <span class="TotalBackSpacePressed"> </span>
                                 </span>
                             </div>
-                            
+
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-6">
@@ -905,7 +905,7 @@
                                     </span>
                                 </span>
                             </div>
-                             
+
                         </div>
                         <div class="row">
                             <span style="color: red;">one Word = Group of Letters Seperated by Space</span>
@@ -1164,38 +1164,38 @@
                     }
                     // document.getElementById("Skipped Word Count:").innerText = "Skipped Word Count: " + skipWordCnt;
                     // document.getElementById("Extra Word Count:").innerText = "Extra Word Count: " + extraWordCnt;
-                    document.getElementById("Skipped Word Count:").innerText = (skipWordCnt + extraWordCnt); 
-                    document.getElementById("TotalSkipWordCount").innerText = skipWordCnt; 
+                    document.getElementById("Skipped Word Count:").innerText = (skipWordCnt + extraWordCnt);
+                    document.getElementById("TotalSkipWordCount").innerText = skipWordCnt;
                     let correctWordsElements = document.getElementsByClassName("CorrectWordCount");
                     for (let i = 0; i < correctWordsElements.length; i++) {
                         correctWordsElements[i].innerText = correctWordCnt;
                     }
                     let totalWords = originalContent.trim().split(/\s+/);//correctWordCnt + incorrectWordsCnt + skipWordCnt + extraWordCnt;
                     let userTypedWords = userTypedText.trim().split(/\s+/);
-                   
-                    let TotalTypedWordsElements =  document.getElementsByClassName("TotalTypedWordsCount"); 
+
+                    let TotalTypedWordsElements = document.getElementsByClassName("TotalTypedWordsCount");
                     for (let i = 0; i < TotalTypedWordsElements.length; i++) {
                         TotalTypedWordsElements[i].innerText = (userTypedWords.length);
                     }
                     let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
-                   
-                    let AccuracyElements =  document.getElementsByClassName("Accuracy");
+
+                    let AccuracyElements = document.getElementsByClassName("Accuracy");
                     for (let i = 0; i < AccuracyElements.length; i++) {
                         AccuracyElements[i].innerText = (accuracy + "%");
                     }
                     document.getElementById("Total Words Count:").innerText = totalWords.length;
                     document.getElementById("TotalWords").innerText = totalWords.length;
-                    let netSpeed =(userTypedWords.length - incorrectWordsCnt) / (timeTaken / 60);
+                    let netSpeed = (userTypedWords.length - incorrectWordsCnt) / (timeTaken / 60);
                     let grossSpeed = (userTypedWords.length) / (timeTaken / 60);
                     document.getElementById("Net Speed Method2").innerText = netSpeed.toFixed(2) + " WPM";
                     document.getElementById("Gross Speed Method2").innerText = grossSpeed.toFixed(2) + " WPM";
                     let minutes = Math.floor(totalTime / 60);
-let seconds = totalTime % 60;
+                    let seconds = totalTime % 60;
 
-// Add leading zero if seconds < 10
-let formattedTime = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+                    // Add leading zero if seconds < 10
+                    let formattedTime = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 
-document.getElementById("TotalTimeAlloted").innerText = formattedTime;
+                    document.getElementById("TotalTimeAlloted").innerText = formattedTime;
                     let takenMinutes = Math.floor(timeTaken / 60);
                     let takenSeconds = timeTaken % 60;
                     let formattedTakenTime = takenMinutes + ":" + (takenSeconds < 10 ? "0" : "") + takenSeconds;
@@ -1258,7 +1258,7 @@ document.getElementById("TotalTimeAlloted").innerText = formattedTime;
 
                                 const userTypedText = typedwords;
 
-                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c,result[0].Total_Time__c,result[0].Time_Taken__c);
+                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c, result[0].Total_Time__c, result[0].Time_Taken__c);
                                 // console.log('typingResult=', typingResult);
                                 if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 

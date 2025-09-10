@@ -867,7 +867,7 @@
                     <div class="container border">
 
 
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Roll Number: <span id="rollNumber">
                                     </span>
@@ -881,7 +881,7 @@
                                 <span>Test Name: <span id="sprTestName"> </span></span>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row typing-result-summary">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Total Words: <span id="TotalWords"> </span></span>
                             </div>
@@ -896,7 +896,7 @@
                             </div>
 
                         </div>
-                        <div class="row">
+                        <div class="row typing-result-summary">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Total Time Alloted: <span id="TotalTimeAlloted"> </span></span>
                             </div>
@@ -907,10 +907,10 @@
                             </div>
 
                         </div>
-                        <div class="row">
+                        <div class="row typing-result-summary">
                             <span style="color: red;">one Word = Group of Letters Seperated by Space</span>
                         </div>
-                        <div class="row">
+                        <div class="row typing-result-summary">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Total Typed Words: <span class="TotalTypedWordsCount">
                                     </span>
@@ -924,7 +924,7 @@
                                 <span>Wrong Words: <span class="IncorrectWordCount"> </span></span>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row typing-result-summary">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Accuracy: <span class="Accuracy"> </span></span>
                             </div>
@@ -935,10 +935,10 @@
                                 <span>Net Speed: <span id="Net Speed Method2"> </span></span>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row typing-result-summary">
                             <span style="color: red;" s>Marks Distribution (as RHC)</span>
                         </div>
-                        <div class="row">
+                        <div class="row typing-result-summary">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Marks Out of 50: <span id="Marks Out of 50">
                                     </span>
@@ -951,7 +951,7 @@
 
                         </div>
 
-                        <div class="row">
+                        <div class="row steno-result-summary">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Incorrect Word: <span class="IncorrectWordCount"> </span></span>
                             </div>
@@ -962,7 +962,7 @@
                                 <span>Correct Word: <span class="CorrectWordCount"> </span></span>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row steno-result-summary">
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <span>Total Words: <span id="Total Words Count:"> </span></span>
                             </div>
@@ -1202,7 +1202,15 @@
                     document.getElementById("TimeTaken").innerText = formattedTakenTime;
                     document.getElementById("TotalBackSpacePressed").innerText = backspaceCount;
                     if(isTypingCourse){
-                        
+                        let allTypingResultSummaryElements = document.getElementsByClassName("typing-result-summary");
+                        for (let i = 0; i < allTypingResultSummaryElements.length; i++) {
+                            allTypingResultSummaryElements[i].style.display = "block";
+                        }
+                    }else{
+                        let allTypingResultSummaryElements = document.getElementsByClassName("typing-result-summary");
+                        for (let i = 0; i < allTypingResultSummaryElements.length; i++) {
+                            allTypingResultSummaryElements[i].style.display = "none";
+                        }
                     }
                     return result;
                 }

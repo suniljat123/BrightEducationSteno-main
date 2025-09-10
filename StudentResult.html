@@ -1066,7 +1066,7 @@
                         .replace(/>/g, "&gt;");
                 }
 
-                function renderComparison(origTokens, typedTokens, originalContent, userTypedText, totalTime, timeTaken) {
+                function renderComparison(origTokens, typedTokens, originalContent, userTypedText, totalTime, timeTaken,backspaceCount, keyStrokes, isTypingCourse) {
                     let result = '';
                     let i = 0;
                     let incorrectWordsCnt = 0;
@@ -1201,8 +1201,9 @@
                     let formattedTakenTime = takenMinutes + ":" + (takenSeconds < 10 ? "0" : "") + takenSeconds;
                     document.getElementById("TimeTaken").innerText = formattedTakenTime;
                     document.getElementById("TotalBackSpacePressed").innerText = backspaceCount;
-                    // Marks Calculation out of 50
-                    //TotalTypedWordsCount-incorrectWordsCnt/time
+                    if(isTypingCourse){
+                        
+                    }
                     return result;
                 }
 

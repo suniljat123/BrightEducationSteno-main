@@ -821,8 +821,7 @@
                                             <th class="bgc-yellow-l3">Total Words</th>
                                             <th class="bgc-yellow-l3">Total Typed</th>
                                             <th class="bgc-yellow-l3">Incorrect</th>
-                                            <th class="bgc-yellow-l3">Accuracy</th>
-                                            <th class="bgc-yellow-l3">Speed/Marks</th>
+                                            <!-- <th class="bgc-yellow-l3">Accuracy</th>  -->
                                             <!-- <th class="bgc-yellow-l3">Marks</th> -->
                                             <!-- <th class="bgc-yellow-l3">Rank</th> -->
                                             <th class="bgc-yellow-l3">Answer Sheet</th>
@@ -1167,9 +1166,9 @@
                                             <td>${currentItem.Total_Words__c}</td>
                                             <td>${currentItem.Total_Type__c}</td>
                                             <td>${currentItem.Incorrect_Words__c}</td>
-                                            <td>${marks}</td>
-                                            <td>${marksOrSpeed}</td>
-                                            <!--<td>${stenoMarks}</td>
+                                             <!--<td>${marks}</td>
+                                           <td>${marksOrSpeed}</td>
+                                            <td>${stenoMarks}</td>
                                             <td>
                                                 ${currentItem.Rank__c} </td>-->
                                             <td style="    justify-content: center;
@@ -1328,10 +1327,10 @@
             }
             document.getElementById("wpm").innerText =
                 (userInput.value.length / 5 / timeTaken).toFixed(2) + " wpm";
-            document.getElementById("accuracy").innerText =
-                Math.round(
-                    ((userInput.value.length - mistakes) / userInput.value.length) * 100
-                ) + " %";
+            // document.getElementById("accuracy").innerText =
+            //     Math.round(
+            //         ((userInput.value.length - mistakes) / userInput.value.length) * 100
+            //     ) + " %";
         };
 
         //Start Test

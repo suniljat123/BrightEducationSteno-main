@@ -989,6 +989,7 @@
             <script defer src="assets/js/main.js"></script>
             <script src="assets/js/MyComponents.js"></script>
             <script>
+                let id = '';
                 function tokenize(text, language) {
                     text = text.normalize("NFC");
                     console.log('Normalized text:');
@@ -1066,7 +1067,7 @@
                         .replace(/>/g, "&gt;");
                 }
 
-                function renderComparison(origTokens, typedTokens, originalContent, userTypedText, totalTime, timeTaken,backspaceCount, isTypingCourse) {
+                function renderComparison(origTokens, typedTokens, originalContent, userTypedText, totalTime, timeTaken, backspaceCount, isTypingCourse) {
                     let result = '';
                     let i = 0;
                     let incorrectWordsCnt = 0;
@@ -1191,13 +1192,13 @@
                     document.getElementById("Gross Speed Method2").innerText = grossSpeed.toFixed(2) + " WPM";
                     let minutes = Math.floor(totalTime / 60);
                     let seconds = totalTime % 60;
-                     
+
                     let dph = netSpeed * 5 * 60; // WPM to DPH conversion
                     let marksOutOf50 = ((20 / 8000) * dph).toFixed(2);
                     let marksOutOf25 = ((10 / 8000) * dph).toFixed(2);
-                    document.getElementById("Marks Out of 50").innerText = marksOutOf50>50?50:marksOutOf50;
-                    document.getElementById("Marks Out of 25").innerText = marksOutOf25>25?25:marksOutOf25;
- 
+                    document.getElementById("Marks Out of 50").innerText = marksOutOf50 > 50 ? 50 : marksOutOf50;
+                    document.getElementById("Marks Out of 25").innerText = marksOutOf25 > 25 ? 25 : marksOutOf25;
+
                     // Add leading zero if seconds < 10
                     let formattedTime = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 
@@ -1206,8 +1207,8 @@
                     let takenSeconds = timeTaken % 60;
                     let formattedTakenTime = takenMinutes + ":" + (takenSeconds < 10 ? "0" : "") + takenSeconds;
                     document.getElementById("TimeTaken").innerText = formattedTakenTime;
-                    document.getElementById("TotalBackSpacePressed").innerText = backspaceCount?backspaceCount:0;
-                    if(isTypingCourse){
+                    document.getElementById("TotalBackSpacePressed").innerText = backspaceCount ? backspaceCount : 0;
+                    if (isTypingCourse) {
                         let allTypingResultSummaryElements = document.getElementsByClassName("typing-result-summary");
                         for (let i = 0; i < allTypingResultSummaryElements.length; i++) {
                             allTypingResultSummaryElements[i].style.display = "flex";
@@ -1216,7 +1217,7 @@
                         for (let i = 0; i < allStenoResultSummaryElements.length; i++) {
                             allStenoResultSummaryElements[i].style.display = "none";
                         }
-                    }else{
+                    } else {
                         let allTypingResultSummaryElements = document.getElementsByClassName("typing-result-summary");
                         for (let i = 0; i < allTypingResultSummaryElements.length; i++) {
                             allTypingResultSummaryElements[i].style.display = "none";
@@ -1226,7 +1227,37 @@
                             allStenoResultSummaryElements[i].style.display = "flex";
                         }
                     }
-                   
+                    let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
+                    var myHeaders = new Headers();
+                    myHeaders.append("Content-Type", "application/json");
+                    var raw = JSON.stringify({
+                        "Phone": SPR_StudentPhone,
+                        "resultId": id,
+                        "accuracy": accuracy.toFixed(2),
+                        "grossSpeed": grossSpeed.toFixed(2),
+                        "netSpeed": netSpeed.toFixed(2),
+                        "marksOutOf50": marksOutOf50.toFixed(1),
+                        "marksOutOf25": marksOutOf25.toFixed(1),
+                        "totalWords": totalWords.length,
+                        "totalType": userTypedWords.length,
+                        "updateTypingResult": 'updateTypingResult'
+                    });
+
+                    var requestOptions = {
+                        method: 'POST',
+                        headers: myHeaders,
+                        body: raw,
+                        redirect: 'follow'
+                    };
+
+                    fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
+                        .then(response => response.json())
+                        .then(result => {
+                            console.log(result)
+                            let URL = 'StudentResult.html?Id=' + result;
+                            window.open(URL, "_self");
+                        })
+                        .catch(error => console.log('error=', error));
                     return result;
                 }
 
@@ -1242,16 +1273,16 @@
                     console.log('DOM fully loaded and parsed');
                     document.getElementById('header').style.backgroundColor = '#38434b'
                     let allTypingResultSummaryElements = document.getElementsByClassName("typing-result-summary");
-                        for (let i = 0; i < allTypingResultSummaryElements.length; i++) {
-                            allTypingResultSummaryElements[i].style.display = "none";
-                        }
-                        let allStenoResultSummaryElements = document.getElementsByClassName("steno-result-summary");
-                        for (let i = 0; i < allStenoResultSummaryElements.length; i++) {
-                            allStenoResultSummaryElements[i].style.display = "none";
-                        }
+                    for (let i = 0; i < allTypingResultSummaryElements.length; i++) {
+                        allTypingResultSummaryElements[i].style.display = "none";
+                    }
+                    let allStenoResultSummaryElements = document.getElementsByClassName("steno-result-summary");
+                    for (let i = 0; i < allStenoResultSummaryElements.length; i++) {
+                        allStenoResultSummaryElements[i].style.display = "none";
+                    }
                     const queryString = window.location.search;
                     const urlParams = new URLSearchParams(queryString);
-                    let id = urlParams.get('Id')
+                    id = urlParams.get('Id')
                     if (id == null) {
                         id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
                     }
@@ -1291,7 +1322,7 @@
 
                                 const userTypedText = typedwords;
 
-                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c, result[0].Total_Time__c, result[0].Time_Taken__c,result[0]?.BackSpace_Count__c,result[0]?.Course_Content__r?.Is_Typing_Course_Content__c);
+                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c, result[0].Total_Time__c, result[0].Time_Taken__c, result[0]?.BackSpace_Count__c, result[0]?.Course_Content__r?.Is_Typing_Course_Content__c);
                                 // console.log('typingResult=', typingResult);
                                 if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 

@@ -1170,9 +1170,10 @@ font-size: 16px;
             // ended
 
             // words in below box
-
-
-            let typedwords = document.getElementById("quote-input").value.replace(/\s+/g, ' ').trim().split(/\s+/);
+ 
+            let typedwords = document.getElementById("quote-input").value.replace(/\s+/g, ' ').trim().split(' ');
+           
+           let totalTypedString = typedwords.join(' ');
             // ended 
             var lastList = [];
             let i = 0, j = 0;
@@ -1182,7 +1183,7 @@ font-size: 16px;
            let accuracy = 0;
            let wrongWords = 0;
             let marks = 0;
-            
+
             //   end of new changess ---------------------------------
 
 
@@ -1211,6 +1212,7 @@ font-size: 16px;
                 "timeTaken": totalTimeInSecond-time,
                 "totalTime":totalTimeInSecond,
                 "backspaceCount": backspaceCount,
+                "studentTypedData": totalTypedString,
                 "submitTypedData": 'submitTypedData'
             });
 

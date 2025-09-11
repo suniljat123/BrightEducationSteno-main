@@ -1195,8 +1195,8 @@
                     let dph = netSpeed * 5 * 60; // WPM to DPH conversion
                     let marksOutOf50 = ((20 / 8000) * dph).toFixed(2);
                     let marksOutOf25 = ((10 / 8000) * dph).toFixed(2);
-                    document.getElementById("Marks Out of 50").innerText = marksOutOf50;
-                    document.getElementById("Marks Out of 25").innerText = marksOutOf25;
+                    document.getElementById("Marks Out of 50").innerText = marksOutOf50>50?50:marksOutOf50;
+                    document.getElementById("Marks Out of 25").innerText = marksOutOf25>25?25:marksOutOf25;
  
                     // Add leading zero if seconds < 10
                     let formattedTime = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
@@ -1206,7 +1206,7 @@
                     let takenSeconds = timeTaken % 60;
                     let formattedTakenTime = takenMinutes + ":" + (takenSeconds < 10 ? "0" : "") + takenSeconds;
                     document.getElementById("TimeTaken").innerText = formattedTakenTime;
-                    document.getElementById("TotalBackSpacePressed").innerText = backspaceCount;
+                    document.getElementById("TotalBackSpacePressed").innerText = backspaceCount?backspaceCount:0;
                     if(isTypingCourse){
                         let allTypingResultSummaryElements = document.getElementsByClassName("typing-result-summary");
                         for (let i = 0; i < allTypingResultSummaryElements.length; i++) {

@@ -991,10 +991,7 @@
             <script>
                 let id = '';
                 function tokenize(text, language) {
-                    console.log('Original text:', text);
-                    text =  (text || "").toString().normalize("NFC");
-                    console.log('After NFC normalization:', text);
-                    console.log('Normalized text:');
+                    text = (text || "").toString().normalize("NFC");
                     let isHindi = /[\u0900-\u097F]/.test(text);
                     if (language == 'Hindi') {
                         isHindi = true;
@@ -1082,8 +1079,6 @@
 
                         // ✅ Case: Exact match
                         if (o === t && o !== null) {
-                            console.log(`o ${o}`);
-                            console.log(`t ${t}`);
                             result += `<span class="correct">${escapeHtml(o)}</span>`;
                             if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
                                 correctWordCnt++;
@@ -1259,15 +1254,13 @@
                         .then(result => {
                             console.log(result)
                             //let URL = 'StudentResult.html?Id=' + result;
-                          //  window.open(URL, "_self");
+                            //  window.open(URL, "_self");
                         })
                         .catch(error => console.log('error=', error));
                     return result;
                 }
 
                 function compareTexts(original, typed, language, totaltime, timeTaken, backspaceCount, isTypingCourse) {
-                    console.log('Original:', original);
-                    console.log('Typed:', typed);
                     const origTokens = tokenize(original, language);
                     const typedTokens = tokenize(typed, language);
                     const dp = lcsMatrix(origTokens, typedTokens);
@@ -1276,7 +1269,6 @@
                 }
 
                 document.addEventListener("DOMContentLoaded", () => {
-                    console.log('DOM fully loaded and parsed');
                     document.getElementById('header').style.backgroundColor = '#38434b'
                     let allTypingResultSummaryElements = document.getElementsByClassName("typing-result-summary");
                     for (let i = 0; i < allTypingResultSummaryElements.length; i++) {
@@ -1292,7 +1284,6 @@
                     if (id == null) {
                         id = queryString.substring(queryString.indexOf('D=') + 2, queryString.length)
                     }
-                    console.log('id=', id)
                     let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
                     var myHeaders = new Headers();
                     myHeaders.append("Content-Type", "application/json");
@@ -1303,7 +1294,6 @@
                         "contentResultId": id,
                         "getTypingTestResult": 'getTypingTestResult',
                     });
-                    console.log('raw=', raw)
                     var requestOptions = {
                         method: 'POST',
                         headers: myHeaders,
@@ -1314,9 +1304,7 @@
                     fetch("https://cloudcertitude15-dev-ed.develop.my.salesforce-sites.com/services/apexrest/BrightEducationSteno", requestOptions)
                         .then(response => response.json())
                         .then(result => {
-                          //  console.log('result=', result)
                             result = JSON.parse(result);
-                            console.log('typing result=>', result)
                             if (result.length > 0) {
                                 content = result[0].Course_Content__r.Audio_Text__c;
                                 document.getElementById('rollNumber').innerText = result[0]?.Students__r?.Roll_Number__c;
@@ -1329,14 +1317,11 @@
                                 const userTypedText = typedwords;
 
                                 const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c, result[0].Total_Time__c, result[0].Time_Taken__c, result[0]?.BackSpace_Count__c, result[0]?.Course_Content__r?.Is_Typing_Course_Content__c);
-                                // console.log('typingResult=', typingResult);
                                 if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 
                                     document.getElementById("comparisonOutput").style.fontFamily = 'Hindi';
-                                    //console.log('Hindi typing test21');
                                 } else {
                                     document.getElementById("comparisonOutput").style.fontFamily = 'monospace';
-                                    //console.log('English typing test');
                                 }
                                 document.getElementById("comparisonOutput").innerHTML = typingResult;
                             }

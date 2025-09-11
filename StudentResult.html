@@ -1066,7 +1066,7 @@
                         .replace(/>/g, "&gt;");
                 }
 
-                function renderComparison(origTokens, typedTokens, originalContent, userTypedText, totalTime, timeTaken,backspaceCount, keyStrokes, isTypingCourse) {
+                function renderComparison(origTokens, typedTokens, originalContent, userTypedText, totalTime, timeTaken,backspaceCount, isTypingCourse) {
                     let result = '';
                     let i = 0;
                     let incorrectWordsCnt = 0;
@@ -1191,7 +1191,13 @@
                     document.getElementById("Gross Speed Method2").innerText = grossSpeed.toFixed(2) + " WPM";
                     let minutes = Math.floor(totalTime / 60);
                     let seconds = totalTime % 60;
-
+                     
+                    let dph = netSpeed * 5 * 60; // WPM to DPH conversion
+                    let marksOutOf50 = ((20 / 8000) * dph).toFixed(2);
+                    let marksOutOf25 = ((10 / 8000) * dph).toFixed(2);
+                    document.getElementById("Marks Out of 50").innerText = marksOutOf50;
+                    document.getElementById("Marks Out of 25").innerText = marksOutOf25;
+ 
                     // Add leading zero if seconds < 10
                     let formattedTime = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 
@@ -1224,12 +1230,12 @@
                     return result;
                 }
 
-                function compareTexts(original, typed, language, totaltime, timeTaken, backspaceCount, keyStrokes, isTypingCourse) {
+                function compareTexts(original, typed, language, totaltime, timeTaken, backspaceCount, isTypingCourse) {
                     const origTokens = tokenize(original, language);
                     const typedTokens = tokenize(typed, language);
                     const dp = lcsMatrix(origTokens, typedTokens);
                     const [alignedOrig, alignedTyped] = backtrackLCS(dp, origTokens, typedTokens);
-                    return renderComparison(alignedOrig, alignedTyped, original, typed, totaltime, timeTaken, backspaceCount, keyStrokes, isTypingCourse);
+                    return renderComparison(alignedOrig, alignedTyped, original, typed, totaltime, timeTaken, backspaceCount, isTypingCourse);
                 }
 
                 document.addEventListener("DOMContentLoaded", () => {
@@ -1285,7 +1291,7 @@
 
                                 const userTypedText = typedwords;
 
-                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c, result[0].Total_Time__c, result[0].Time_Taken__c,result[0]?.BackSpace_Count__c,result[0]?.KeyStrokes__c,result[0]?.Course_Content__r?.Is_Typing_Course_Content__c);
+                                const typingResult = compareTexts(originalText, userTypedText, result[0].Course_Content__r.Test_Language__c, result[0].Total_Time__c, result[0].Time_Taken__c,result[0]?.BackSpace_Count__c,result[0]?.Course_Content__r?.Is_Typing_Course_Content__c);
                                 // console.log('typingResult=', typingResult);
                                 if (result[0].Course_Content__r.Test_Language__c == 'Hindi') {
 

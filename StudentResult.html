@@ -1266,6 +1266,8 @@
                 }
 
                 function compareTexts(original, typed, language, totaltime, timeTaken, backspaceCount, isTypingCourse) {
+                    console.log('Original:', original);
+                    console.log('Typed:', typed);
                     const origTokens = tokenize(original, language);
                     const typedTokens = tokenize(typed, language);
                     const dp = lcsMatrix(origTokens, typedTokens);

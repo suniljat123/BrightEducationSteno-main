@@ -1147,6 +1147,18 @@ font-size: 16px;
             //time = 60;
             timer = setInterval(updateTimer, 1000);
         };
+        let backspaceCount = 0;
+        userInput.addEventListener("input", (e) => {
+            console.log('input event triggered', e.target.value);
+            calculateTypingAccuracy();
+
+            // Track backspaces
+            if (e.inputType === "deleteContentBackward") {
+                backspaceCount++;
+            }
+
+           
+        });
         const displayResult = () => {
 
             document.getElementById("resultMainDiv").style.display = 'block';
@@ -1196,6 +1208,7 @@ font-size: 16px;
                 "totalType": totaltypewords,
                 "timeTaken": totalTimeInSecond-time,
                 "totalTime":totalTimeInSecond,
+                "backspaceCount": backspaceCount,
                 "submitTypedData": 'submitTypedData'
             });
 

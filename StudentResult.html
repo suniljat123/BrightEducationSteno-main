@@ -991,7 +991,9 @@
             <script>
                 let id = '';
                 function tokenize(text, language) {
-                    text = text.normalize("NFC");
+                    console.log('Original text:', text);
+                    text =  (text || "").toString().normalize("NFC");
+                    console.log('After NFC normalization:', text);
                     console.log('Normalized text:');
                     let isHindi = /[\u0900-\u097F]/.test(text);
                     if (language == 'Hindi') {

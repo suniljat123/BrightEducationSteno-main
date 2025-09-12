@@ -1019,9 +1019,17 @@ font-size: 16px;
     <script defer src="assets/js/main.js"></script>
     <script src="assets/js/MyComponents.js"></script>
     <script>
-        const textarea = document.getElementById("quote-input"); 
+        const textarea = document.getElementById("quote-input");
+
+        // Always keep cursor at end
+        function moveCursorToEnd() {
+            const len = textarea.value.length;
+            textarea.setSelectionRange(len, len);
+        }
+       
         let allowBackspace = false;
-        textarea.addEventListener("keydown", (e) => { 
+        textarea.addEventListener("keydown", (e) => {
+          
             if (allowBackspace && e.key === "Backspace") {
                 e.preventDefault();
                 return;

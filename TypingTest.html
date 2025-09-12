@@ -835,65 +835,66 @@
                         .skipped {
                             color: blue;
                         }
+
                         .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+                            position: relative;
+                            display: inline-block;
+                            width: 60px;
+                            height: 34px;
+                        }
 
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+                        .switch input {
+                            opacity: 0;
+                            width: 0;
+                            height: 0;
+                        }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+                        .slider {
+                            position: absolute;
+                            cursor: pointer;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background-color: #ccc;
+                            -webkit-transition: .4s;
+                            transition: .4s;
+                        }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+                        .slider:before {
+                            position: absolute;
+                            content: "";
+                            height: 26px;
+                            width: 26px;
+                            left: 4px;
+                            bottom: 4px;
+                            background-color: white;
+                            -webkit-transition: .4s;
+                            transition: .4s;
+                        }
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
+                        input:checked+.slider {
+                            background-color: #2196F3;
+                        }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+                        input:focus+.slider {
+                            box-shadow: 0 0 1px #2196F3;
+                        }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+                        input:checked+.slider:before {
+                            -webkit-transform: translateX(26px);
+                            -ms-transform: translateX(26px);
+                            transform: translateX(26px);
+                        }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
+                        /* Rounded sliders */
+                        .slider.round {
+                            border-radius: 34px;
+                        }
 
-.slider.round:before {
-  border-radius: 50%;
-}
+                        .slider.round:before {
+                            border-radius: 50%;
+                        }
                     </style>
                     <!-- Our price plan section -->
                     <div class="plans-section" style="padding:21px;overflow-x: scroll!important;">
@@ -909,9 +910,9 @@ input:checked + .slider:before {
                             margin-bottom: 30px;
                             width: 100%;
                         ">
-                            <!-- Left: Go Back -->
-                            <div>
-                                <button style="
+                                <!-- Left: Go Back -->
+                                <div>
+                                    <button style="
                                     background-color: #ff4a17;
                                     color: white;
                                     border: none;
@@ -919,39 +920,40 @@ input:checked + .slider:before {
                                     border-radius: 5px;
                                     padding: 0 12px;
                                 " onclick="handleGoBack()">Go Back</button>
-                            </div>
-                        
-                            <!-- Middle: Select Time -->
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <label for="duration">Select Time:</label>
-                                <select name="duration" id="duration" onchange="handleTimeChange()" class="form-control-sm">
-                                    <option value="1">1 Min</option>
-                                    <option value="2">2 Mins</option>
-                                    <option value="3">3 Mins</option>
-                                    <option value="4">4 Mins</option>
-                                    <option value="5">5 Mins</option>
-                                    <option value="10">10 Mins</option>
-                                    <option value="15">15 Mins</option>
-                                </select>
-                            </div>
-                        
-                            <!-- Right: Toggle + Timer -->
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                Backspace: <label class="switch">
-                                    <input type="checkbox" onchange="handleBackspaceToggle(this)">
-                                    <span class="slider round"></span>
-                                </label>
-                                <span style="
+                                </div>
+
+                                <!-- Middle: Select Time -->
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <label for="duration">Select Time:</label>
+                                    <select name="duration" id="duration" onchange="handleTimeChange()"
+                                        class="form-control-sm">
+                                        <option value="1">1 Min</option>
+                                        <option value="2">2 Mins</option>
+                                        <option value="3">3 Mins</option>
+                                        <option value="4">4 Mins</option>
+                                        <option value="5">5 Mins</option>
+                                        <option value="10">10 Mins</option>
+                                        <option value="15">15 Mins</option>
+                                    </select>
+                                </div>
+
+                                <!-- Right: Toggle + Timer -->
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    Backspace: <label class="switch">
+                                        <input type="checkbox" onchange="handleBackspaceToggle(this)">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <span style="
                                     font-size: 24px;
                                     font-weight: 500;
                                     font-family: Poppins, sans-serif;
                                     color: #263d4d;
                                 ">
-                                    Time: <span id="timer">1:00</span>
-                                </span>
+                                        Time: <span id="timer">1:00</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        
+
                             <div id="quote" style="    text-align: justify;
     margin: 0px 0 30px 0;
     border: solid rgb(25 45 102) 2px;
@@ -969,7 +971,7 @@ font-size: 16px;
 
     font-weight: 700;
     font-size: 23px;" rows="3" id="quote-input" placeholder="Type here when the test starts..." class="hindiFont"
-                                spellcheck="false" ></textarea>
+                                spellcheck="false"></textarea>
                             <button class="button" style="float: right;
   margin-top: 20px;
   background-color: rgb(25 45 102);
@@ -1019,38 +1021,38 @@ font-size: 16px;
     <script>
         const textarea = document.getElementById("quote-input");
 
-// Always keep cursor at end
-function moveCursorToEnd() {
-    const len = textarea.value.length;
-    textarea.setSelectionRange(len, len);
-}
+        // Always keep cursor at end
+        function moveCursorToEnd() {
+            const len = textarea.value.length;
+            textarea.setSelectionRange(len, len);
+        }
 
-// On focus, set cursor at end
-textarea.addEventListener("focus", moveCursorToEnd);
+        // On focus, set cursor at end
+        textarea.addEventListener("focus", moveCursorToEnd);
 
-// On click, reset cursor at end
-textarea.addEventListener("mouseup", (e) => {
-    e.preventDefault();   // stop manual placing
-    moveCursorToEnd();
-});
+        // On click, reset cursor at end
+        textarea.addEventListener("mouseup", (e) => {
+            e.preventDefault();   // stop manual placing
+            moveCursorToEnd();
+        });
 
 
 
-let allowBackspace = false;  
-textarea.addEventListener("keydown", (e) => {
-    if (["ArrowLeft", "ArrowUp", "Home", "PageUp"].includes(e.key)) {
-        e.preventDefault();
-    }
-    if(allowBackspace && e.key === "Backspace") {
-        e.preventDefault();
-        return;
-    }
-});
-textarea.addEventListener("select", moveCursorToEnd);
-handleBackspaceToggle = (checkbox) => {
-      allowBackspace = checkbox.checked;
-    console.log('allowBackspace=>', allowBackspace)
-}
+        let allowBackspace = false;
+        textarea.addEventListener("keydown", (e) => {
+            if (["ArrowLeft", "ArrowUp", "Home", "PageUp"].includes(e.key)) {
+                e.preventDefault();
+            }
+            if (allowBackspace && e.key === "Backspace") {
+                e.preventDefault();
+                return;
+            }
+        });
+        textarea.addEventListener("select", moveCursorToEnd);
+        handleBackspaceToggle = (checkbox) => {
+            allowBackspace = checkbox.checked;
+            console.log('allowBackspace=>', allowBackspace)
+        }
         let backspaceCount = 0;
         $(document).ready(function () {
             checkIsSprStudent();

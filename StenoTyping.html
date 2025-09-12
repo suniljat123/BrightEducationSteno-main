@@ -1010,6 +1010,10 @@ font-size: 16px;
             if (["ArrowLeft", "ArrowUp", "Home", "PageUp"].includes(e.key)) {
                 e.preventDefault();
             }
+            if (allowBackspace && e.key === "Backspace") {
+                e.preventDefault();
+                return;
+            }
         });
         let time = 60;
         let totalTimeInSecond;

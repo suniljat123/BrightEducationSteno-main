@@ -53,8 +53,8 @@
 
 <body>
     <!-- Designed and Developed by Sunil Barara -->
-  <!--Mobile Number: 7878438668 -->
-    <app-contactcareernavbar></app-contactcareernavbar> 
+    <!--Mobile Number: 7878438668 -->
+    <app-contactcareernavbar></app-contactcareernavbar>
 
     <div class="section-title" style="padding-left: 4rem; padding-top: 10rem">
         <h2>Typing Test</h2>
@@ -884,8 +884,9 @@ padding: 10px 5px;
 font-size: 16px;
 
     font-weight: 700;
-    font-size: 23px;" rows="6" spellcheck="false" id="quote-input" placeholder="Type here when the test starts.." class="hindiFont"
-                                onpaste="return false;" ondrop="return false;" autocomplete="off"></textarea>
+    font-size: 23px;" rows="6" spellcheck="false" id="quote-input" placeholder="Type here when the test starts.."
+                                class="hindiFont" onpaste="return false;" ondrop="return false;"
+                                autocomplete="off"></textarea>
                             <button class="button" style="float: right;
   margin-top: 20px;
   background-color: rgb(25 45 102);
@@ -974,6 +975,31 @@ font-size: 16px;
 
     </script>
     <Script>
+        const textarea = document.getElementById("quote-input");
+
+        // Always keep cursor at end
+        function moveCursorToEnd() {
+            const len = textarea.value.length;
+            textarea.setSelectionRange(len, len);
+        }
+
+        // On focus, set cursor at end
+        textarea.addEventListener("focus", moveCursorToEnd);
+
+        // On click, reset cursor at end
+        textarea.addEventListener("mouseup", (e) => {
+            e.preventDefault();   // stop manual placing
+            moveCursorToEnd();
+        });
+
+
+
+        let allowBackspace = false;
+        textarea.addEventListener("keydown", (e) => {
+            if (["ArrowLeft", "ArrowUp", "Home", "PageUp"].includes(e.key)) {
+                e.preventDefault();
+            }
+        });
         let time = 60;
         let totalTimeInSecond;
         let correctWords = 0;
@@ -999,7 +1025,7 @@ font-size: 16px;
         let timer = "";
         let mistakes = 0;
         let totaltypewords = 0;
- 
+
 
         userInput.addEventListener("input", () => {
             calculateTypingAccuracy()
@@ -1098,7 +1124,7 @@ font-size: 16px;
 
                     time = parseInt(result[0].Duration__c) * 60;
                     totalTimeInSecond = parseInt(result[0].Duration__c) * 60;
-                    document.getElementById("timer").innerText = convertSecondsToTime(time) ;
+                    document.getElementById("timer").innerText = convertSecondsToTime(time);
                     //    document.getElementById("timer").innerText = time + "s";
                     let content = result[0].Audio_Text__c.split(" ");
                     //console.log('10092->', content); 
@@ -1134,7 +1160,7 @@ font-size: 16px;
                 if (totalSeconds > 0) {
                     totalSeconds--;
                     time--;
-                    timerElement.innerText = convertSecondsToTime(totalSeconds) ;
+                    timerElement.innerText = convertSecondsToTime(totalSeconds);
                 }
             }
         }
@@ -1155,7 +1181,7 @@ font-size: 16px;
                 backspaceCount++;
             }
 
-           
+
         });
         const displayResult = () => {
 
@@ -1168,18 +1194,18 @@ font-size: 16px;
             // ended
 
             // words in below box
- 
+
             let typedwords = document.getElementById("quote-input").value.replace(/\s+/g, ' ').trim().split(' ');
-           
-           let totalTypedString = typedwords.join(' ');
+
+            let totalTypedString = typedwords.join(' ');
             // ended 
             var lastList = [];
             let i = 0, j = 0;
             let correctWordCnt = 0;
             let inCorrectWordCnt = 0;
             let skipWordCnt = 0;
-           let accuracy = 0;
-           let wrongWords = 0;
+            let accuracy = 0;
+            let wrongWords = 0;
             let marks = 0;
 
             //   end of new changess ---------------------------------
@@ -1207,8 +1233,8 @@ font-size: 16px;
                 "stenoMarks": marks.toFixed(2) + "",
                 "totalWords": quoteSection.length + '',
                 "totalType": totaltypewords,
-                "timeTaken": totalTimeInSecond-time,
-                "totalTime":totalTimeInSecond,
+                "timeTaken": totalTimeInSecond - time,
+                "totalTime": totalTimeInSecond,
                 "backspaceCount": backspaceCount,
                 "studentTypedData": totalTypedString,
                 "submitTypedData": 'submitTypedData'

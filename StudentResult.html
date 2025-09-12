@@ -1141,10 +1141,10 @@
 
                         if (typedWords.length === 0 && origWords.length > 0) {
                             result += ` <span class="missed">${escapeHtml(origSpaced)}</span> `;
-                            skipWordCnt++;
+                            skipWordCnt += origSpaced.length > 0 ? origWords.length : 0;
                         } else if (origWords.length === 0 && typedWords.length > 0) {
                             result += `<span class="extra">${escapeHtml(typedSpaced)}</span> `;
-                            extraWordCnt++;
+                            extraWordCnt+=typedSpaced.length > 0 ? typedWords.length : 0;
                         } else {
                             if (typedWords.length) {
                                 result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;

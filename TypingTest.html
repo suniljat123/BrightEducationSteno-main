@@ -901,56 +901,57 @@ input:checked + .slider:before {
                         <!-- -------------------------- TYping Modal Code is Here   -------------------- -->
                         <!-- Main Body Starts -->
                         <div id="" class="container" style=" max-width: 100rem;">
-                            <div class="stats" style="    text-align: right;
-font-size: 18px;
-margin-bottom: 30px;
-display: flex;
-justify-content: space-between;">
-                                <div style="display:flex; justify-content: center; align-items:center;"> <button
-                                        width="2px" style=" 
-                background-color: #ff4a17;
-                color: white;
-                border-width: 0px;
-                height: 31px;
-                border-radius: 5px;" onclick="handleGoBack()">Go Back</button>
-                                </div>
-                                <div id="timeDivId" style="display:flex; justify-content:center;">
-
-                                    <span style="    margin-right: 16rem;
-                                    margin-top: 21px;">
-                                        <label>Select Time: </label>
-                                        <select name="duration" id="duration" onchange="handleTimeChange()"
-                                            class="form-control-sm">
-                                            <option value="1">1 Min</option>
-                                            <option value="2">2 Mins</option>
-                                            <option value="3">3 Mins</option>
-                                            <option value="4">4 Mins</option>
-                                            <option value="5">5 Mins</option>
-                                            <option value="10">10 Mins</option>
-                                            <option value="15">15 Mins</option>
-                                        </select>
-                                    </span>
-
-<span><label class="switch">
-    <input type="checkbox">
-    <span class="slider round"></span>
-  </label></span>
-                                    <p style="
-    padding: 4px;
-    border-radius: 6px;
-    font-size: 36px;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-family: Poppins, sans-serif;
-    color: #263d4d;
-">
-                                    </p>
-
-                                    Time: <span id="timer">1:00
-                                    </span></p>
-                                </div>
-
+                            <div class="stats" style="
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 18px;
+                            margin-bottom: 30px;
+                            width: 100%;
+                        ">
+                            <!-- Left: Go Back -->
+                            <div>
+                                <button style="
+                                    background-color: #ff4a17;
+                                    color: white;
+                                    border: none;
+                                    height: 31px;
+                                    border-radius: 5px;
+                                    padding: 0 12px;
+                                " onclick="handleGoBack()">Go Back</button>
                             </div>
+                        
+                            <!-- Middle: Select Time -->
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <label for="duration">Select Time:</label>
+                                <select name="duration" id="duration" onchange="handleTimeChange()" class="form-control-sm">
+                                    <option value="1">1 Min</option>
+                                    <option value="2">2 Mins</option>
+                                    <option value="3">3 Mins</option>
+                                    <option value="4">4 Mins</option>
+                                    <option value="5">5 Mins</option>
+                                    <option value="10">10 Mins</option>
+                                    <option value="15">15 Mins</option>
+                                </select>
+                            </div>
+                        
+                            <!-- Right: Toggle + Timer -->
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span style="
+                                    font-size: 24px;
+                                    font-weight: 700;
+                                    font-family: Poppins, sans-serif;
+                                    color: #263d4d;
+                                ">
+                                    Time: <span id="timer">1:00</span>
+                                </span>
+                            </div>
+                        </div>
+                        
                             <div id="quote" style="    text-align: justify;
     margin: 0px 0 30px 0;
     border: solid rgb(25 45 102) 2px;

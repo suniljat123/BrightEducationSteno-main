@@ -910,7 +910,7 @@ font-size: 16px;
 
     font-weight: 700;
     font-size: 23px;" rows="3" id="quote-input" placeholder="Type here when the test starts..." class="hindiFont"
-                                spellcheck="false" onmousedown="return false" ></textarea>
+                                spellcheck="false" onmousedown="return false"></textarea>
                             <button class="button" style="float: right;
   margin-top: 20px;
   background-color: rgb(25 45 102);
@@ -942,7 +942,7 @@ font-size: 16px;
             class="bi bi-arrow-up-short"></i></a>
 
 
-    <!-- Vendor JS Files --> 
+    <!-- Vendor JS Files -->
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -960,24 +960,30 @@ font-size: 16px;
     <script>
         const textarea = document.getElementById("quote-input");
 
-// Force cursor always to end
-textarea.addEventListener("click", () => {
-    setTimeout(() => {
-        textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
-    }, 0);
+// Always keep cursor at end
+function moveCursorToEnd() {
+    const len = textarea.value.length;
+    textarea.setSelectionRange(len, len);
+}
+
+// On focus, set cursor at end
+textarea.addEventListener("focus", moveCursorToEnd);
+
+// On click, reset cursor at end
+textarea.addEventListener("mouseup", (e) => {
+    e.preventDefault();   // stop manual placing
+    moveCursorToEnd();
 });
 
-// Prevent moving cursor with arrow keys
+// On keydown, block moving cursor left/up/home
 textarea.addEventListener("keydown", (e) => {
     if (["ArrowLeft", "ArrowUp", "Home", "PageUp"].includes(e.key)) {
         e.preventDefault();
     }
 });
 
-// Prevent selecting text
-textarea.addEventListener("select", () => {
-    textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
-});
+// On select, remove selection (force cursor end)
+textarea.addEventListener("select", moveCursorToEnd);
         let backspaceCount = 0;
         $(document).ready(function () {
             checkIsSprStudent();
@@ -1212,7 +1218,7 @@ textarea.addEventListener("select", () => {
                 "timeTaken": totalTimeInSecond - time, // in seconds
                 "totalTime": totalTimeInSecond,
                 "contentData": quoteSection.innerText,
-                "studentTypedData": totalTypedString?totalTypedString:'Blank',
+                "studentTypedData": totalTypedString ? totalTypedString : 'Blank',
                 "submitTypedData": 'submitTypedData'
             });
 

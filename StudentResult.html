@@ -1149,7 +1149,7 @@
                             if (typedWords.length) {
                                 result += `<span class="incorrect">${escapeHtml(typedSpaced)}</span>`;
                                 if (!/^\s+$/.test(o) && !/^[.,!?;:]+$/.test(o)) {
-                                    incorrectWordsCnt++;
+                                    incorrectWordsCnt+= typedWords.length> 0 ? typedWords.length : 0;
                                 }
                             }
                             if (origWords.length) result += `<span class="expected">${escapeHtml(origSpaced)}</span> `;

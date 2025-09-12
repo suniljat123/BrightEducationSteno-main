@@ -187,9 +187,9 @@
       .then(response => response.json())
       .then(result => {
         console.log('result=', result)
-        if (result == 'No Account Found.') {
+        if (result == 'No Account Found.' || result == 'Please enter correct password.') {
           alert(result)
-        } else {
+        }  else {
 
           localStorage.setItem("SPR_StudentPhone", result);
           localStorage.setItem("SPR_LoginTime", Date.now())

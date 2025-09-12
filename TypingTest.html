@@ -909,8 +909,8 @@ padding: 10px 5px;
 font-size: 16px;
 
     font-weight: 700;
-    font-size: 23px;" rows="3" id="quote-input" placeholder="Type here when the test starts..."
-                                class="hindiFont" spellcheck="false" onmousedown="return false"  onselectstart="return false"></textarea>
+    font-size: 23px;" rows="3" id="quote-input" placeholder="Type here when the test starts..." class="hindiFont"
+                                spellcheck="false" onmousedown="return false" ></textarea>
                             <button class="button" style="float: right;
   margin-top: 20px;
   background-color: rgb(25 45 102);
@@ -927,7 +927,7 @@ font-size: 16px;
   padding: 10px 30px;
   border-radius: 5px;
   font-size: 18px;" id="stop-test" onclick="displayResult()">Stop Test</button>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -942,7 +942,7 @@ font-size: 16px;
             class="bi bi-arrow-up-short"></i></a>
 
 
-    <!-- Vendor JS Files -->
+    <!-- Vendor JS Files --> 
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -958,6 +958,26 @@ font-size: 16px;
     <script defer src="assets/js/main.js"></script>
     <script src="assets/js/MyComponents.js"></script>
     <script>
+        const textarea = document.getElementById("quote-input");
+
+        textarea.addEventListener("click", (e) => {
+            // Always move cursor to end
+            textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
+            e.preventDefault();
+        });
+
+        textarea.addEventListener("keydown", (e) => {
+            // Prevent moving cursor with arrow keys
+            if (e.key === "ArrowLeft" || e.key === "ArrowUp" ||
+                e.key === "Home" || e.key === "PageUp") {
+                e.preventDefault();
+            }
+        });
+
+        // Optional: Prevent text selection with mouse/keyboard
+        textarea.addEventListener("select", () => {
+            textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
+        });
         let backspaceCount = 0;
         $(document).ready(function () {
             checkIsSprStudent();
@@ -1027,11 +1047,11 @@ font-size: 16px;
 
                         document.getElementById("quote").style.fontFamily = 'Hindi';
                         document.getElementById("quote-input").style.fontFamily = 'Hindi';
-                       // document.getElementById("wrapperResultId").style.fontFamily = 'Hindi';
+                        // document.getElementById("wrapperResultId").style.fontFamily = 'Hindi';
                     } else {
                         document.getElementById("quote").style.fontFamily = 'monospace';
                         document.getElementById("quote-input").style.fontFamily = 'monospace';
-                       // document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
+                        // document.getElementById("wrapperResultId").style.fontFamily = 'monospace';
                     }
 
                     time = parseInt(result[0].Duration__c) * 60;
@@ -1117,7 +1137,7 @@ font-size: 16px;
                 }
             }
         }
-        function convertSecondsToTime(seconds) { 
+        function convertSecondsToTime(seconds) {
             var minutes = Math.floor(seconds / 60);
             var remainingSeconds = seconds % 60;
 
@@ -1134,11 +1154,11 @@ font-size: 16px;
             document.getElementById("quote").style.display = 'none';
             document.getElementById("timeDivId").style.display = 'none';
 
-         //   var resultSection = document.getElementById("wrapperResultId");
+            //   var resultSection = document.getElementById("wrapperResultId");
             var quotee = document.getElementById("quote").innerText;
             const words = quotee.split(/\s+/);
             let typedwords = document.getElementById("quote-input").value.replace(/\s+/g, ' ').trim().split(' ');
-           
+
             let totalTypedString = typedwords.join(' ');
             // typedwords = typedwords.substring(1,typedwords.length-1)
             let i = 0, j = 0;
@@ -1170,7 +1190,7 @@ font-size: 16px;
             // Marks calculation (example: 50 - (fullMistakes * 2) - (halfMistakes * 1))
             const marksOutOf50 = Math.max(0, 50 - (fullMistakes * 2) - (halfMistakes * 1));
             const marksOutOf25 = Math.max(0, 25 - (fullMistakes * 1) - (halfMistakes * 0.5));
- 
+
             // Send data to server
             let SPR_StudentPhone = localStorage.getItem("SPR_StudentPhone");
             var myHeaders = new Headers();
@@ -1184,12 +1204,12 @@ font-size: 16px;
                 "netSpeed": netWPM.toFixed(2),
                 "netDPH": netDPH.toFixed(0),
                 "marksOutOf50": marksOutOf50.toFixed(1),
-                "marksOutOf25": marksOutOf25.toFixed(1), 
+                "marksOutOf25": marksOutOf25.toFixed(1),
                 "backspaceCount": backspaceCount,
                 "totalKeystrokes": keyStrokes,
                 "totalWords": quoteSection.innerText.length + '',
                 "totalType": totaltypewords,
-                "timeTaken": totalTimeInSecond-time, // in seconds
+                "timeTaken": totalTimeInSecond - time, // in seconds
                 "totalTime": totalTimeInSecond,
                 "contentData": quoteSection.innerText,
                 "studentTypedData": totalTypedString,
@@ -1231,7 +1251,7 @@ font-size: 16px;
             part2.style.display = 'none';
             quote = '';
         }
-    </script> 
+    </script>
 
     <!-- include common vendor scripts used in demo pages -->
     <script src="js/jsone.js"></script>

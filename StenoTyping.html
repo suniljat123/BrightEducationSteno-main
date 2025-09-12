@@ -104,13 +104,14 @@
                             color: #fff;
                         }
 
-                         
+
                         .switch {
                             position: relative;
                             display: inline-block;
                             width: 60px;
                             height: 34px;
-                        } 
+                        }
+
                         .switch input {
                             opacity: 0;
                             width: 0;
@@ -200,6 +201,10 @@ border-radius: 6px;
                                 <div style="display: flex; align-items: center; gap: 15px;">
                                     Backspace: <label class="switch">
                                         <input type="checkbox" onchange="handleBackspaceToggle(this)">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    Navigation: <label class="switch">
+                                        <input type="checkbox" onchange="handleNavigationToggle(this)">
                                         <span class="slider round"></span>
                                     </label>
                                     <span style="
@@ -315,8 +320,10 @@ font-size: 16px;
 
         // Always keep cursor at end
         function moveCursorToEnd() {
-            const len = textarea.value.length;
-            textarea.setSelectionRange(len, len);
+            if (allowNavigation) {
+                const len = textarea.value.length;
+                textarea.setSelectionRange(len, len);
+            }
         }
 
         // On focus, set cursor at end
@@ -324,19 +331,25 @@ font-size: 16px;
 
         // On click, reset cursor at end
         textarea.addEventListener("mouseup", (e) => {
-            e.preventDefault();   // stop manual placing
-            moveCursorToEnd();
+            if (allowNavigation) {
+                e.preventDefault();   // stop manual placing
+                moveCursorToEnd();
+            }
+
         });
 
 
 
         let allowBackspace = false;
+        let allowNavigation = false;
         handleBackspaceToggle = (checkbox) => {
             allowBackspace = checkbox.checked;
-            console.log('allowBackspace=>', allowBackspace)
+        }
+        handleNavigationToggle = (checkbox) => {
+            allowNavigation = checkbox.checked;
         }
         textarea.addEventListener("keydown", (e) => {
-            if (["ArrowLeft", "ArrowUp", "Home", "PageUp"].includes(e.key)) {
+            if (allowNavigation && ["ArrowLeft", "ArrowUp", "Home", "PageUp"].includes(e.key)) {
                 e.preventDefault();
             }
             if (allowBackspace && e.key === "Backspace") {

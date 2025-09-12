@@ -1175,7 +1175,7 @@
                     for (let i = 0; i < TotalTypedWordsElements.length; i++) {
                         TotalTypedWordsElements[i].innerText = (userTypedWords.length);
                     }
-                    let accuracy = userTypedWords.length > 0 ? ((correctWordCnt / userTypedWords.length) * 100).toFixed(2) : 0;
+                    let accuracy = totalWords.length > 0 ? ((correctWordCnt / totalWords.length) * 100).toFixed(2) : 0;
 
                     let AccuracyElements = document.getElementsByClassName("Accuracy");
                     for (let i = 0; i < AccuracyElements.length; i++) {

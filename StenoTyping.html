@@ -865,7 +865,7 @@ border-radius: 6px;
     font-size: 36px;
     font-weight: 700;
     text-transform: uppercase;
-    font-family: " Poppins", sans-serif; color: #263d4d; }">Time: <span id="timer">0s</span></p>
+    font-family: " Poppins", sans-serif; color: #263d4d; }">Time: <span id="timer">00:00</span></p>
                                     <!-- <p style=" 
 padding: 4px;
 border-radius: 6px;    margin: 0;
@@ -884,7 +884,7 @@ padding: 10px 5px;
 font-size: 16px;
 
     font-weight: 700;
-    font-size: 23px;" rows="6" id="quote-input" placeholder="Type here when the test starts.." class="hindiFont"
+    font-size: 23px;" rows="6" spellcheck="false" id="quote-input" placeholder="Type here when the test starts.." class="hindiFont"
                                 onpaste="return false;" ondrop="return false;" autocomplete="off"></textarea>
                             <button class="button" style="float: right;
   margin-top: 20px;
@@ -1134,7 +1134,7 @@ font-size: 16px;
                 if (totalSeconds > 0) {
                     totalSeconds--;
                     time--;
-                    timerElement.innerText = convertSecondsToTime(totalSeconds) + "s";
+                    timerElement.innerText = convertSecondsToTime(totalSeconds) ;
                 }
             }
         }

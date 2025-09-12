@@ -1034,17 +1034,21 @@ textarea.addEventListener("mouseup", (e) => {
     moveCursorToEnd();
 });
 
-// On keydown, block moving cursor left/up/home
+
+
+let allowBackspace = false;  
 textarea.addEventListener("keydown", (e) => {
     if (["ArrowLeft", "ArrowUp", "Home", "PageUp"].includes(e.key)) {
         e.preventDefault();
     }
+    if(allowBackspace && e.key === "Backspace") {
+        e.preventDefault();
+        return;
+    }
 });
-
-// On select, remove selection (force cursor end)
 textarea.addEventListener("select", moveCursorToEnd);
 handleBackspaceToggle = (checkbox) => {
-    let allowBackspace = checkbox.checked;
+      allowBackspace = checkbox.checked;
     console.log('allowBackspace=>', allowBackspace)
 }
         let backspaceCount = 0;

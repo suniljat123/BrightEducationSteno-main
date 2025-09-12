@@ -59,14 +59,13 @@
                 After listening audio, type your dictation and click submit button
             </h5>
             <br>
-            <button type="button" id="play_audio" class="btn btn-success" onclick="playAudio()"><i
-                    style="font-size: 20px;" class="bi bi-volume-up iconBtn"></i> Play Audio</button>
+            <button type="button" id="play_audio" class="btn btn-success" onclick="playDictation()"><i
+                    style="font-size: 20px;" class="bi bi-volume-up iconBtn"></i> Play Dictation</button>
             <br>
             <br>
-            <a style="display: none;text-decoration:none;" id="start_test"><button onclick="stopAudio()"
+            <a style="text-decoration:none;" id="start_test"><button onclick="stopAudio()"
                     class="btn btn-warning">
-                    <i style="font-size: 20px;" class="bi bi-play-fill iconBtn"></i> Skip Audio &amp; Start
-                    Typing.</button></a>
+                    <i style="font-size: 20px;" class="bi bi-play-fill iconBtn"></i> Skip Dictation</button></a>
             <br>
             <div style="width: 100%; display:flex; justify-content:center;">
                 <img id="audioWaveImg" style="display: none;" src="assets/img/sound.gif" width="150px" height="100px">
@@ -111,7 +110,7 @@
             Id = urlParams.get('Id')
             getAudioUrl()
         })
-        function playAudio() {
+        function playDictation() {
             var audio = document.getElementById("myAudio");
             audio.play();
             var audioWave = document.getElementById("audioWaveImg");

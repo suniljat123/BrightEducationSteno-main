@@ -1098,7 +1098,7 @@ font-size: 16px;
 
                     time = parseInt(result[0].Duration__c) * 60;
                     totalTimeInSecond = parseInt(result[0].Duration__c) * 60;
-                    document.getElementById("timer").innerText = convertSecondsToTime(time) + 's';
+                    document.getElementById("timer").innerText = convertSecondsToTime(time) ;
                     //    document.getElementById("timer").innerText = time + "s";
                     let content = result[0].Audio_Text__c.split(" ");
                     //console.log('10092->', content); 

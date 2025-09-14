@@ -603,12 +603,7 @@ class NotLoginIndexPage extends HTMLElement {
        
        
       
-      <!-- STYLESHEETS -->
-      <link rel="stylesheet" type="text/css" href="assets/css/plugins.min.css">
-      <link rel="stylesheet" type="text/css" href="assets/plugins/fontawesome/css/font-awesome.min.css">
-      <link rel="stylesheet" type="text/css" href="assets/plugins/line-awesome/css/line-awesome.min.css">
-      <link rel="stylesheet" type="text/css" href="assets/plugins/flaticon/flaticon.css">
-      <link rel="stylesheet" type="text/css" href="assets/plugins/themify/themify-icons.css">
+      <!-- STYLESHEETS -->  
       <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
       <link class="skin" rel="stylesheet" type="text/css" href="assets/css/skin/skin-1.min.css">
       <link rel="stylesheet" type="text/css" href="assets/css/templete.min.css">

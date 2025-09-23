@@ -43,11 +43,10 @@ class Footer extends HTMLElement {
           <div class="social-links d-flex">
             
             <a href="https://wa.me/+919602596476?text=Hello,%20I%20came%20across%20Bright%20Education%20Steno%20website.%20I%20want%20to%20join%20course." target="_blank" class="facebook"><i class="bi bi-whatsapp"></i></a>
-            <a href="https://www.instagram.com/steno_updates?igsh=ZmhiZ2xjcjJyOWZ3" target="_blank" class="instagram"><i
-                class="bi bi-instagram"></i></a>
-            <a href="https://t.me/stenoupdates" class="linkedin" target="_blank"><i class="bi bi-telegram"></i></a>
-                <a href="https://youtube.com/@RStenographer?si=wEOivWSja0a3P86W" target="_blank" class="google-plus"><i class="bi bi-youtube"></i></a>   
-         <a href="https://nmuoka.on-app.in/app/home?orgCode=nmuoka&referrer=utm_source=copy-link&utm_medium=tutor-app-referral" target="_blank" class="twitter"><i class="bi bi-google-play"></i></a>
+           
+            <a href="https://t.me/brighteducationsteno" class="linkedin" target="_blank"><i class="bi bi-telegram"></i></a>
+                <a href="https://youtube.com/@bright_education_steno?si=_jno0lv_wdyQ1z3l" target="_blank" class="google-plus"><i class="bi bi-youtube"></i></a>   
+         
                 </div>
         </div>
 

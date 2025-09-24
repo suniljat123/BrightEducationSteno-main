@@ -365,7 +365,7 @@ function callToast() {
     const phone = localStorage.getItem("SPR_StudentPhone");
     const loginTime = localStorage.getItem("SPR_LoginTime");
     const now = Date.now();
-    const maxSessionDuration = 2 * 60 * 1000; // 15 minutes in ms
+    const maxSessionDuration = 15 * 60 * 1000; // 15 minutes in ms
   
     if (!phone || !loginTime || now - loginTime > maxSessionDuration) {
       // Session expired or user not logged in

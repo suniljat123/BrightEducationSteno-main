@@ -247,9 +247,6 @@
   try {
     const res = await fetch("https://signatureglobal2--sguat.sandbox.my.salesforce.com/services/oauth2/token", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
       body: params.toString()
     });
 

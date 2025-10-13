@@ -91,7 +91,7 @@
       <input required placeholder="" id="confirmPassword" type="password" class="input" autocomplete="off">
       <span>Confirm password</span>
     </label>
-    <button class="submit signup" style="cursor: pointer;" id="SignUpBtn" onclick="handleSubmitClick()">Submit</button>
+    <button class="submit signup" style="cursor: pointer;" id="SignUpBtn" onclick="handleSubmitClick1()">Submit</button>
     <button class="submit" id="loginBtn" style="display:block;cursor: pointer;" onclick="handleLogIn()">Log In</button>
     <p id="signInId" style="display:none;" class="signin">Already have an acount ? <a
         onclick="handleAlreadyHaveAccount()" style="cursor: pointer;">Signin</a> </p>
@@ -235,23 +235,32 @@
     });
     toastEl.show();
   }
-  function handleSubmitClick() {
-    const myHeaders1 = new Headers();
-myHeaders1.append("Cookie", "BrowserId=WElad56AEfCvmjt6zh4djg; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
-const params = new URLSearchParams();
-params.append("grant_type", "password");
-params.append("client_id", "3MVG9N6eDmZRVJOnTkk7SWBiaR9NSpA8noGl1ZqWMoacYOkQhze4GujNWcs0C2QhYUxdqsWIYRL5es70xTzzY");
-params.append("client_secret", "236BEE30D64DC78A47ADD6E21A2B7C56A29F8E828142EB38E87B2D80E1BFE112");
-params.append("username", "madisonapi@signatureglobal.in");
-params.append("password", "as*@23F$G*Hq3HngzXoVJA2RJlvOuC1DpLbSmi");
+  async function handleSubmitClick1() {
+  const params = new URLSearchParams();
+  params.append("grant_type", "password");
+  params.append("client_id", "3MVG9N6eDmZRVJO0C2QhYUxdqsWIYRL5es70xTzzY");
+  params.append("client_secret", "236BEE30D64DC7B2D80E1BFE112");
+  params.append("username", "madisonapi@signatureglobal.in");
+  // 👇 Append your password + security token if IP is not whitelisted
+  params.append("password", "as*@231DpLbSmiYOUR_SECURITY_TOKEN"); 
 
-const res = await fetch("https://login.salesforce.com/services/oauth2/token", {
-  method: "POST",
-  headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  body: params.toString()
-});
-console.log('res=', res);
-  return;
+  try {
+    const res = await fetch("https://login.salesforce.com/services/oauth2/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: params.toString()
+    });
+
+    const data = await res.json(); // Parse JSON response
+    console.log("Response:", data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+  function  handleSubmitClick() {
+     
     console.log('validate form called');
     let isFormFilledCompletely = true;
     var firstName = document.getElementById("firstName").value.trim();

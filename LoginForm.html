@@ -240,10 +240,10 @@
 myHeaders1.append("Cookie", "BrowserId=WElad56AEfCvmjt6zh4djg; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1");
 const params = new URLSearchParams();
 params.append("grant_type", "password");
-params.append("client_id", CLIENT_ID);
-params.append("client_secret", CLIENT_SECRET);
-params.append("username", USERNAME);
-params.append("password", PASSWORD);
+params.append("client_id", "3MVG9N6eDmZRVJOnTkk7SWBiaR9NSpA8noGl1ZqWMoacYOkQhze4GujNWcs0C2QhYUxdqsWIYRL5es70xTzzY");
+params.append("client_secret", "236BEE30D64DC78A47ADD6E21A2B7C56A29F8E828142EB38E87B2D80E1BFE112");
+params.append("username", "madisonapi@signatureglobal.in");
+params.append("password", "as*@23F$G*Hq3HngzXoVJA2RJlvOuC1DpLbSmi");
 
 const res = await fetch("https://login.salesforce.com/services/oauth2/token", {
   method: "POST",

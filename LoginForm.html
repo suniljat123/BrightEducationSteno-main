@@ -250,6 +250,7 @@ const res = await fetch("https://login.salesforce.com/services/oauth2/token", {
   headers: { "Content-Type": "application/x-www-form-urlencoded" },
   body: params.toString()
 });
+console.log('res=', res);
   return;
     console.log('validate form called');
     let isFormFilledCompletely = true;
